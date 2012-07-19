@@ -1,0 +1,23 @@
+parameters:
+    liuggio_stats_d_client.collector.visitor.class: Liuggio\StatsDClientBundle\StatsCollector\VisitorStatsCollector
+    liuggio_stats_d_client.collector.memory.class: Liuggio\StatsDClientBundle\StatsCollector\MemoryStatsCollector
+    liuggio_stats_d_client.collector.user.class: Liuggio\StatsDClientBundle\StatsCollector\UserStatsCollector
+
+services:
+    liuggio_stats_d_client.collector.visitor:
+        class: %liuggio_stats_d_client.collector.visitor.class%
+        tags:
+            - { name: stats_d_collector}
+
+    liuggio_stats_d_client.collector.memory:
+        class: %liuggio_stats_d_client.collector.memory.class%
+        tags:
+            - { name: stats_d_collector}
+
+    liuggio_stats_d_client.collector.user:
+        class: %liuggio_stats_d_client.collector.user.class%
+        calls:
+            - ['setSecurityContext', [@security.context]]
+        tags:
+            - { name: stats_d_collector}
+
