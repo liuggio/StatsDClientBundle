@@ -43,6 +43,7 @@ class StatsDCollectorService
         foreach ($this->collectors as $collector) {
             $collector->collect($request, $response, $exception);
             $statSData = array_merge($statSData, $collector->getStatsData());
+
         }
         return $statSData;
     }
