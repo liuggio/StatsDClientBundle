@@ -26,7 +26,6 @@ http://graphite.wdfiles.com/local--files/screen-shots/graphite_fullscreen_800.pn
 
 http://graphite.wdfiles.com/local--files/screen-shots/graphite_cli_800.png
 
-
 ## Theory
 
 
@@ -41,7 +40,6 @@ Graphite is a Scalable Realtime Graphing
 #### The Client send data with UDP (faster)
 
 https://www.google.com/search?q=tcp+vs+udp
-
 
 ## Installation
 
