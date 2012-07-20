@@ -1,11 +1,9 @@
 parameters:
-#    liuggio_stats_d_client.dbal.logger.class: Liuggio\StatsDClientBundle\Logger\DbalLogger
     liuggio_stats_d_client.service.class: Liuggio\StatsDClientBundle\Service\StatsDClientService
     liuggio_stats_d_client.collector.service.class: Liuggio\StatsDClientBundle\Service\StatsDCollectorService
     liuggio_stats_d_client.collector.listener.class: Liuggio\StatsDClientBundle\Listener\StatsDCollectorListener
     liuggio_stats_d_client.entity.class: Liuggio\StatsDClientBundle\Entity\StatsData
     liuggio_stats_d_client.factory.class: Liuggio\StatsDClientBundle\Service\StatsDataFactory
-
     liuggio_stats_d_client.collector.dbal.class: Liuggio\StatsDClientBundle\StatsCollector\DbalStatsCollector
 
 services:
@@ -17,12 +15,6 @@ services:
         class: %liuggio_stats_d_client.collector.service.class%
         arguments: [@liuggio_stats_d_client.service]
 
-#    liuggio_stats_d_client.collector.listener:
-#        class: %liuggio_stats_d_client.collector.listener.class%
-#        arguments: [@liuggio_stats_d_client.collector.service]
-#        tags:
-#            - { name:kernel.event_subscriber}
-
     liuggio_stats_d_client.factory:
         class: %liuggio_stats_d_client.factory.class%
         arguments: [%liuggio_stats_d_client.entity.class%]
@@ -33,9 +25,3 @@ services:
         arguments: ['query']
         tags:
             - { name: stats_d_collector}
-
-# @todo do it only if is liuggio_stats_d_client.collector.dbal is enabled by config.yml
-#    doctrine.dbal.logger.chain:
-#      class: %doctrine.dbal.logger.chain.class%
-#      calls:
-#        - [ addLogger, [ @liuggio_stats_d_client.collector.dbal ] ]

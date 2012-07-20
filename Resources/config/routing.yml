@@ -1,3 +1,0 @@
-LiuggioStatsDClientBundle_homepage:
-    pattern:  /hello/{name}
-    defaults: { _controller: LiuggioStatsDClientBundle:Default:index }
