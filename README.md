@@ -126,17 +126,20 @@ class StatsCollector extends StatsCollector
 
 ```
 
+## The Flow
+
+The CollectorService collects all the collector classes that have a tag `data_collector` in their definition
+
+1. A listener `StatsDCollectorListener` is subscribed to kernel events,
+
+2. When an Event is thrown, `StatsDCollectorService` is called withe arguments (Response, Request, Exception)
+
+3. `StatsDCollectorService`  calls all registered collectors that have `StatsCollectorInterface`
+
+4. `StatsDCollectorService` sends all data to StatsDClientService
+
+5. `StatsDClientService` provides to send to the server
+
+6. On Graphite you'll have all data and all that happens in your application symfony2
 
 
-
-The Collector shall collect the data classes that have a tag 'collector'
-so that one can call each Request / Response / Exception
-
-The flow is this:
-
-1. A listener `` StatsDCollectorListener is subscribed to kernel events,
-2. When called `call` StatsDCollectorService passing Response Exception Request
-3. `` StatsDCollectorService calls all registered collectors StatsCollectorInterface `type`
-4. `` StatsDCollectorService sends all data to StatsDClientService
-5. StatsDClientService provides to send to the server
-6. graphite can have on your monitor all data and all that happens in your application symfony2
