@@ -15,7 +15,6 @@ Within this bundle you could use ready-to-go monitor for
 - Amount of PHP ram used
 
 
-
 And in your application you could use the service for send packet to StatD Server using the service
 or create a personalized Event/Listener (suggested)
 
@@ -57,7 +56,7 @@ liuggio_stats_d_client:
     host: 31.222.167.143
     port: 8125
     fail_silently: true
-  enable_collector: true
+  enable_collector: true #default is false, and it won't work
   collectors:
     liuggio_stats_d_client.collector.dbal: 'terravision.query'
     liuggio_stats_d_client.collector.visitor: 'terravision.visitor'
