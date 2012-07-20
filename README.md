@@ -195,7 +195,7 @@ A similar pattern is used by the Profiler in Symfony
 # TODO
 
 
-1. Tests cover just the 40% more test: on Dependency/Compiler/Listener
+1. Tests cover just the 40% more test: on Compiler/Listener
 
     Planned for: end of July
 
