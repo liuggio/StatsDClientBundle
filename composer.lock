@@ -1,0 +1,69 @@
+{
+    "hash": "d803fa21b3731c682a77a6ea10727996",
+    "packages": [
+        {
+            "package": "doctrine/common",
+            "version": "2.2.2"
+        },
+        {
+            "package": "doctrine/dbal",
+            "version": "2.2.2"
+        },
+        {
+            "package": "symfony/config",
+            "version": "v2.0.16"
+        },
+        {
+            "package": "symfony/dependency-injection",
+            "version": "v2.0.16"
+        },
+        {
+            "package": "symfony/event-dispatcher",
+            "version": "v2.0.16"
+        },
+        {
+            "package": "symfony/framework-bundle",
+            "version": "v2.0.16"
+        },
+        {
+            "package": "symfony/http-foundation",
+            "version": "v2.0.16"
+        },
+        {
+            "package": "symfony/http-kernel",
+            "version": "v2.0.16"
+        },
+        {
+            "package": "symfony/routing",
+            "version": "v2.0.16"
+        },
+        {
+            "package": "symfony/templating",
+            "version": "v2.0.16"
+        },
+        {
+            "package": "symfony/translation",
+            "version": "v2.0.16"
+        },
+        {
+            "package": "symfony/yaml",
+            "version": "dev-master",
+            "alias-pretty-version": "2.1.x-dev",
+            "alias-version": "2.1.9999999.9999999-dev"
+        },
+        {
+            "package": "symfony/yaml",
+            "version": "dev-master",
+            "source-reference": "v2.1.0-BETA3",
+            "commit-date": "1342347231"
+        }
+    ],
+    "packages-dev": null,
+    "aliases": [
+
+    ],
+    "minimum-stability": "stable",
+    "stability-flags": {
+        "symfony/yaml": 20
+    }
+}

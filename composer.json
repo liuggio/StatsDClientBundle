@@ -1,0 +1,28 @@
+{
+    "name": "Liuggio/statsd-client-bundle",
+    "type": "symfony-bundle",
+    "description": "Provides statsd cliend and simple ready-to-use support for #Symfony2 Application",
+    "keywords": ["symfony", "statsd", "graphite", "monitor"],
+    "license": "MIT",
+    "authors": [
+        {
+            "name":     "Liuggio",
+            "email":    "Liuggio@gmail.com",
+            "homepage": "https://github.com/Liuggio"
+        },
+        {
+            "name": "Community contributions",
+            "homepage": "https://github.com/liuggio/StatsDClientBundle/contributors"
+        }
+    ],
+    "require": {
+        "php": ">=5.3.2",
+        "symfony/framework-bundle": ">=2.0,<2.2-dev",
+        "doctrine/dbal": ">=2.2.0,<=2.2.99",
+        "symfony/yaml": ">=2.0,<2.2-dev"
+    },
+    "autoload": {
+        "psr-0": { "Liuggio\\StatsDClientBundle": "" }
+    },
+    "target-dir": "Liuggio/StatsDClientBundle"
+}

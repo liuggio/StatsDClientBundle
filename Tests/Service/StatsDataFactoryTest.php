@@ -88,4 +88,18 @@ class StatsDataFactoryTest extends WebTestCase
         $this->assertContains('|c', $obj->getValue());
     }
 
+    public function testAddSampling()
+    {
+        $key = 'key';
+        $value = 1;
+
+        $obj = new StatsData();
+        $obj->setKey($key);
+        $obj->setValue('1|c');
+
+        $float = 0.1;
+        $obj2 = $this->statsDataFactory->addSampling($obj, $float);
+        $this->assertEquals($key, $obj2->getKey());
+        $this->assertEquals('1|c|@0.10', $obj2->getValue());
+    }
 }

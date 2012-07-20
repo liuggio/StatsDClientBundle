@@ -12,6 +12,6 @@ use Liuggio\StatsDClientBundle\Entity\StatsData;
 class StatsDCollectorServiceTest extends WebTestCase
 {
         public function testSto(){
-            $this->markTestSkipped('prr');
+            $this->markTestSkipped('-');
         }
 }

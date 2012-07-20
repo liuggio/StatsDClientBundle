@@ -31,7 +31,7 @@ http://graphite.wdfiles.com/local--files/screen-shots/graphite_cli_800.png
 
 You have to install etsy/statd and Graphite
 
-Install bundle with composer and add to kernel,
+
 then add to config/yaml
 
 ``` yaml
@@ -48,8 +48,8 @@ liuggio_stats_d_client:
     liuggio_stats_d_client.collector.memory: 'tvision.memory'
     liuggio_stats_d_client.collector.user: 'tvision.user'
 ## or
-    enable_collector: false
-    collectors: ~
+#    enable_collector: false
+#    collectors: ~
 
 ```
 
@@ -144,16 +144,28 @@ class StatsCollector extends StatsCollector
 
 The CollectorService collects all the collector classes that have a tag `data_collector` in their definition
 
-1. A listener `StatsDCollectorListener` is subscribed to kernel events,
+1. A listener `StatsDCollectorListener` is subscribed to kernel events only if  the parameter `enable_collector` is true
 
 2. When an Event is thrown, `StatsDCollectorService` is called withe arguments (Response, Request, Exception)
 
-3. `StatsDCollectorService`  calls all registered collectors that have `StatsCollectorInterface`
+3. `StatsDCollectorService`  calls all the registered collectors that have `StatsCollectorInterface`
 
 4. `StatsDCollectorService` sends all data to StatsDClientService
 
 5. `StatsDClientService` provides to send to the server
 
-6. On Graphite you'll have all data and all that happens in your application symfony2
+6. On Graphite you'll have all data and all that happens in your Symfony2 application
 
 
+# TODO
+
+
+1. Tests cover just the 40% more test: on Dependency/Compiler/Listener
+
+    Planned for: end of July
+
+2. More StatsCollectors+test
+
+3. Logging integrated for debugging
+
+4. Better example usage and explaination
