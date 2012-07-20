@@ -26,26 +26,13 @@ http://graphite.wdfiles.com/local--files/screen-shots/graphite_fullscreen_800.pn
 
 http://graphite.wdfiles.com/local--files/screen-shots/graphite_cli_800.png
 
-## Theory
-
-
-#### [StatD](https://github.com/etsy/statsd)
-
-StatD is a simple daemon for easy stats aggregation
-
-#### [Graphite](http://graphite.wikidot.com/)
-
-Graphite is a Scalable Realtime Graphing
-
-#### The Client send data with UDP (faster)
-
-https://www.google.com/search?q=tcp+vs+udp
 
 ## Installation
 
 You have to install etsy/statd and Graphite
 
-Install bundle with composer and add to kernel
+Install bundle with composer and add to kernel,
+then add to config/yaml
 
 ``` yaml
 
@@ -63,12 +50,39 @@ liuggio_stats_d_client:
 
 ```
 
-@todo improve this
+## Theory
 
 
-## Test
+#### [StatD](https://github.com/etsy/statsd)
 
-@todo
+StatD is a simple daemon for easy stats aggregation
+
+#### [Graphite](http://graphite.wikidot.com/)
+
+Graphite is a Scalable Realtime Graphing
+
+#### The Client send data with UDP (faster)
+
+https://www.google.com/search?q=tcp+vs+udp
+
+
+## Contribution
+
+Active contribution and patches are very welcome.
+To keep things in shape we have quite a bunch of unit tests. If you're submitting pull requests please
+make sure that they are still passing and if you add functionality please
+take a look at the coverage as well it should be pretty high :)
+
+First initial vendors:
+
+    php vendor/vendors.php
+
+This will give you proper results:
+
+``` bash
+phpunit --coverage-html reports
+```
+
 
 
 # Advanced Usage
