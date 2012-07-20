@@ -199,8 +199,10 @@ A similar pattern is used by the Profiler in Symfony
 
     Planned for: end of July
 
-2. More StatsCollectors+test
+2. Better stat for existing collector
 
-3. Logging integrated for debugging
+3. More StatsCollectors+test
 
-4. Better example usage and explaination
+4. Logging integrated for debugging
+
+5. Better example usage and explaination
