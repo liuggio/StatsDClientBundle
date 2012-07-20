@@ -11,7 +11,7 @@ class LiuggioStatsDClientExtensionTest extends \PHPUnit_Framework_TestCase
 
     /**
      * @covers Liuggio\StatsDClientBundle\LiuggioStatsDClientBundle
-     * @covers Liuggio\StatsDClientBundle\LiuggioStatsDClientExtension::load
+     * @covers Liuggio\StatsDClientBundle\DependencyInjection\LiuggioStatsDClientExtension::load
      * @covers Liuggio\StatsDClientBundle\DependencyInjection\Configuration::getConfigTreeBuilder
      */
     public function testLoad()
