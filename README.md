@@ -20,8 +20,6 @@ or create a personalized Event/Listener (suggested)
 
 ## Screenshot Graphite
 
-http://blog.signalhq.com/wp-content/uploads/2011/12/graphite.png
-
 http://graphite.wdfiles.com/local--files/screen-shots/graphite_fullscreen_800.png
 
 http://graphite.wdfiles.com/local--files/screen-shots/graphite_cli_800.png
@@ -128,7 +126,7 @@ This service is called by the listener to collect data from all the collectors i
 ## How to create your personal Collector
 
 
-1. Create a class that extends StatsCollector then create the `collect` function
+- Create a class that extends StatsCollector then create the `collect` function
 
 ```
 use Liuggio\StatsDClientBundle\StatsCollector\StatsCollector;
@@ -152,7 +150,7 @@ class ExceptionStatsCollector extends StatsCollector
 ```
 
 
-2.
+- add the service
 
 ```
      liuggio_stats_d_client.collector.exception:
@@ -162,7 +160,7 @@ class ExceptionStatsCollector extends StatsCollector
 
 ```
 
-3. enable it in the config.yml
+- enable it in the config.yml
 
 ```
   collectors:
