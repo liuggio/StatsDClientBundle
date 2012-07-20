@@ -76,20 +76,20 @@ To keep things in shape we have quite a bunch of unit tests. If you're submittin
 make sure that they are still passing and if you add functionality please
 take a look at the coverage as well it should be pretty high :)
 
-1. First fork or clone the repository
+- First fork or clone the repository
 
 ```
 git clone git://github.com/liuggio/StatsDClientBundle.git
 cd StatsDClientBundle
 ```
 
-2. Install vendors:
+- Install vendors:
 
 ``` bash
 composer.phar install
 ```
 
-3. This will give you proper results:
+- This will give you proper results:
 
 ``` bash
 phpunit --coverage-html reports
