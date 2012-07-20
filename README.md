@@ -38,15 +38,15 @@ then add to config/yaml
 
 liuggio_stats_d_client:
   connection:
-    host: 31.222.167.143
+    host: localhost
     port: 8125
     fail_silently: true
   enable_collector: true #default is false, and it won't work
   collectors:
-    liuggio_stats_d_client.collector.dbal: 'terravision.query'
-    liuggio_stats_d_client.collector.visitor: 'terravision.visitor'
-    liuggio_stats_d_client.collector.memory: 'terravision.memory'
-    liuggio_stats_d_client.collector.user: 'terravision.user'
+    liuggio_stats_d_client.collector.dbal: 'tvision.query'
+    liuggio_stats_d_client.collector.visitor: 'tvision.visitor'
+    liuggio_stats_d_client.collector.memory: 'tvision.memory'
+    liuggio_stats_d_client.collector.user: 'tvision.user'
 
 ```
 
