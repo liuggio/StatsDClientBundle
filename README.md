@@ -162,9 +162,15 @@ class ExceptionStatsCollector extends StatsCollector
 
 ```
 
-3.
+3. enable it in the config.yml
 
-enable it in the config.yaml
+```
+  collectors:
+#    serviceReference: prefix
+    liuggio_stats_d_client.collector.exception: 'YOURNAME.exception'
+```
+
+
 
 
 
