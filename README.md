@@ -158,6 +158,8 @@ The CollectorService collects all the collector classes that have a tag `data_co
 
 6. On Graphite you'll have all data and all that happens in your Symfony2 application
 
+A similar pattern is used by the Profiler in Symfony
+
 
 # TODO
 
