@@ -203,6 +203,8 @@ A similar pattern is used by the Profiler in Symfony
 
 3. More StatsCollectors+test
 
-4. Logging integrated for debugging
+4. Spit the StatsDService into a library decoupled with bundles 
+
+5. Logging integrated for debugging
 
 5. Better example usage and explaination
