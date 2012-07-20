@@ -9,8 +9,9 @@ use Doctrine\DBAL\Logging\SQLLogger;
 class DbalStatsCollector extends StatsCollector implements SQLLogger, StatsCollectorInterface
 {
     private static $counter = 0;
-    
-    public function getName() {
+
+    public function getName()
+    {
         return 'DoctrineSqlCollector';
     }
 
@@ -36,7 +37,7 @@ class DbalStatsCollector extends StatsCollector implements SQLLogger, StatsColle
         }
         $key = sprintf('%s.%s', $this->getStatsDataKey(), $verb);
         if (null === $this->getStatsDataFactory()) {
-            return ;
+            return;
         }
 
         $statData = $this->getStatsDataFactory()->createStatsDataIncrement($key);
@@ -46,7 +47,8 @@ class DbalStatsCollector extends StatsCollector implements SQLLogger, StatsColle
     /**
      * {@inheritdoc}
      */
-    public function stopQuery() {
+    public function stopQuery()
+    {
 
         return true;
     }

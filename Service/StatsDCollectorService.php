@@ -4,9 +4,10 @@ namespace Liuggio\StatsDClientBundle\Service;
 
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
- 
+
 use Liuggio\StatsDClientBundle\StatsCollector\StatsCollectorInterface;
 use Liuggio\StatsDClientBundle\Service\StatsDClientService;
+
 /**
  * StatsDCollectorService.
  *
@@ -43,7 +44,6 @@ class StatsDCollectorService
             $collector->collect($request, $response, $exception);
             $statSData = array_merge($statSData, $collector->getStatsData());
         }
-        var_dump($statSData);
         return $statSData;
     }
 

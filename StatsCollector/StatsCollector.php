@@ -22,13 +22,15 @@ abstract class StatsCollector implements StatsCollectorInterface
      */
     protected $statsDataFactory;
 
-    public function __construct($stat_key = __CLASS__, StatsDataFactory $stats_data_factory = null) {
+    public function __construct($stat_key = __CLASS__, StatsDataFactory $stats_data_factory = null)
+    {
 
         $this->setStatsDataKey($stat_key);
         $this->statsDataFactory = $stats_data_factory;
     }
 
-    public function getName() {
+    public function getName()
+    {
         return 'abstractCollector';
     }
 
@@ -57,6 +59,7 @@ abstract class StatsCollector implements StatsCollectorInterface
         }
         return $this->statsData;
     }
+
     /**
      *
      * @return mixed

@@ -9,7 +9,8 @@ class VisitorStatsCollector extends StatsCollector
 {
     private static $counter = 0;
 
-    public function getName() {
+    public function getName()
+    {
         return 'VisitorCollector';
     }
 
@@ -26,7 +27,7 @@ class VisitorStatsCollector extends StatsCollector
     {
         // check the number times of execution.
         // eg. with `render` in twig happens that this func is called more times.
-        if (self::$counter != 0){
+        if (self::$counter != 0) {
             return false;
         }
         $statData = $this->getStatsDataFactory()->createStatsDataIncrement($this->getStatsDataKey());

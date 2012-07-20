@@ -15,8 +15,8 @@ Within this bundle you could use ready-to-go monitor for
 - Amount of PHP ram used
 
 
-But in your application you could use the service for send packet to StatD Server using the service
 
+And in your application you could use the service for send packet to StatD Server using the service
 or create a personalized Event/Listener (suggested)
 
 ## Screenshot Graphite
@@ -31,19 +31,18 @@ http://graphite.wdfiles.com/local--files/screen-shots/graphite_cli_800.png
 ## Theory
 
 
-#### StatD
+#### [StatD](https://github.com/etsy/statsd)
 
 StatD is a simple daemon for easy stats aggregation
 
-[grafite](https://github.com/etsy/statsd)
-
-#### Graphite
+#### [Graphite](http://graphite.wikidot.com/)
 
 Graphite is a Scalable Realtime Graphing
 
 #### The Client send data with UDP (faster)
 
 https://www.google.com/search?q=tcp+vs+udp
+
 
 ## Installation
 
@@ -130,14 +129,6 @@ class StatsCollector extends StatsCollector
 
 
 
-
-
-
-
-
-
-
-
 The Collector shall collect the data classes that have a tag 'collector'
 so that one can call each Request / Response / Exception
 
@@ -149,10 +140,3 @@ The flow is this:
 4. `` StatsDCollectorService sends all data to StatsDClientService
 5. StatsDClientService provides to send to the server
 6. graphite can have on your monitor all data and all that happens in your application symfony2
-
-
-
-## TODO readme.
-
-hold on.
-

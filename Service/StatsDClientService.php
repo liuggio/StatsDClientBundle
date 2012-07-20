@@ -18,7 +18,8 @@ class StatsDClientService
      */
     private $failSilently;
 
-    public function __construct($host, $port, $fail_silently = true) {
+    public function __construct($host, $port, $fail_silently = true)
+    {
         $this->host = $host;
         $this->port = $port;
         $this->failSilently = $fail_silently;

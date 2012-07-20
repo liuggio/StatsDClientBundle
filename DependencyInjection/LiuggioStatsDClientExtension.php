@@ -29,17 +29,17 @@ class LiuggioStatsDClientExtension extends Extension
         $config = $this->processConfiguration($configuration, $configs);
 
         foreach ($config['connection'] as $k => $v) {
-            $container->setParameter($this->getAlias().'.connection.'.$k, $v);
+            $container->setParameter($this->getAlias() . '.connection.' . $k, $v);
         }
 
-        $container->setParameter($this->getAlias().'.enable_collector',  $config['enable_collector']);
-        $container->setParameter($this->getAlias().'.collectors', $config['collectors']);
+        $container->setParameter($this->getAlias() . '.enable_collector', $config['enable_collector']);
+        $container->setParameter($this->getAlias() . '.collectors', $config['collectors']);
 
-        $loader = new Loader\YamlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
+        $loader = new Loader\YamlFileLoader($container, new FileLocator(__DIR__ . '/../Resources/config'));
         $loader->load('services.yml');
         $loader->load('collectors.yml');
 
-        if ($config['enable_collector']  && count($config['collectors'])) {
+        if ($config['enable_collector'] && count($config['collectors'])) {
 
             // Define the Listener
             $definition = new Definition('%liuggio_stats_d_client.collector.listener.class%',
@@ -47,13 +47,6 @@ class LiuggioStatsDClientExtension extends Extension
             );
             $definition->addTag('kernel.event_subscriber');
             $container->setDefinition('liuggio_stats_d_client.collector.listener', $definition);
-
         }
-
-
-
-
     }
-
-
 }

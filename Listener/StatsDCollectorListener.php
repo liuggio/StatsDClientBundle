@@ -11,6 +11,7 @@ use Symfony\Component\HttpKernel\KernelEvents;
 use Symfony\Component\HttpFoundation\RequestMatcherInterface;
 
 use Liuggio\StatsDClientBundle\Service\StatsDCollectorService;
+
 /**
  * StatsDCollectorListener.
  *
@@ -34,8 +35,8 @@ class StatsDCollectorListener implements EventSubscriberInterface
     public function __construct(StatsDCollectorService $collector, $onlyException = false, $onlyMasterRequests = false)
     {
         $this->collector = $collector;
-        $this->onlyException = (Boolean) $onlyException;
-        $this->onlyMasterRequests = (Boolean) $onlyMasterRequests; 
+        $this->onlyException = (Boolean)$onlyException;
+        $this->onlyMasterRequests = (Boolean)$onlyMasterRequests;
         $this->collectors = array();
     }
 
