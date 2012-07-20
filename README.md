@@ -120,7 +120,8 @@ This service is called by the listener to collect data from all the collectors i
 
 ## How to create your personal Collector
 
-Create a class that extends StatsCollector then create the `collect` function
+
+1. Create a class that extends StatsCollector then create the `collect` function
 
 ```
 use Liuggio\StatsDClientBundle\StatsCollector\StatsCollector;
@@ -128,12 +129,13 @@ use Liuggio\StatsDClientBundle\StatsCollector\StatsCollector;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
-class StatsCollector extends StatsCollector
+class ExceptionStatsCollector extends StatsCollector
 
 //...
 
  public function collect(Request $request, Response $response, \Exception $exception = null)
     {
+        if ...
         $statData = $this->getStatsDataFactory()->createStatsDataIncrement($this->getStatsDataKey());
         $this->addStatsData($statData);
 
@@ -141,6 +143,24 @@ class StatsCollector extends StatsCollector
     }
 
 ```
+
+
+2.
+
+```
+     liuggio_stats_d_client.collector.exception:
+         class: %THE CLASS%
+         tags:
+             - { name: stats_d_collector} #this is important, this will be selected by the CollectorService
+
+```
+
+3.
+
+enable it in the config.yaml
+
+
+
 
 ## The Flow
 
