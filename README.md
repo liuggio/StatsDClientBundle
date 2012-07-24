@@ -10,8 +10,6 @@ Within this bundle you could use ready-to-go monitor for
 
 - SQL: Verbs used (amount of select/set/update/upgrade/delete)
 
-- SQL: amount of time consumed by the query
-
 - Amount of PHP ram used
 
 
