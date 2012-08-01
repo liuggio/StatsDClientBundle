@@ -27,7 +27,7 @@ http://graphite.wdfiles.com/local--files/screen-shots/graphite_cli_800.png
 
 You have to install etsy/statd and Graphite 
 
-see this blog post to install it with vagrant [Easy install statsd graphite](http://liuggio.github.com/stasd/2012/07/31/easily-install-statsd-and-graphite-with-vagrant/).
+see this blog post to install it with vagrant [Easy install statsd graphite](http://welcometothebundle.com/easily-install-statsd-and-graphite-with-vagrant/).
 
 
 then add to config/yaml
