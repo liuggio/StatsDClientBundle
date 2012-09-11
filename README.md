@@ -45,6 +45,7 @@ liuggio_stats_d_client:
     liuggio_stats_d_client.collector.visitor: 'tvision.visitor'
     liuggio_stats_d_client.collector.memory: 'tvision.memory'
     liuggio_stats_d_client.collector.user: 'tvision.user'
+    liuggio_stats_d_client.collector.exception: 'tvision.exception'
 ## or
 #    enable_collector: false
 #    collectors: ~

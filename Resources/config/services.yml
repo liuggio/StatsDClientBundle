@@ -6,6 +6,11 @@ parameters:
     liuggio_stats_d_client.factory.class: Liuggio\StatsDClientBundle\Service\StatsDataFactory
     liuggio_stats_d_client.collector.dbal.class: Liuggio\StatsDClientBundle\StatsCollector\DbalStatsCollector
 
+#this is an example of a listener waiting for a generic statsd-event
+    liuggio_stats_d_client.collector.listener:
+        class: %liuggio_stats_d_client.collector.listener.class%
+        tags:
+            - { name: stats_d_collector}
 services:
     liuggio_stats_d_client.service:
         class: %liuggio_stats_d_client.service.class%
