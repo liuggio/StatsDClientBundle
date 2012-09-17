@@ -31,7 +31,6 @@ class LiuggioStatsDClientExtension extends Extension
         foreach ($config['connection'] as $k => $v) {
             $container->setParameter($this->getAlias() . '.connection.' . $k, $v);
         }
-
         $container->setParameter($this->getAlias() . '.enable_collector', $config['enable_collector']);
         $container->setParameter($this->getAlias() . '.collectors', $config['collectors']);
 
@@ -48,5 +47,33 @@ class LiuggioStatsDClientExtension extends Extension
             $definition->addTag('kernel.event_subscriber');
             $container->setDefinition('liuggio_stats_d_client.collector.listener', $definition);
         }
+        // monolog
+        if ($config['monolog'] && $config['monolog']['enable']) {
+            $this->loadMonologHandler($config, $container);
+        }
     }
+
+    /**
+     * Loads the Monolog configuration.
+     *
+     * @param array            $config    A configuration array
+     * @param ContainerBuilder $container A ContainerBuilder instance
+     */
+    protected function loadMonologHandler(array $config, ContainerBuilder $container)
+    {
+
+        $def2 = new Definition('%liuggio_stats_d_client.monolog_formatter.short_line.class%');
+        $container->setDefinition('monolog.formatter.shortline', $def2);
+
+        $def = new Definition($container->getParameter('liuggio_stats_d_client.monolog_handler.class'));
+        $def->setPublic(false);
+        $def->addMethodCall('setStatsDService', array(new Reference('liuggio_stats_d_client.service')));
+        $def->addMethodCall('setStatsDFactory',array(new Reference('liuggio_stats_d_client.factory')));
+        $def->addMethodCall('setPrefix', array($config['monolog']['prefix']));
+        $def->addMethodCall('setFormatter',array(new Reference($config['monolog']['formatter'])));
+        $def->addMethodCall('setLevel',array($config['monolog']['level']));
+
+        $container->setDefinition('monolog.handler.statsd', $def);
+    }
+
 }

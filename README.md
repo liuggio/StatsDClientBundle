@@ -35,6 +35,11 @@ then add to config/yaml
 ``` yaml
 
 liuggio_stats_d_client:
+  monolog:
+    enable: true
+    prefix: 'log'
+    formatter: 'monolog.formatter.shortline'
+    level: 'warning'
   connection:
     host: localhost
     port: 8125
@@ -45,9 +50,9 @@ liuggio_stats_d_client:
     liuggio_stats_d_client.collector.visitor: 'tvision.visitor'
     liuggio_stats_d_client.collector.memory: 'tvision.memory'
     liuggio_stats_d_client.collector.user: 'tvision.user'
+    liuggio_stats_d_client.collector.exception: 'tvision.exception'
 ## or
 #    enable_collector: false
-#    collectors: ~
 
 ```
 
@@ -105,22 +110,26 @@ This service creates object (StatsDataInterface) to send
 
 Reference: `liuggio_stats_d_client.factory`
 
+```
+$data = $this->get('liuggio_stats_d_client.factory')->createStatsDataIncrement('log.error');
+
+```
+
 ### StatDClient
 
 Reference: `liuggio_stats_d_client.service`
 
 This service SEND the data over the UDP interface
 
-from a controller call ``` $this->get('liuggio_stats_d_client.service')->send($StatData) ```
+from a controller call ``` $this->get('liuggio_stats_d_client.service')->send($data) ```
 
-the `$StatData` is an object created by the factory
+the `$data` is the object created by the factory
 
 ### StatsDCollectorService
 
 Reference: `liuggio_stats_d_client.collector.service`
 
 This service is called by the listener to collect data from all the collectors installed
-
 
 
 ## How to create your personal Collector
@@ -138,7 +147,7 @@ class ExceptionStatsCollector extends StatsCollector
 
 //...
 
- public function collect(Request $request, Response $response, \Exception $exception = null)
+    public function collect(Request $request, Response $response, \Exception $exception = null)
     {
         if ...
         $statData = $this->getStatsDataFactory()->createStatsDataIncrement($this->getStatsDataKey());
@@ -167,8 +176,6 @@ class ExceptionStatsCollector extends StatsCollector
 #    serviceReference: prefix
     liuggio_stats_d_client.collector.exception: 'YOURNAME.exception'
 ```
-
-
 
 
 

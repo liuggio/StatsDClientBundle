@@ -20,7 +20,9 @@ class Configuration implements ConfigurationInterface
         $treeBuilder = new TreeBuilder();
         $rootNode = $treeBuilder->root('liuggio_stats_d_client');
 
-        $rootNode->children()
+
+        $rootNode
+          ->children()
             ->booleanNode('enable_collector')->defaultFalse()->end()
             ->arrayNode('connection')
                 ->children()
@@ -29,13 +31,24 @@ class Configuration implements ConfigurationInterface
                     ->scalarNode("fail_silently")->defaultValue(true)->end()
                 ->end()
             ->end()
-            ->arrayNode('collectors')
+            ->arrayNode('collectors')->canBeUnset()
                 ->prototype('scalar')->end()
                 ->isRequired()
                 ->useAttributeAsKey('name')
             ->end()
-        ->end();
+            ->arrayNode('monolog')->canBeUnset()
+                ->children()
+                    ->scalarNode('enable')->defaultValue(false)->end()
+                    ->scalarNode('prefix')->defaultValue("log")->end()
+                    ->scalarNode('formatter')->defaultValue("monolog.formatter.shortline")->end()
+                    ->scalarNode('level')->defaultValue("warning")->end()
+                ->end()
+            ->end()
+          ->end();
 
         return $treeBuilder;
     }
+
+
+
 }
