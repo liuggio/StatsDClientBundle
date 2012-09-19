@@ -4,6 +4,8 @@ Monitor what is happening in your production Symfony2 application, with StatD an
 
 Within this bundle you could use ready-to-go monitor for
 
+- Monolog  - New feature
+
 - Amount of user
 
 - Logged vs Anonymous user
@@ -40,6 +42,7 @@ liuggio_stats_d_client:
     prefix: 'log'
     formatter: 'monolog.formatter.shortline'
     level: 'warning'
+    context_logging: false # with this option you could also have the context in your graphs
   connection:
     host: localhost
     port: 8125
@@ -53,6 +56,7 @@ liuggio_stats_d_client:
     liuggio_stats_d_client.collector.exception: 'tvision.exception'
 ## or
 #    enable_collector: false
+
 
 ```
 
