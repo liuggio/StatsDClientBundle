@@ -31,6 +31,10 @@ You have to install etsy/statd and Graphite
 
 see this blog post to install it with vagrant [Easy install statsd graphite](http://welcometothebundle.com/easily-install-statsd-and-graphite-with-vagrant/).
 
+add to your composer
+
+`    "liuggio/statsd-client-bundle": "v1.0.0"`
+
 
 then add to config/yaml
 
