@@ -37,8 +37,17 @@ class LiuggioStatsDClientExtensionTest extends \PHPUnit_Framework_TestCase
     {
         return array(
             'enable_collector' => true,
-            'connection' => array('host'=>'localhost', 'port'=>100, 'fail_silently'=>true),
-            'collectors' => array('liuggio_stats_d_client.collector.dbal' => 'tv.vision.query')
+            'connection' => array(
+                'host' => 'localhost',
+                'port' => 100,
+                'fail_silently' => true
+            ),
+            'collectors' => array('liuggio_stats_d_client.collector.dbal' => 'tv.vision.query'),
+            'monolog' => array(
+                'enable' => true,
+                'prefix' => 'log',
+                'formatter' => 'monolog.formatter.shortline',
+                'level' => 'warning')
         );
     }
 
