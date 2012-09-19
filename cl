@@ -1,5 +1,5 @@
 {
-    "hash": "fff647cdb4c4654cd297f7eeee775696",
+    "hash": "e707d4c26ee0f2d98da5b6fd0692d054",
     "packages": [
         {
             "name": "doctrine/common",
@@ -18,7 +18,7 @@
             "require": {
                 "php": ">=5.3.2"
             },
-            "time": "2012-08-29 06:04:14",
+            "time": "2012-08-29 08:04:14",
             "type": "library",
             "installation-source": "dist",
             "autoload": {
@@ -65,59 +65,60 @@
             ]
         },
         {
-            "name": "monolog/monolog",
-            "version": "1.2.1",
+            "name": "doctrine/dbal",
+            "version": "2.2.2",
             "source": {
                 "type": "git",
-                "url": "https://github.com/Seldaek/monolog",
-                "reference": "1.2.1"
+                "url": "https://github.com/doctrine/dbal",
+                "reference": "2.2.2"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://github.com/Seldaek/monolog/zipball/1.2.1",
-                "reference": "1.2.1",
+                "url": "https://github.com/doctrine/dbal/zipball/2.2.2",
+                "reference": "2.2.2",
                 "shasum": ""
             },
             "require": {
-                "php": ">=5.3.0"
+                "php": ">=5.3.2",
+                "doctrine/common": ">=2.2.0,<=2.2.99"
             },
-            "require-dev": {
-                "mlehner/gelf-php": "1.0.*"
-            },
-            "suggest": {
-                "mlehner/gelf-php": "Allow sending log messages to a GrayLog2 server",
-                "ext-amqp": "Allow sending log messages to an AMQP server (1.0+ required)",
-                "ext-mongo": "Allow sending log messages to a MongoDB server"
-            },
-            "time": "2012-08-29 11:53:20",
+            "time": "2012-04-13 07:56:12",
             "type": "library",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "1.3.x-dev"
-                }
-            },
             "installation-source": "dist",
             "autoload": {
                 "psr-0": {
-                    "Monolog": "src/"
+                    "Doctrine\\DBAL": "lib/"
                 }
             },
             "license": [
-                "MIT"
+                "LGPL"
             ],
             "authors": [
                 {
-                    "name": "Jordi Boggiano",
-                    "email": "j.boggiano@seld.be",
-                    "homepage": "http://seld.be",
-                    "role": "Developer"
+                    "name": "Jonathan Wage",
+                    "email": "jonwage@gmail.com",
+                    "homepage": "http://www.jwage.com/"
+                },
+                {
+                    "name": "Guilherme Blanco",
+                    "email": "guilhermeblanco@gmail.com"
+                },
+                {
+                    "name": "Roman Borschel",
+                    "email": "roman@code-factory.org"
+                },
+                {
+                    "name": "Benjamin Eberlei",
+                    "email": "kontakt@beberlei.de"
                 }
             ],
-            "description": "Logging for PHP 5.3",
-            "homepage": "http://github.com/Seldaek/monolog",
+            "description": "Database Abstraction Layer",
+            "homepage": "http://www.doctrine-project.org",
             "keywords": [
-                "log",
-                "logging"
+                "database",
+                "persistence",
+                "dbal",
+                "queryobject"
             ]
         },
         {
@@ -138,7 +139,7 @@
             "require": {
                 "php": ">=5.3.3"
             },
-            "time": "2012-08-22 11:48:41",
+            "time": "2012-08-22 13:48:41",
             "type": "library",
             "extra": {
                 "branch-alias": {
@@ -193,7 +194,7 @@
                 "symfony/yaml": "2.1.*",
                 "symfony/config": "2.1.*"
             },
-            "time": "2012-09-10 08:53:42",
+            "time": "2012-09-10 10:53:42",
             "type": "library",
             "extra": {
                 "branch-alias": {
@@ -247,7 +248,7 @@
                 "symfony/dependency-injection": "2.1.*",
                 "symfony/http-kernel": "2.1.*"
             },
-            "time": "2012-09-10 08:53:42",
+            "time": "2012-09-10 10:53:42",
             "type": "library",
             "extra": {
                 "branch-alias": {
@@ -294,7 +295,7 @@
             "require": {
                 "php": ">=5.3.3"
             },
-            "time": "2012-08-22 11:48:41",
+            "time": "2012-08-22 13:48:41",
             "type": "library",
             "extra": {
                 "branch-alias": {
@@ -359,7 +360,7 @@
                 "symfony/form": "2.1.*",
                 "symfony/validator": "2.1.*"
             },
-            "time": "2012-09-10 08:53:42",
+            "time": "2012-09-10 10:53:42",
             "type": "symfony-bundle",
             "extra": {
                 "branch-alias": {
@@ -406,7 +407,7 @@
             "require": {
                 "php": ">=5.3.3"
             },
-            "time": "2012-09-04 10:24:42",
+            "time": "2012-09-04 12:24:42",
             "type": "library",
             "extra": {
                 "branch-alias": {
@@ -474,7 +475,7 @@
                 "symfony/dependency-injection": "2.1.*",
                 "symfony/finder": "2.1.*"
             },
-            "time": "2012-09-11 03:00:41",
+            "time": "2012-09-11 05:00:41",
             "type": "library",
             "extra": {
                 "branch-alias": {
@@ -532,7 +533,7 @@
                 "symfony/yaml": "2.1.*",
                 "doctrine/common": ">=2.2,<2.4-dev"
             },
-            "time": "2012-09-10 08:53:42",
+            "time": "2012-09-10 10:53:42",
             "type": "library",
             "extra": {
                 "branch-alias": {
@@ -579,7 +580,7 @@
             "require": {
                 "php": ">=5.3.3"
             },
-            "time": "2012-08-22 11:48:41",
+            "time": "2012-08-22 13:48:41",
             "type": "library",
             "extra": {
                 "branch-alias": {
@@ -634,7 +635,7 @@
                 "symfony/config": "2.1.*",
                 "symfony/yaml": "2.1.*"
             },
-            "time": "2012-09-10 08:53:42",
+            "time": "2012-09-10 10:53:42",
             "type": "library",
             "extra": {
                 "branch-alias": {
@@ -681,7 +682,7 @@
             "require": {
                 "php": ">=5.3.3"
             },
-            "time": "2012-08-22 11:48:41",
+            "time": "2012-08-22 13:48:41",
             "type": "library",
             "extra": {
                 "branch-alias": {

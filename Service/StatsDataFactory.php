@@ -131,12 +131,13 @@ class StatsDataFactory
      * @param null $sampleValue
      * @return \Liuggio\StatsDClientBundle\Model\StatsDataInterface
      */
-    public function addSampling(StatsDataInterface $stats_data, $sampleValue = null) {
+    public function addSampling(StatsDataInterface $stats_data, $sampleValue = null)
+    {
 
         if (null === $sampleValue) {
             return $stats_data;
         }
-        $newValue =  sprintf('%s|@%.2f', $stats_data->getValue(), $sampleValue);
+        $newValue = sprintf('%s|@%.2f', $stats_data->getValue(), $sampleValue);
         $stats_data->setValue($newValue);
         return $stats_data;
     }

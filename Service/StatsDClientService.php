@@ -2,6 +2,8 @@
 
 namespace Liuggio\StatsDClientBundle\Service;
 
+use Liuggio\StatsDClientBundle\Model\StatsDataInterface;
+
 class StatsDClientService
 {
     /**
@@ -25,6 +27,16 @@ class StatsDClientService
         $this->failSilently = $fail_silently;
     }
 
+    /**
+     * this function reduce the amount of data that should be send
+     * @param $StatsData
+     */
+    public function reduceCount($StatsData)
+    {
+        //@todo StatsData should have 3 fields:
+        //    key-value-type
+        // in here a foreach that if is the type of count, it add the content and pop the value.
+    }
 
     /**
      * send data over udp
@@ -41,6 +53,8 @@ class StatsDClientService
             $StatsData = array($StatsData);
         }
         $sentDataCounter = 0;
+        //reduce dataCount
+        $this->reduceCount($StatsData);
         // Wrap this in a try/catch - failures in any of this should be silently ignored
         try {
             $host = $this->getHost();
@@ -51,9 +65,13 @@ class StatsDClientService
                 throw new \Exception("Could not open statd connection to $host:$port");
             }
             foreach ($StatsData as $StatsDataEntity) {
-                $message = $StatsDataEntity->getMessage();
-                socket_sendto($socket, $message, strlen($message), 0, $host, $port);
-                $sentDataCounter++;
+                if ($StatsDataEntity instanceOf StatsDataInterface) {
+                    $message = $StatsDataEntity->getMessage();
+                    socket_sendto($socket, $message, strlen($message), 0, $host, $port);
+                    $sentDataCounter++;
+                } else {
+                    throw new \Exception("Statsd Object is not an instanceOf of StatsDataInterface ");
+                }
             }
             socket_close($socket);
         } catch (\Exception $e) {

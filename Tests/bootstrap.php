@@ -6,3 +6,4 @@ if (!file_exists($file)) {
 }
 
 $autoload = require_once $file;
+require_once __DIR__.'/Monolog/TestCase.php';

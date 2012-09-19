@@ -6,13 +6,13 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Security\Core\Exception\AuthenticationCredentialsNotFoundException;
 
-class UserStatsCollector extends StatsCollector
+class ExceptionStatsCollector extends StatsCollector
 {
     private static $counter = 0;
 
     public function getName()
     {
-        return 'UserCollector';
+        return 'ExceptionCollector';
     }
 
     /**
@@ -26,23 +26,14 @@ class UserStatsCollector extends StatsCollector
      */
     public function collect(Request $request, Response $response, \Exception $exception = null)
     {
-        // check the number times of execution.
-        // eg. with `render` in twig happens that this func is called more times.
-        if (self::$counter != 0) {
-            return false;
-        }
-        if (null === $this->getSecurityContext()) {
+        if (null === $exception) {
             return true;
         }
+        // check the number times of execution.
+        // eg. with `render` in twig happens that this func is called more times.
 
-        $key = sprintf('%s.anonymous', $this->getStatsDataKey());
-        try {
-            if ($this->getSecurityContext()->isGranted('IS_AUTHENTICATED_FULLY')) {
-                $key = sprintf('%s.logged', $this->getStatsDataKey());
-            }
-        } catch (AuthenticationCredentialsNotFoundException $exception) {
-            //do nothing
-        }
+
+        $key = sprintf('%s.exception', $this->getStatsDataKey());
         $statData = $this->getStatsDataFactory()->createStatsDataIncrement($key);
         $this->addStatsData($statData);
 
@@ -50,15 +41,6 @@ class UserStatsCollector extends StatsCollector
         return true;
     }
 
-    public function setSecurityContext($security_context)
-    {
-        $this->security_context = $security_context;
-    }
-
-    public function getSecurityContext()
-    {
-        return $this->security_context;
-    }
 
 
 }
