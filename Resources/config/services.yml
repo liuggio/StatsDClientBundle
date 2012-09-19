@@ -5,7 +5,16 @@ parameters:
     liuggio_stats_d_client.entity.class: Liuggio\StatsDClientBundle\Entity\StatsData
     liuggio_stats_d_client.factory.class: Liuggio\StatsDClientBundle\Service\StatsDataFactory
     liuggio_stats_d_client.collector.dbal.class: Liuggio\StatsDClientBundle\StatsCollector\DbalStatsCollector
+# monolog handler
+    liuggio_stats_d_client.monolog_handler.class: Liuggio\StatsDClientBundle\Monolog\Handler\StatsDHandler
+# monolog formatter
+    liuggio_stats_d_client.monolog_formatter.short_line.class: Liuggio\StatsDClientBundle\Monolog\Formatter\ShortLineFormatter
 
+#this is an example of a listener waiting for a generic statsd-event
+    liuggio_stats_d_client.collector.listener:
+        class: %liuggio_stats_d_client.collector.listener.class%
+        tags:
+            - { name: stats_d_collector}
 services:
     liuggio_stats_d_client.service:
         class: %liuggio_stats_d_client.service.class%
