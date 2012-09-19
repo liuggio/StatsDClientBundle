@@ -42,6 +42,7 @@ class Configuration implements ConfigurationInterface
                     ->scalarNode('prefix')->defaultValue("log")->end()
                     ->scalarNode('formatter')->defaultValue("monolog.formatter.shortline")->end()
                     ->scalarNode('level')->defaultValue("warning")->end()
+                    ->scalarNode('context_logging')->defaultValue(false)->end()
                 ->end()
             ->end()
           ->end();

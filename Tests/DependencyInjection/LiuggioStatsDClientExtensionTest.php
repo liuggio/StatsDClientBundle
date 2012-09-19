@@ -45,6 +45,7 @@ class LiuggioStatsDClientExtensionTest extends \PHPUnit_Framework_TestCase
             'collectors' => array('liuggio_stats_d_client.collector.dbal' => 'tv.vision.query'),
             'monolog' => array(
                 'enable' => true,
+                'context_logging' => true,
                 'prefix' => 'log',
                 'formatter' => 'monolog.formatter.shortline',
                 'level' => 'warning')

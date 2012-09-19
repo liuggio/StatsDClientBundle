@@ -4,15 +4,53 @@ namespace Liuggio\StatsDClientBundle\Monolog\Handler;
 
 use Monolog\Handler\AbstractProcessingHandler;
 use Monolog\Formatter\FormatterInterface;
+
 /**
  * A processing handler for Monolog
  */
 class StatsDHandler extends AbstractProcessingHandler
 {
     /**
+     * @var bool
+     */
+    protected $contextLogging = false;
+
+    /**
+     * @param boolean $sendContext
+     */
+    public function setContextLogging($contextLogging)
+    {
+        $this->contextLogging = $contextLogging;
+    }
+
+    /**
+     * @return boolean
+     */
+    public function getContextLogging()
+    {
+        return $this->contextLogging;
+    }
+
+    /**
      * @var array
      */
     protected $buffer = array();
+
+    /**
+     * @param array $buffer
+     */
+    public function setBuffer($buffer)
+    {
+        $this->buffer = $buffer;
+    }
+
+    /**
+     * @return array
+     */
+    public function getBuffer()
+    {
+        return $this->buffer;
+    }
 
     /**
      * @var string
@@ -52,6 +90,7 @@ class StatsDHandler extends AbstractProcessingHandler
     {
         $this->statsDService = $statsDService;
     }
+
     /**
      * @param  $statsDService
      */
@@ -64,7 +103,8 @@ class StatsDHandler extends AbstractProcessingHandler
      * @param $str
      * @return mixed
      */
-    protected function toAscii($str) {
+    protected function toAscii($str)
+    {
         $clean = preg_replace("/[^a-zA-Z0-9\/_|+ -]/", '', $str);
         $clean = strtolower(trim($clean, '-'));
         $clean = preg_replace("/[\/_|+ -]+/", '-', $clean);
@@ -85,16 +125,23 @@ class StatsDHandler extends AbstractProcessingHandler
      */
     protected function write(array $record)
     {
+
+
         $channelKey = sprintf("%s.%s", $this->getPrefix(), $this->toAscii($record['channel']));
         $levelKey = sprintf("%s.%s", $channelKey, $this->toAscii($record['level_name']));
-        $messageKey = sprintf("%s.%s", $levelKey, $this->toAscii($record['formatted']));
 
-        $this->buffer[] = $this->statsDFactory->createStatsDataIncrement($levelKey);
-        $this->buffer[] = $this->statsDFactory->createStatsDataIncrement($messageKey);
-
-        foreach ($record['context'] as $key => $parameter) {
-            $contextKey = sprintf("%s.context.%s.%s", $levelKey, $this->toAscii($key), $this->toAscii($parameter));
-            $this->buffer[] = $this->statsDFactory->createStatsDataIncrement($contextKey);
+        if ($record['formatted']) {
+            $messageKey = sprintf("%s.%s", $levelKey, $this->toAscii($record['formatted']));
+            $this->buffer[] = $this->statsDFactory->createStatsDataIncrement($messageKey);
         }
+        $this->buffer[] = $this->statsDFactory->createStatsDataIncrement($levelKey);
+
+        if ($this->getContextLogging()) {
+            foreach ($record['context'] as $key => $parameter) {
+                $contextKey = sprintf("%s.context.%s.%s", $levelKey, $this->toAscii($key), $this->toAscii($parameter));
+                $this->buffer[] = $this->statsDFactory->createStatsDataIncrement($contextKey);
+            }
+        }
+
     }
 }

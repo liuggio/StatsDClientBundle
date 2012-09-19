@@ -34,6 +34,7 @@ class LiuggioStatsDClientExtension extends Extension
         $container->setParameter($this->getAlias() . '.enable_collector', $config['enable_collector']);
         $container->setParameter($this->getAlias() . '.collectors', $config['collectors']);
 
+
         $loader = new Loader\YamlFileLoader($container, new FileLocator(__DIR__ . '/../Resources/config'));
         $loader->load('services.yml');
         $loader->load('collectors.yml');
@@ -68,10 +69,11 @@ class LiuggioStatsDClientExtension extends Extension
         $def = new Definition($container->getParameter('liuggio_stats_d_client.monolog_handler.class'));
         $def->setPublic(false);
         $def->addMethodCall('setStatsDService', array(new Reference('liuggio_stats_d_client.service')));
-        $def->addMethodCall('setStatsDFactory',array(new Reference('liuggio_stats_d_client.factory')));
+        $def->addMethodCall('setStatsDFactory', array(new Reference('liuggio_stats_d_client.factory')));
         $def->addMethodCall('setPrefix', array($config['monolog']['prefix']));
-        $def->addMethodCall('setFormatter',array(new Reference($config['monolog']['formatter'])));
-        $def->addMethodCall('setLevel',array($config['monolog']['level']));
+        $def->addMethodCall('setFormatter', array(new Reference($config['monolog']['formatter'])));
+        $def->addMethodCall('setLevel', array($config['monolog']['level']));
+        $def->addMethodCall('setContextLogging', array($config['monolog']['context_logging']));
 
         $container->setDefinition('monolog.handler.statsd', $def);
     }

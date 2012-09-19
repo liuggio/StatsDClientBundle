@@ -48,7 +48,7 @@ class ShortLineFormatter extends LineFormatter
             }
         }
 
-        $shortMessage = preg_replace("/[^A-Za-z0-9?![:space:]]/","-",$shortMessage);
+        $shortMessage = preg_replace("/[^A-Za-z0-9?![:space:]]/", "-", $shortMessage);
 
         return $shortMessage;
     }

@@ -21,95 +21,73 @@ class LineFormatterTest extends \PHPUnit_Framework_TestCase
             'datetime' => new \DateTime,
             'extra' => array(),
         ));
-        $this->assertEquals('['.date('Y-m-d').'] log.WARNING: foo [] []'."\n", $message);
+        $this->assertEquals('log.WARNING.foo', $message);
     }
 
-//    public function testDefFormatWithArrayContext()
-//    {
-//        $formatter = new LineFormatter(null, 'Y-m-d');
-//        $message = $formatter->format(array(
-//            'level_name' => 'ERROR',
-//            'channel' => 'meh',
-//            'message' => 'foo',
-//            'datetime' => new \DateTime,
-//            'extra' => array(),
-//            'context' => array(
-//                'foo' => 'bar',
-//                'baz' => 'qux',
-//            )
-//        ));
-//        $this->assertEquals('['.date('Y-m-d').'] meh.ERROR: foo {"foo":"bar","baz":"qux"} []'."\n", $message);
-//    }
-//
-//    public function testDefFormatExtras()
-//    {
-//        $formatter = new LineFormatter(null, 'Y-m-d');
-//        $message = $formatter->format(array(
-//            'level_name' => 'ERROR',
-//            'channel' => 'meh',
-//            'context' => array(),
-//            'datetime' => new \DateTime,
-//            'extra' => array('ip' => '127.0.0.1'),
-//            'message' => 'log',
-//        ));
-//        $this->assertEquals('['.date('Y-m-d').'] meh.ERROR: log [] {"ip":"127.0.0.1"}'."\n", $message);
-//    }
-//
-//    public function testFormatExtras()
-//    {
-//        $formatter = new LineFormatter("[%datetime%] %channel%.%level_name%: %message% %context% %extra.file% %extra%\n", 'Y-m-d');
-//        $message = $formatter->format(array(
-//            'level_name' => 'ERROR',
-//            'channel' => 'meh',
-//            'context' => array(),
-//            'datetime' => new \DateTime,
-//            'extra' => array('ip' => '127.0.0.1', 'file' => 'test'),
-//            'message' => 'log',
-//        ));
-//        $this->assertEquals('['.date('Y-m-d').'] meh.ERROR: log [] test {"ip":"127.0.0.1"}'."\n", $message);
-//    }
-//
-//    public function testDefFormatWithObject()
-//    {
-//        $formatter = new LineFormatter(null, 'Y-m-d');
-//        $message = $formatter->format(array(
-//            'level_name' => 'ERROR',
-//            'channel' => 'meh',
-//            'context' => array(),
-//            'datetime' => new \DateTime,
-//            'extra' => array('foo' => new TestFoo, 'bar' => new TestBar, 'baz' => array(), 'res' => fopen('php://memory', 'rb')),
-//            'message' => 'foobar',
-//        ));
-//        if (version_compare(PHP_VERSION, '5.4.0', '>=')) {
-//            $this->assertEquals('['.date('Y-m-d').'] meh.ERROR: foobar [] {"foo":"[object] (Monolog\\\\Formatter\\\\TestFoo: {\\"foo\\":\\"foo\\"})","bar":"[object] (Monolog\\\\Formatter\\\\TestBar: {})","baz":[],"res":"[resource]"}'."\n", $message);
-//        } else {
-//            $this->assertEquals('['.date('Y-m-d').'] meh.ERROR: foobar [] {"foo":"[object] (Monolog\\Formatter\\TestFoo: {"foo":"foo"})","bar":"[object] (Monolog\\Formatter\\TestBar: {})","baz":[],"res":"[resource]"}'."\n", $message);
-//        }
-//    }
-//
-//    public function testBatchFormat()
-//    {
-//        $formatter = new LineFormatter(null, 'Y-m-d');
-//        $message = $formatter->formatBatch(array(
-//            array(
-//                'level_name' => 'CRITICAL',
-//                'channel' => 'test',
-//                'message' => 'bar',
-//                'context' => array(),
-//                'datetime' => new \DateTime,
-//                'extra' => array(),
-//            ),
-//            array(
-//                'level_name' => 'WARNING',
-//                'channel' => 'log',
-//                'message' => 'foo',
-//                'context' => array(),
-//                'datetime' => new \DateTime,
-//                'extra' => array(),
-//            ),
-//        ));
-//        $this->assertEquals('['.date('Y-m-d').'] test.CRITICAL: bar [] []'."\n".'['.date('Y-m-d').'] log.WARNING: foo [] []'."\n", $message);
-//    }
+    public function testDefFormatWithArrayContext()
+    {
+        $formatter = new ShortLineFormatter();
+        $message = $formatter->format(array(
+            'level_name' => 'ERROR',
+            'channel' => 'meh',
+            'message' => 'foo',
+            'datetime' => new \DateTime,
+            'extra' => array(),
+            'context' => array(
+                'foo' => 'bar',
+                'baz' => 'qux',
+            )
+        ));
+        $this->assertEquals('meh.ERROR.foo', $message);
+    }
+
+    public function testDefLongFormat()
+    {
+        $formatter = new ShortLineFormatter();
+        $message = $formatter->format(array(
+            'level_name' => 'DEBUG',
+            'channel' => 'doctrine',
+            'message' => 'INSERT INTO viaggio_calendar (enable, viaggio_id, calendar_id) VALUES (?, ?, ?)',
+            'datetime' => new \DateTime,
+            'extra' => array(),
+            'context' => array(
+                'foo' => 'bar',
+                'baz' => 'qux',
+            )
+        ));
+        $this->assertEquals('doctrine.DEBUG.INSERT-INTO', $message);
+    }
+
+    public function testDefKernelException()
+    {
+        $formatter = new ShortLineFormatter();
+        $message = $formatter->format(array(
+            'level_name' => 'DEBUG',
+            'channel' => 'doctrine',
+            'message' => 'Notified event "kernel.exception" to listener "Symfony\Component\HttpKernel\EventListener\ProfilerListener::onKernelException"',
+            'datetime' => new \DateTime,
+            'extra' => array(),
+            'context' => array(
+                'foo' => 'bar',
+                'baz' => 'qux',
+            )
+        ));
+        $this->assertEquals('doctrine.DEBUG.Notified-event', $message);
+    }
+
+    public function testDefRouteException()
+    {
+        $formatter = new ShortLineFormatter();
+        $message = $formatter->format(array(
+            'level_name' => 'DEBUG',
+            'channel' => 'doctrine',
+            'message' => 'Symfony\Component\HttpKernel\Exception\NotFoundHttpException: No route found for "GET /ddd" (uncaught exception) at /xxxx/classes.php line 5062',
+            'datetime' => new \DateTime,
+            'extra' => array(),
+        ));
+        $this->assertEquals('doctrine.DEBUG.Symfony-Component-HttpKernel-Exception-NotFoundHttpException--No', $message);
+    }
+
 }
 
 class TestFoo
