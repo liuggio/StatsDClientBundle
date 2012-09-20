@@ -106,8 +106,6 @@ composer.phar install
 phpunit --coverage-html reports
 ```
 
-
-
 # Advanced Usage
 
 ## What's in this bundle:

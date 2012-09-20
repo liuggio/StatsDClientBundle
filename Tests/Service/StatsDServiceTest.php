@@ -10,6 +10,16 @@ namespace Liuggio\StatsDClientBundle\Service {
         public static $flags;
         public static $host;
         public static $port;
+
+        public static function clean() {
+            dumpSocket::$socket = null;
+            dumpSocket::$message = null;
+            dumpSocket::$len = null;
+            dumpSocket::$flags = null;
+            dumpSocket::$host = null;
+            dumpSocket::$port = null;
+
+        }
     }
 
     function socket_sendto($socket, $message, $len, $flags, $host, $port)
@@ -20,7 +30,7 @@ namespace Liuggio\StatsDClientBundle\Service {
         dumpSocket::$flags = $flags;
         dumpSocket::$host = $host;
         dumpSocket::$port = $port;
-        return null;
+        return $len;
     }
 
 }
@@ -29,7 +39,7 @@ namespace Liuggio\StatsDClientBundle\Tests\Service {
 
     use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 
-    use  Liuggio\StatsDClientBundle\Service\StatsDClientService;
+    use Liuggio\StatsDClientBundle\Service\StatsDClientService;
     use Liuggio\StatsDClientBundle\Entity\StatsData;
 
     class StatDServiceTest extends WebTestCase
@@ -51,8 +61,34 @@ namespace Liuggio\StatsDClientBundle\Tests\Service {
             $this->assertEquals(\Liuggio\StatsDClientBundle\Service\dumpSocket::$message, $msg);
             $this->assertEquals(\Liuggio\StatsDClientBundle\Service\dumpSocket::$host, $host);
             $this->assertEquals(\Liuggio\StatsDClientBundle\Service\dumpSocket::$port, $port);
+            // clean static file
+            \Liuggio\StatsDClientBundle\Service\dumpSocket::clean();
 
         }
+
+        public function testReduceCount()
+        {
+            $host = 'buum';
+            $port = 1;
+            $statd = new StatsDClientService($host, $port, false);
+
+            $entity = new StatsData();
+            $entity->setKey('key');
+            $entity->setValue('1|c');
+            $array[] = $entity;
+
+            $entity = new StatsData();
+            $entity->setKey('key');
+            $entity->setValue('2|c');
+            $array[] = $entity;
+
+            $reducedMessage = array("key:1|c,key:2|c");
+
+            $this->assertEquals($statd->reduceCount($array),$reducedMessage);
+            \Liuggio\StatsDClientBundle\Service\dumpSocket::clean();
+        }
+
+
     }
 //namespace bracket
 }

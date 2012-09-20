@@ -52,6 +52,20 @@ class StatsData implements StatsDataInterface
     }
 
     /**
+     * return the value splitted by data and type
+     * @return array
+     */
+    public function getValueArray()
+    {
+        $type = null;
+        // take everything after the |
+        if (null !== $this->getValue()) {
+            $type = explode("|", $this->getValue(),2);
+        }
+        return $type;
+    }
+
+    /**
      * @return int
      */
     public function getMessage()

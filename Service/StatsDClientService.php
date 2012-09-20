@@ -6,6 +6,8 @@ use Liuggio\StatsDClientBundle\Model\StatsDataInterface;
 
 class StatsDClientService
 {
+    const MAX_UDP_SIZE_STR = 548; //512 - IPv4 header
+
     /**
      * @var string
      */
@@ -20,6 +22,7 @@ class StatsDClientService
      */
     private $failSilently;
 
+
     public function __construct($host, $port, $fail_silently = true)
     {
         $this->host = $host;
@@ -27,15 +30,39 @@ class StatsDClientService
         $this->failSilently = $fail_silently;
     }
 
+    function doReduce($result, $item)
+    {
+        $oldLastItem = array_pop($result);
+        $sizeResult = strlen($oldLastItem);
+        $message = $item->getMessage();
+        $totalSize = $sizeResult + strlen($message) + 1; //the comma is the 1
+
+        if (self::MAX_UDP_SIZE_STR < $totalSize) {
+            //going to build another one
+            array_push($result, $message);
+            array_push($result, $oldLastItem);
+        } else {
+            //going to modifying the existing
+            $comma= '';
+            if ($sizeResult > 0) {
+                $comma= ',';
+            }
+            $oldLastItem = sprintf("%s%s%s", $oldLastItem, $comma, $message);
+            array_push($result, $oldLastItem);
+        }
+        return $result;
+    }
+
     /**
-     * this function reduce the amount of data that should be send
+     * this function reduce the amount of data that should be send with the same message
      * @param $StatsData
      */
     public function reduceCount($StatsData)
     {
-        //@todo StatsData should have 3 fields:
-        //    key-value-type
-        // in here a foreach that if is the type of count, it add the content and pop the value.
+        if (is_array($StatsData)) {
+            $StatsData = array_reduce($StatsData, "self::doReduce", array());
+        }
+        return $StatsData;
     }
 
     /**
@@ -46,15 +73,14 @@ class StatsDClientService
      *
      * @throws \Liuggio\StatsDClientBundle\Exception
      */
-    public function send($StatsData)
+    public function send($StatsData, $reduceDataCount = true)
     {
 
         if (!is_array($StatsData)) {
             $StatsData = array($StatsData);
         }
         $sentDataCounter = 0;
-        //reduce dataCount
-        $this->reduceCount($StatsData);
+
         // Wrap this in a try/catch - failures in any of this should be silently ignored
         try {
             $host = $this->getHost();
@@ -66,11 +92,23 @@ class StatsDClientService
             }
             foreach ($StatsData as $StatsDataEntity) {
                 if ($StatsDataEntity instanceOf StatsDataInterface) {
+                    // the array is an array of StatsDataInterface
                     $message = $StatsDataEntity->getMessage();
-                    socket_sendto($socket, $message, strlen($message), 0, $host, $port);
+                    $sendData = true;
+                } elseif (is_string($StatsDataEntity)) {
+                    // the array is an array of string
+                    $message = $StatsDataEntity;
+                    $sendData = true;
+                }
+
+                if ($sendData) {
+                    $sendData = socket_sendto($socket, $message, strlen($message), 0, $host, $port);
+                    if (strlen($message) !== $sendData) {
+                        throw new \Exception(sprintf("Error on Data sent, expected %d instead of %d",strlen($message),$sendData ));
+                    }
                     $sentDataCounter++;
                 } else {
-                    throw new \Exception("Statsd Object is not an instanceOf of StatsDataInterface ");
+                    throw new \Exception("Statsd Object is not an instanceOf of StatsDataInterface or String");
                 }
             }
             socket_close($socket);
@@ -119,7 +157,7 @@ class StatsDClientService
      */
     public function setFailSilently($fail_silently)
     {
-        $this->fail_silently = $fail_silently;
+        $this->failSilently  = $fail_silently;
     }
 
     /**
@@ -127,6 +165,6 @@ class StatsDClientService
      */
     public function getFailSilently()
     {
-        return $this->fail_silently;
+        return $this->failSilently;
     }
 }

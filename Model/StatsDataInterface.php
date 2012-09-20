@@ -22,6 +22,11 @@ interface StatsDataInterface
      */
     function getMessage();
 
+    /**
+     * @abstract
+     * @return string
+     */
+    function getValueArray();
 
     /**
      * @abstract
