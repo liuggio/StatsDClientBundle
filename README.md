@@ -1,22 +1,22 @@
 ## Abstract
 
-Monitor what is happening in your production Symfony2 application, with StatD and Graphite.
+Monitoring what is happening in your production Symfony2 application, with StatD and Graphite.
 
 Within this bundle you could use ready-to-go monitor for
 
-- Monolog  - New feature
+- Monolog (this is a new feature)
 
 - Amount of user
 
 - Logged vs Anonymous user
 
-- SQL: Verbs used (amount of select/set/update/upgrade/delete)
+- SQL: Verbs used (amount of select/set/update/upgrade/delete) (this feature is not suggested, please use a server monitor tool eg. nagios, munin)
 
 - Amount of PHP ram used
 
 
-And in your application you could use the service for send packet to StatD Server using the service
-or create a personalized Event/Listener (suggested)
+And in your application you could use the service for send packet to StatsD Server using the service
+or create a personalized Event/Listener
 
 ## Screenshot Graphite
 
@@ -33,8 +33,13 @@ see this blog post to install it with vagrant [Easy install statsd graphite](htt
 
 add to your composer
 
-`    "liuggio/statsd-client-bundle": "v1.0.0"`
-
+``` 
+"require": {
+    # ..
+    "liuggio/statsd-client-bundle": "v1.0.0"`
+    # ..
+}
+```
 
 then add to config/yaml
 
@@ -63,6 +68,36 @@ liuggio_stats_d_client:
 
 
 ```
+
+If you want to use monolog 
+
+```
+
+monolog:
+    handlers:
+        main:
+            type:         fingers_crossed
+            action_level: info #critical for 5xx problems, error for 4xx and 5xx problems
+            handler:      grouped
+        grouped:
+            type:    group
+            members: [streamed, stats_d]
+        stats_d:
+            type:  service
+            id: monolog.handler.statsd
+            level: error
+            action_level: error
+#            channels:
+#                type:     exclusive # Include all, except those listed below
+#                elements: [ ]
+        streamed
+            type:  stream
+            path:  %kernel.logs_dir%/%kernel.environment%.log
+            level: info
+
+```
+
+
 
 ## Theory
 
