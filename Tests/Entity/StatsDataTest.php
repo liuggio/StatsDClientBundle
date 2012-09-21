@@ -9,7 +9,6 @@ use Liuggio\StatsDClientBundle\Entity\StatsData;
 
 class StatsDataTest extends WebTestCase
 {
-
     public function testReduceCount()
     {
         $entity = new StatsData();
