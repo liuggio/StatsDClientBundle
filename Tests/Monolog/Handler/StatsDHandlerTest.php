@@ -76,11 +76,7 @@ class StatsDHandlerTest extends TestCase
         return $statsDFactory;
 
     }
-    /**
-     * @covers Liuggio\StatsDClientBundle\Monolog\Handler\StatsDHandler::__construct
-     * @covers Liuggio\StatsDClientBundle\Monolog\Handler\StatsDHandler::__handle
-     * @covers Liuggio\StatsDClientBundle\Monolog\Handler\StatsDHandler::write
-     */
+
     public function testHandleBuffers()
     {
         $handler = new StatsDHandler(Logger::INFO);
@@ -102,11 +98,7 @@ class StatsDHandlerTest extends TestCase
         $this->assertArrayNotHasKey(2, $outputBuffer);
     }
 
-    /**
-     * @covers Liuggio\StatsDClientBundle\Monolog\Handler\StatsDHandler::__construct
-     * @covers Liuggio\StatsDClientBundle\Monolog\Handler\StatsDHandler::__handle
-     * @covers Liuggio\StatsDClientBundle\Monolog\Handler\StatsDHandler::write
-     */
+
     public function testHandleBuffersWithContext()
     {
         $handler = new StatsDHandler(Logger::INFO);
