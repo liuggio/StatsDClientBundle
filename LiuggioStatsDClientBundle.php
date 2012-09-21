@@ -9,7 +9,7 @@ use Symfony\Component\DependencyInjection\Scope;
 use Symfony\Component\HttpFoundation\Request;
 
 
-use Liuggio\StatsDClientBundle\DependencyInjection\Compiler\CollectorPass;
+use Liuggio\StatsDClientBundle\DependencyInjection\Compiler\CollectorCompilerPass;
 
 class LiuggioStatsDClientBundle extends Bundle
 {
@@ -17,7 +17,7 @@ class LiuggioStatsDClientBundle extends Bundle
     public function build(ContainerBuilder $container)
     {
         parent::build($container);
-        $container->addCompilerPass(new CollectorPass());
+        $container->addCompilerPass(new CollectorCompilerPass());
     }
 
 }

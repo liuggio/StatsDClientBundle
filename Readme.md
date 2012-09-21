@@ -1,0 +1,85 @@
+StaSD Client Bundle
+===================
+
+[![Build Status](https://secure.travis-ci.org/liuggio/StatsDClientBundle.png)](http://travis-ci.org/liuggio/StatsDClientBundle)
+
+This bundle helps you to monitor your application.
+
+It includes a **client** for the etsy/Statsd API, a **service** to send your data,
+a **Monolog Handler** and a series of **collectors** in order to aggregate your personal date.
+
+
+**Check out the documentation**
+
+* [Installation and Configuration](https:///blob/master/Resources/doc/installation.md)
+* [Advanced usage](https:///blob/master/Resources/doc/advanced.md)
+
+## Abstract
+
+Monitoring what is happening in your production Symfony2 application, with StatD and Graphite.
+
+Within this bundle you could use ready-to-go monitor for
+
+- Monolog (this is a new feature)
+
+- Amount of user
+
+- Logged vs Anonymous user
+
+- SQL: Verbs used (amount of select/set/update/upgrade/delete) (this feature is not suggested, please use a server monitor tool eg. nagios, munin)
+
+- Amount of PHP ram used
+
+
+
+## Short Theory
+
+### Easily Install StatSD and Graphite
+
+In order to try this application monitor you have to install etsy/statd and Graphite
+
+see this blog post to install it with vagrant [Easy install statsd graphite](http://welcometothebundle.com/easily-install-statsd-and-graphite-with-vagrant/).
+
+
+#### [StatD](https://github.com/etsy/statsd)
+
+StatD is a simple daemon for easy stats aggregation
+
+#### [Graphite](http://graphite.wikidot.com/)
+
+Graphite is a Scalable Realtime Graphing
+
+#### The Client send data with UDP (faster)
+
+https://www.google.com/search?q=tcp+vs+udp
+
+## Contribution
+
+Active contribution and patches are very welcome.
+To keep things in shape we have quite a bunch of unit tests. If you're submitting pull requests please
+make sure that they are still passing and if you add functionality please
+take a look at the coverage as well it should be pretty high :)
+
+- First fork or clone the repository
+
+```
+git clone git://github.com/liuggio/StatsDClientBundle.git
+cd StatsDClientBundle
+```
+
+- Install vendors:
+
+``` bash
+composer.phar install
+```
+
+- This will give you proper results:
+
+``` bash
+phpunit --coverage-html reports
+```
+
+
+
+
+
