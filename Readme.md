@@ -5,8 +5,8 @@ StaSD Client Bundle
 
 This bundle helps you to monitor your application.
 
-It includes a **client** for the etsy/Statsd API, a **service** to send your data,
-a **Monolog Handler** and a series of **collectors** in order to aggregate your personal date.
+It includes a **Client** for the etsy/Statsd API, a **service**,
+a **Monolog Handler** and a series of **Collectors** in order to aggregate your personal data.
 
 
 **Check out the documentation**
