@@ -11,7 +11,7 @@ use Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
  * strongly inspired by Symfony ProfilerPass
  * @author <liuggio@gmail.com>
  */
-class CollectorPass implements CompilerPassInterface
+class CollectorCompilerPass implements CompilerPassInterface
 {
     public function process(ContainerBuilder $container)
     {
