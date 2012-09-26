@@ -15,6 +15,8 @@ class ExceptionStatsCollector extends StatsCollector
         return 'ExceptionCollector';
     }
 
+
+
     /**
      * Collects data for the given Response.
      *

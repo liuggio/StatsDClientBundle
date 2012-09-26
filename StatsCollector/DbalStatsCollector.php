@@ -8,13 +8,6 @@ use Doctrine\DBAL\Logging\SQLLogger;
 
 class DbalStatsCollector extends StatsCollector implements SQLLogger, StatsCollectorInterface
 {
-    private static $counter = 0;
-
-    public function getName()
-    {
-        return 'DoctrineSqlCollector';
-    }
-
     /**
      * try to extract the sql verbs.
      * @param $sql
@@ -49,7 +42,6 @@ class DbalStatsCollector extends StatsCollector implements SQLLogger, StatsColle
      */
     public function stopQuery()
     {
-
         return true;
     }
 
