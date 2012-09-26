@@ -30,17 +30,20 @@ class StatsDCollectorService
     /**
      * Collects data for the given Response.
      *
+     * @param boolean $isMasterRequest
      * @param Request    $request   A Request instance
      * @param Response   $response  A Response instance
      * @param \Exception $exception An exception instance if the request threw one
      *
      * @return Profile|null A Profile instance or null if the profiler is disabled
      */
-    public function collect(Request $request, Response $response, \Exception $exception = null)
+    public function collect($isMasterRequest, Request $request, Response $response, \Exception $exception = null)
     {
-
         $statSData = array();
         foreach ($this->collectors as $collector) {
+            if ($collector->getOnlyOnMasterResponse() && !$isMasterRequest) {
+                break;
+            }
             $collector->collect($request, $response, $exception);
             $statSData = array_merge($statSData, $collector->getStatsData());
 
@@ -78,7 +81,7 @@ class StatsDCollectorService
      */
     public function add(StatsCollectorInterface $collector)
     {
-        $this->collectors[$collector->getName()] = $collector;
+        $this->collectors[$collector->getStatsDataKey()] = $collector;
     }
 
     /**

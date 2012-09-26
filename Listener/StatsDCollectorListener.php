@@ -79,7 +79,7 @@ class StatsDCollectorListener implements EventSubscriberInterface
         $exception = $this->exception;
         $this->exception = null;
 
-        $dataToSend = $this->collector->collect($request, $event->getResponse(), $exception);
+        $dataToSend = $this->collector->collect($master, $request, $event->getResponse(), $exception);
 
         if (null === $dataToSend || !is_array($dataToSend) || count($dataToSend) < 1) {
             return;

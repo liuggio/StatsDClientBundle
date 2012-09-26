@@ -21,19 +21,19 @@ abstract class StatsCollector implements StatsCollectorInterface
      * @var Liuggio\StatsDClientBundle\Service\StatsDataFactory
      */
     protected $statsDataFactory;
+    /**
+     * @var boolean
+     */
+    protected $onlyOnMasterResponse;
 
-    public function __construct($stat_key = __CLASS__, StatsDataFactory $stats_data_factory = null)
+
+
+    public function __construct($stat_key = __CLASS__, StatsDataFactory $stats_data_factory = null, $only_on_master_response = false)
     {
-
         $this->setStatsDataKey($stat_key);
         $this->statsDataFactory = $stats_data_factory;
+        $this->setOnlyOnMasterResponse($only_on_master_response);
     }
-
-    public function getName()
-    {
-        return 'abstractCollector';
-    }
-
 
     /**
      * Collects data for the given Response.
@@ -101,5 +101,19 @@ abstract class StatsCollector implements StatsCollectorInterface
     {
         return $this->statsDataFactory;
     }
+    /**
+     * @param boolean $onlyOnMasterResponse
+     */
+    public function setOnlyOnMasterResponse($onlyOnMasterResponse)
+    {
+        $this->onlyOnMasterResponse = $onlyOnMasterResponse;
+    }
 
+    /**
+     * @return boolean
+     */
+    public function getOnlyOnMasterResponse()
+    {
+        return $this->onlyOnMasterResponse;
+    }
 }

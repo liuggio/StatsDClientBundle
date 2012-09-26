@@ -25,9 +25,4 @@ interface StatsCollectorInterface
      */
     public function collect(Request $request, Response $response, \Exception $exception = null);
 
-    /**
-     * @abstract
-     */
-    function getName();
-
 }

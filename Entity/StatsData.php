@@ -4,9 +4,6 @@ namespace Liuggio\StatsDClientBundle\Entity;
 
 use  Liuggio\StatsDClientBundle\Model\StatsDataInterface;
 
-/**
- *
- */
 class StatsData implements StatsDataInterface
 {
     /**
