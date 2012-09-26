@@ -9,7 +9,6 @@ services:
     liuggio_stats_d_client.collector.visitor:
         class: %liuggio_stats_d_client.collector.visitor.class%
         calls:
-            - ['setSecurityContext', [@security.context]]
             - ['setOnlyOnMasterResponse', [true]]
         tags:
             - { name: stats_d_collector}
@@ -17,7 +16,6 @@ services:
     liuggio_stats_d_client.collector.memory:
         class: %liuggio_stats_d_client.collector.memory.class%
         calls:
-            - ['setSecurityContext', [@security.context]]
             - ['setOnlyOnMasterResponse', [true]]
         tags:
             - { name: stats_d_collector}
@@ -33,7 +31,6 @@ services:
     liuggio_stats_d_client.collector.exception:
         class: %liuggio_stats_d_client.collector.exception.class%
         calls:
-            - ['setSecurityContext', [@security.context]]
             - ['setOnlyOnMasterResponse', [true]]
         tags:
             - { name: stats_d_collector}
