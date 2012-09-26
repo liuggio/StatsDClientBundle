@@ -3,6 +3,7 @@
 namespace Liuggio\StatsDClientBundle\Service;
 
 use Liuggio\StatsDClientBundle\Model\StatsDataInterface;
+use Liuggio\StatsDClientBundle\Exception;
 
 class StatsDClientService
 {
@@ -30,22 +31,43 @@ class StatsDClientService
         $this->failSilently = $fail_silently;
     }
 
+    /**
+     * This function return an array of reduced string
+     *
+     * @param $result
+     * @param $item
+     * @return mixed
+     */
     function doReduce($result, $item)
     {
         $oldLastItem = array_pop($result);
         $sizeResult = strlen($oldLastItem);
-        $message = $item->getMessage();
-        $totalSize = $sizeResult + strlen($message) + 1; //the comma is the 1
 
+        if ($item instanceOf StatsDataInterface) {
+            $message = $item->getMessage();
+        } elseif (is_string($item)) {
+            $message = $item;
+        } else {
+            // ignore this item
+            if (!$this->getFailSilently()) {
+                throw new Exception(sprintf("Error on Data sent, expected a string or StatsDataInterface"));
+            }
+            if (null !== $oldLastItem) {
+                array_push($result, $oldLastItem);
+            }
+            return $result;
+        }
+
+        $totalSize = $sizeResult + strlen($message) + 1; //the comma is the 1
         if (self::MAX_UDP_SIZE_STR < $totalSize) {
             //going to build another one
             array_push($result, $message);
             array_push($result, $oldLastItem);
         } else {
             //going to modifying the existing
-            $comma= '';
+            $comma = '';
             if ($sizeResult > 0) {
-                $comma= ',';
+                $comma = ',';
             }
             $oldLastItem = sprintf("%s%s%s", $oldLastItem, $comma, $message);
             array_push($result, $oldLastItem);
@@ -55,31 +77,35 @@ class StatsDClientService
 
     /**
      * this function reduce the amount of data that should be send with the same message
-     * @param $StatsData
+     * @param $statsData
      */
-    public function reduceCount($StatsData)
+    public function reduceCount($statsData)
     {
-        if (is_array($StatsData)) {
-            $StatsData = array_reduce($StatsData, "self::doReduce", array());
+        if (is_array($statsData)) {
+            $statsData = array_reduce($statsData, "self::doReduce", array());
         }
-        return $StatsData;
+        return $statsData;
     }
 
     /**
-     * send data over udp
+     * send data over udp Data is a well formmatted string for statsd, or a StatsDataInterface, or an array of string or
+     * an array of StatsDataInterfaces
      *
-     * @param array $StatsData
+     * @param mixed $statsData could be array, a string or a StatsDataInterface
      * @return int the number of StatsData Sent
      *
      * @throws \Liuggio\StatsDClientBundle\Exception
      */
-    public function send($StatsData, $reduceDataCount = true)
+    public function send($statsData, $reduceDataCount = true)
     {
-
-        if (!is_array($StatsData)) {
-            $StatsData = array($StatsData);
-        }
         $sentDataCounter = 0;
+        if ($reduceDataCount) {
+            $statsData = $this->reduceCount($statsData);
+        }
+
+        if (!is_array($statsData)) {
+            $statsData = array($statsData);
+        }
 
         // Wrap this in a try/catch - failures in any of this should be silently ignored
         try {
@@ -90,25 +116,25 @@ class StatsDClientService
             if (!$socket) {
                 throw new \Exception("Could not open statd connection to $host:$port");
             }
-            foreach ($StatsData as $StatsDataEntity) {
-                if ($StatsDataEntity instanceOf StatsDataInterface) {
+            foreach ($statsData as $statsDataObject) {
+                $message = null;
+
+                if ($statsDataObject instanceOf StatsDataInterface) {
                     // the array is an array of StatsDataInterface
-                    $message = $StatsDataEntity->getMessage();
-                    $sendData = true;
-                } elseif (is_string($StatsDataEntity)) {
+                    $message = $statsDataObject->getMessage();
+                } elseif (is_string($statsDataObject)) {
                     // the array is an array of string
-                    $message = $StatsDataEntity;
-                    $sendData = true;
+                    $message = $statsDataObject;
+                } else {
+                    throw new Exception("Statsd Object is not an instanceOf of StatsDataInterface neither of a String");
                 }
 
-                if ($sendData) {
+                if (null !== $message && strlen($message) > 0) {
                     $sendData = socket_sendto($socket, $message, strlen($message), 0, $host, $port);
                     if (strlen($message) !== $sendData) {
-                        throw new \Exception(sprintf("Error on Data sent, expected %d instead of %d",strlen($message),$sendData ));
+                        throw new Exception(sprintf("Error on Data sent, expected %d instead of %d", strlen($message), $sendData));
                     }
                     $sentDataCounter++;
-                } else {
-                    throw new \Exception("Statsd Object is not an instanceOf of StatsDataInterface or String");
                 }
             }
             socket_close($socket);
@@ -119,6 +145,7 @@ class StatsDClientService
         }
         return $sentDataCounter;
     }
+
 
     /**
      * @param int $port
@@ -157,7 +184,7 @@ class StatsDClientService
      */
     public function setFailSilently($fail_silently)
     {
-        $this->failSilently  = $fail_silently;
+        $this->failSilently = $fail_silently;
     }
 
     /**
