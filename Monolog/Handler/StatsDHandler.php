@@ -16,7 +16,7 @@ class StatsDHandler extends AbstractProcessingHandler
     protected $contextLogging = false;
 
     /**
-     * @param boolean $sendContext
+     * @param boolean $contextLogging
      */
     public function setContextLogging($contextLogging)
     {
@@ -92,7 +92,7 @@ class StatsDHandler extends AbstractProcessingHandler
     }
 
     /**
-     * @param  $statsDService
+     * @param $statsDFactory
      */
     public function setStatsDFactory($statsDFactory)
     {

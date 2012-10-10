@@ -75,7 +75,7 @@ Working with `Monolog`
 -------------
 
 To Monitorize your log, add the following lines to your application configuration
-file, in order to enable the StasDHandler
+file, in order to enable the StatsDHandler
 
 
 ``` yaml
@@ -146,7 +146,7 @@ If the information Monolog are not enough for you, you can use the Collectors th
 
 5. Logging integrated for debugging
 
-5. Better example usage and explaination
+5. Better example usage and explanation
 Some Collectors are into the StatsCollector folder, but you can build your own personal collector.
 The idea of the collector follows many of the Symfony2 Profiler.
 

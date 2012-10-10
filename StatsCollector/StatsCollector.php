@@ -18,7 +18,7 @@ abstract class StatsCollector implements StatsCollectorInterface
      */
     protected $statsData;
     /**
-     * @var Liuggio\StatsDClientBundle\Service\StatsDataFactory
+     * @var \Liuggio\StatsDClientBundle\Service\StatsDataFactory
      */
     protected $statsDataFactory;
     /**
@@ -61,7 +61,7 @@ abstract class StatsCollector implements StatsCollectorInterface
     }
 
     /**
-     *
+     * @param \Liuggio\StatsDClientBundle\Model\StatsDataInterface $statsData
      * @return mixed
      */
     public function addStatsData(\Liuggio\StatsDClientBundle\Model\StatsDataInterface $statsData)
@@ -70,8 +70,7 @@ abstract class StatsCollector implements StatsCollectorInterface
     }
 
     /**
-     *
-     * @param string $stat
+     * @param string $key
      */
     public function setStatsDataKey($key)
     {
@@ -87,7 +86,7 @@ abstract class StatsCollector implements StatsCollectorInterface
     }
 
     /**
-     * @param \Liuggio\StatsDClientBundle\StatCollector\Liuggio\StatsDClientBundle\Service\StatsDataFactory $statsDataFactory
+     * @param \Liuggio\StatsDClientBundle\Service\StatsDataFactory $statsDataFactory
      */
     public function setStatsDataFactory(StatsDataFactory $statsDataFactory)
     {
@@ -95,7 +94,7 @@ abstract class StatsCollector implements StatsCollectorInterface
     }
 
     /**
-     * @return \Liuggio\StatsDClientBundle\StatCollector\Liuggio\StatsDClientBundle\Service\StatsDataFactory
+     * @return \Liuggio\StatsDClientBundle\Service\StatsDataFactory
      */
     public function getStatsDataFactory()
     {

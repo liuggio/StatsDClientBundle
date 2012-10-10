@@ -20,8 +20,8 @@ class StatsDataFactory
     /**
      * Log timing information
      *
-     * @param string $stats The metric to in log timing info for.
-     * @param float $time The ellapsed time (ms) to log
+     * @param string $key The metric to in log timing info for.
+     * @param float $time The elapsed time (ms) to log
      *
      * @return \Liuggio\StatsDClientBundle\Model\StatsDataInterface
      * */
@@ -36,8 +36,7 @@ class StatsDataFactory
     /**
      * Increments one or more stats counters
      *
-     * @param string|array $stats The metric(s) to increment.
-     * @param float|1 $sampleRate the rate (0-1) for sampling.
+     * @param string|array $key The metric(s) to increment.
      * @return boolean
      *
      * @return \Liuggio\StatsDClientBundle\Model\StatsDataInterface
@@ -51,8 +50,7 @@ class StatsDataFactory
     /**
      * Decrements one or more stats counters.
      *
-     * @param string|array $stats The metric(s) to decrement.
-     * @param float|1 $sampleRate the rate (0-1) for sampling.
+     * @param string|array $key The metric(s) to decrement.
      *
      * @return \Liuggio\StatsDClientBundle\Model\StatsDataInterface
      * */
@@ -65,8 +63,8 @@ class StatsDataFactory
     /**
      * Updates one or more stats counters by arbitrary amounts.
      *
-     * @param string|array $stats The metric(s) to update. Should be either a string or array of metrics.
-     * @param int|1 $delta The amount to increment/decrement each metric by.
+     * @param string|array $key The metric(s) to update. Should be either a string or array of metrics.
+     * @param int $delta The amount to increment/decrement each metric by, 1 by default.
      *
      * @return \Liuggio\StatsDClientBundle\Model\StatsDataInterface
      * */
@@ -80,8 +78,8 @@ class StatsDataFactory
     /**
      * Gauge
      *
-     * @param string|array $stats The metric(s) to update. Should be either a string or array of metrics.
-     * @param int|1 $value The amount to increment/decrement each metric by.
+     * @param string|array $key The metric(s) to update. Should be either a string or array of metrics.
+     * @param int $value The amount to increment/decrement each metric by, 1 by default.
      *
      * @return \Liuggio\StatsDClientBundle\Model\StatsDataInterface
      * */
@@ -109,9 +107,11 @@ class StatsDataFactory
     }
 
     /**
+     * @param string|array $key The metric(s) to create data for.
+     * @param int $value The value of the metric.
      * @return \Liuggio\StatsDClientBundle\Model\StatsDataInterface
      */
-    public function createStatsData($key = null, $val = null)
+    public function createStatsData($key = null, $value = null)
     {
         $StatsData = $this->getEntityClass();
         $StatsData = new $StatsData();
@@ -120,8 +120,8 @@ class StatsDataFactory
             $StatsData->setKey($key);
         }
 
-        if (null !== $val) {
-            $StatsData->setValue($val);
+        if (null !== $value) {
+            $StatsData->setValue($value);
         }
         return $StatsData;
     }

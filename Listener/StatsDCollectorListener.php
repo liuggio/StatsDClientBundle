@@ -28,7 +28,7 @@ class StatsDCollectorListener implements EventSubscriberInterface
     /**
      * Constructor.
      *
-     * @param StatDCollectorService                $collector           A collector instance
+     * @param StatsDCollectorService  $collector           A collector instance
      * @param Boolean                 $onlyException      true if the collector only collects data when an exception occurs, false otherwise
      * @param Boolean                 $onlyMasterRequests true if the collector only collects data when the request is a master request, false otherwise
      */
