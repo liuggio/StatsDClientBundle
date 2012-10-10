@@ -88,11 +88,12 @@ class StatsDClientService
     }
 
     /**
-     * send data over udp Data is a well formmatted string for statsd, or a StatsDataInterface, or an array of string or
+     * Send data over udp Data is a well formmatted string for statsd, or a StatsDataInterface, or an array of string or
      * an array of StatsDataInterfaces
      *
      * @param mixed $statsData could be array, a string or a StatsDataInterface
-     * @return int the number of StatsData Sent
+     * @param boolean $reduceDataCount
+     * @return int
      *
      * @throws \Liuggio\StatsDClientBundle\Exception
      */
