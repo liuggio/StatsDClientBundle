@@ -49,7 +49,7 @@ class StatsData implements StatsDataInterface
     }
 
     /**
-     * return the value splitted by data and type
+     * return the value split by data and type
      * @return array
      */
     public function getValueArray()
