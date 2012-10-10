@@ -21,7 +21,7 @@ class StatsDataFactory
      * Log timing information
      *
      * @param string $key The metric to in log timing info for.
-     * @param float $time The ellapsed time (ms) to log
+     * @param float $time The elapsed time (ms) to log
      *
      * @return \Liuggio\StatsDClientBundle\Model\StatsDataInterface
      * */
