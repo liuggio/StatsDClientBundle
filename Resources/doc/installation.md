@@ -1,7 +1,7 @@
 Installation
 ============
 
-* 1 To begin, add the dependent bundles to the vendor/bundles directory. Add the following lines to the composer.json file
+* 1 First, add the dependent bundles to the vendor/bundles directory. Add the following lines to the composer.json file
 
 ```
 "require": {
@@ -29,7 +29,7 @@ Installation
 
 ```
 
-* 4 Then add to config/yaml the minimum configuration
+* 4 Then add to config/yaml the minimal configuration
 
 ``` yaml
 
@@ -48,7 +48,7 @@ Working with the `Service`
 
 ### StatsDataFactory
 
-This service creates object (StatsDataInterface) to send
+This service creates the (StatsDataInterface) object to send
 
 Reference: `liuggio_stats_d_client.factory`
 
@@ -57,24 +57,24 @@ $data = $this->get('liuggio_stats_d_client.factory')->createStatsDataIncrement('
 
 ```
 
-### StatDClient
+### StatsDClient
 
 Reference: `liuggio_stats_d_client.service`
 
-This service SEND the data over the UDP interface
+This service SENDS the data over the UDP interface
 
 from a controller call ``` $this->get('liuggio_stats_d_client.service')->send($data) ```
 
 the `$data` is the object created by the factory
 
-and the send will reduce the data to send, in order to speed up the connections.
+the send method will optimise the data sent in order to speed up the connection.
 
 
 
 Working with `Monolog`
 -------------
 
-To Monitorize your log, add the following lines to your application configuration
+To monitor your logs, add the following lines to your application configuration
 file, in order to enable the StatsDHandler
 
 
@@ -90,7 +90,7 @@ liuggio_stats_d_client:
   monolog:
     enable: true
     prefix: 'log'
-    formatter: 'monolog.formatter.shortline' # is optional but this will prettify the statsd key
+    formatter: 'monolog.formatter.shortline' # optional but this will prettify the statsd key
     level: 'warning'
     context_logging: false # with this option you could also have the monolog context variable in your graphs
 
@@ -129,26 +129,26 @@ monolog:
 Working with Personal Collector
 -------------
 
-If the information Monolog are not enough for you, you can use the Collectors that collect the information and then send data to StatsD Server.
+If the information from Monolog is not enough for you, you can use the Collectors that collect the information and then send the data to the StatsD Server.
 
 # TODO
 
 
-1. Tests cover just the 40% more test: on Compiler/Listener
+1. Tests cover just 40%, do more tests: on Compiler/Listener
 
     Planned for: end of July
 
-2. Better stat for existing collector
+2. Better stats for existing collector
 
 3. More StatsCollectors+test
 
 4. Spit the StatsDService into a library decoupled with bundles
 
-5. Logging integrated for debugging
+5. Integrated logging for debugging
 
-5. Better example usage and explanation
-Some Collectors are into the StatsCollector folder, but you can build your own personal collector.
-The idea of the collector follows many of the Symfony2 Profiler.
+5. Better examples and explanations
+Some Collectors are in the StatsCollector folder, but you can build your own personal collectors.
+The collectors are mostly based on the Symfony2 Profilers.
 
 
 ``` yaml
@@ -170,7 +170,7 @@ liuggio_stats_d_client:
 
 ```
 
-For example the `liuggio_stats_d_client.collector.dbal` will collect a lot of information about doctrine logging.
+For example the `liuggio_stats_d_client.collector.dbal` will collect a lot of the information provided by the doctrine logging.
 
 
 
