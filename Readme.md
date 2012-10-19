@@ -16,7 +16,7 @@ a **Monolog Handler** and a series of **Collectors** in order to aggregate your 
 
 ## Abstract
 
-Monitoring what is happening in your production Symfony2 application, with StatD and Graphite.
+Monitoring what is happening in your production Symfony2 application, with StatsD and Graphite.
 
 Within this bundle you could use ready-to-go monitor for
 
@@ -36,14 +36,14 @@ Within this bundle you could use ready-to-go monitor for
 
 ### Easily Install StatSD and Graphite
 
-In order to try this application monitor you have to install etsy/statd and Graphite
+In order to try this application monitor you have to install etsy/statsd and Graphite
 
 see this blog post to install it with vagrant [Easy install statsd graphite](http://welcometothebundle.com/easily-install-statsd-and-graphite-with-vagrant/).
 
 
-#### [StatD](https://github.com/etsy/statsd)
+#### [StatsD](https://github.com/etsy/statsd)
 
-StatD is a simple daemon for easy stats aggregation
+StatsD is a simple daemon for easy stats aggregation
 
 #### [Graphite](http://graphite.wikidot.com/)
 
