@@ -1,4 +1,4 @@
-StaSD Client Bundle
+StatsD Client Bundle
 ===================
 
 [![Build Status](https://secure.travis-ci.org/liuggio/StatsDClientBundle.png)](http://travis-ci.org/liuggio/StatsDClientBundle)
