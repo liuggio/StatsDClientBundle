@@ -1,9 +1,10 @@
 parameters:
-    liuggio_stats_d_client.service.class: Liuggio\StatsDClientBundle\Service\StatsDClientService
+    liuggio_stats_d_client.service.class: Liuggio\StatsdClient\StatsdClient
+    liuggio_stats_d_client.entity.class: Liuggio\StatsdClient\Entity\StatsdData
+    liuggio_stats_d_client.factory.class: Liuggio\StatsdClient\Factory\StatsdDataFactory
+
     liuggio_stats_d_client.collector.service.class: Liuggio\StatsDClientBundle\Service\StatsDCollectorService
     liuggio_stats_d_client.collector.listener.class: Liuggio\StatsDClientBundle\Listener\StatsDCollectorListener
-    liuggio_stats_d_client.entity.class: Liuggio\StatsDClientBundle\Entity\StatsData
-    liuggio_stats_d_client.factory.class: Liuggio\StatsDClientBundle\Service\StatsDataFactory
     liuggio_stats_d_client.collector.dbal.class: Liuggio\StatsDClientBundle\StatsCollector\DbalStatsCollector
 # monolog handler
     liuggio_stats_d_client.monolog_handler.class: Liuggio\StatsDClientBundle\Monolog\Handler\StatsDHandler
@@ -18,7 +19,7 @@ parameters:
 services:
     liuggio_stats_d_client.service:
         class: %liuggio_stats_d_client.service.class%
-        arguments: [%liuggio_stats_d_client.connection.host%, %liuggio_stats_d_client.connection.port%, %liuggio_stats_d_client.connection.fail_silently%]
+        arguments: [%liuggio_stats_d_client.connection.host%, %liuggio_stats_d_client.connection.port%, %liuggio_stats_d_client.connection.fail_silently%, %liuggio_stats_d_client.connection.fail_silently%]
 
     liuggio_stats_d_client.collector.service:
         class: %liuggio_stats_d_client.collector.service.class%

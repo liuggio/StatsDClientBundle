@@ -53,7 +53,7 @@ This service creates the (StatsDataInterface) object to send
 Reference: `liuggio_stats_d_client.factory`
 
 ```
-$data = $this->get('liuggio_stats_d_client.factory')->createStatsDataIncrement('log.error');
+$data = $this->get('liuggio_stats_d_client.factory')->increment('log.error');
 
 ```
 

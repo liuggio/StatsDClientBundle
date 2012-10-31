@@ -19,7 +19,7 @@ class ExceptionStatsCollector extends StatsCollector
     public function collect(Request $request, Response $response, \Exception $exception = null)
     {
         if ...
-        $statData = $this->getStatsDataFactory()->createStatsDataIncrement($this->getStatsDataKey());
+        $statData = $this->getStatsDataFactory()->increment($this->getStatsDataKey());
         $this->addStatsData($statData);
 
         return true;

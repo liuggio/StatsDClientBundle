@@ -18,13 +18,13 @@ class UserStatsCollectorTest extends WebTestCase
         $phpunit = $this;
         $statsDFactory = $this->getMockBuilder('Liuggio\StatsDClientBundle\Service\StatsDataFactory')
             ->disableOriginalConstructor()
-            ->setMethods(array('createStatsDataIncrement'))
+            ->setMethods(array('increment'))
             ->getMock();
 
         $dataMock = $this->getMock('Liuggio\StatsDClientBundle\Model\StatsDataInterface');
 
         $statsDFactory->expects($this->any())
-            ->method('createStatsDataIncrement')
+            ->method('increment')
             ->will($this->returnCallback(function ($input) use ($phpunit, $compare, $dataMock) {
                 $phpunit->assertEquals($compare, $input);
             return $dataMock;

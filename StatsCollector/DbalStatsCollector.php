@@ -33,7 +33,7 @@ class DbalStatsCollector extends StatsCollector implements SQLLogger, StatsColle
             return;
         }
 
-        $statData = $this->getStatsDataFactory()->createStatsDataIncrement($key);
+        $statData = $this->getStatsDataFactory()->increment($key);
         $this->addStatsData($statData);
     }
 

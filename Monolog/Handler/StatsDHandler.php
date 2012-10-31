@@ -132,14 +132,14 @@ class StatsDHandler extends AbstractProcessingHandler
 
         if ($record['formatted']) {
             $messageKey = sprintf("%s.%s", $levelKey, $this->toAscii($record['formatted']));
-            $this->buffer[] = $this->statsDFactory->createStatsDataIncrement($messageKey);
+            $this->buffer[] = $this->statsDFactory->increment($messageKey);
         }
-        $this->buffer[] = $this->statsDFactory->createStatsDataIncrement($levelKey);
+        $this->buffer[] = $this->statsDFactory->increment($levelKey);
 
         if ($this->getContextLogging()) {
             foreach ($record['context'] as $key => $parameter) {
                 $contextKey = sprintf("%s.context.%s.%s", $levelKey, $this->toAscii($key), $this->toAscii($parameter));
-                $this->buffer[] = $this->statsDFactory->createStatsDataIncrement($contextKey);
+                $this->buffer[] = $this->statsDFactory->increment($contextKey);
             }
         }
 

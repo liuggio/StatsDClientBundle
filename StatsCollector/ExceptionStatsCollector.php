@@ -36,7 +36,7 @@ class ExceptionStatsCollector extends StatsCollector
 
 
         $key = sprintf('%s.exception', $this->getStatsDataKey());
-        $statData = $this->getStatsDataFactory()->createStatsDataIncrement($key);
+        $statData = $this->getStatsDataFactory()->increment($key);
         $this->addStatsData($statData);
 
         self::$counter++;

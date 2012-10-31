@@ -20,13 +20,13 @@ class MemoryStatsCollectorTest extends WebTestCase
         $phpunit = $this;
         $statsDFactory = $this->getMockBuilder('Liuggio\StatsDClientBundle\Service\StatsDataFactory')
             ->disableOriginalConstructor()
-            ->setMethods(array('createStatsDataGauge'))
+            ->setMethods(array('gauge'))
             ->getMock();
 
         $dataMock = $this->getMock('Liuggio\StatsDClientBundle\Model\StatsDataInterface');
 
         $statsDFactory->expects($this->any())
-            ->method('createStatsDataGauge')
+            ->method('gauge')
             ->will($this->returnCallback(function ($input, $value) use ($phpunit, $compare, $dataMock) {
                 $phpunit->assertInternalType('integer',$value);
                 $phpunit->assertEquals($compare, $input);
