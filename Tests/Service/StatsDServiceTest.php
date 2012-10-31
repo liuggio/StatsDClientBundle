@@ -141,7 +141,7 @@ namespace Liuggio\StatsDClientBundle\Tests\Service {
 
             $array[] = $this->generateStatsDataEntity('key', '2|c');
 
-            $reducedMessage = array("key:1|c,mixed:1|g,key:2|c");
+            $reducedMessage = array("key:1|c" . PHP_EOL. "mixed:1|g" . PHP_EOL. "key:2|c");
 
             $this->assertEquals($statd->reduceCount($array),$reducedMessage);
             \Liuggio\StatsDClientBundle\Service\dumpSocket::clean();

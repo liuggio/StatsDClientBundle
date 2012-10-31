@@ -67,7 +67,7 @@ class StatsDClientService
             //going to modifying the existing
             $comma = '';
             if ($sizeResult > 0) {
-                $comma = ',';
+                $comma = PHP_EOL;
             }
             $oldLastItem = sprintf("%s%s%s", $oldLastItem, $comma, $message);
             array_push($result, $oldLastItem);

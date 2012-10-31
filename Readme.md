@@ -70,7 +70,7 @@ cd StatsDClientBundle
 - Install vendors:
 
 ``` bash
-composer.phar install
+php composer.phar install --dev
 ```
 
 - This will give you proper results:

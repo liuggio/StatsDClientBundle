@@ -20,7 +20,6 @@ class Configuration implements ConfigurationInterface
         $treeBuilder = new TreeBuilder();
         $rootNode = $treeBuilder->root('liuggio_stats_d_client');
 
-
         $rootNode
           ->children()
             ->booleanNode('enable_collector')->defaultFalse()->end()
@@ -49,7 +48,4 @@ class Configuration implements ConfigurationInterface
 
         return $treeBuilder;
     }
-
-
-
 }
