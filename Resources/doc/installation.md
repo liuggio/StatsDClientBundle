@@ -46,7 +46,7 @@ liuggio_stats_d_client:
 Working with the `Service`
 -------------
 
-### StatsDataFactory
+### StatsdDataFactory
 
 This service creates the (StatsDataInterface) object to send
 

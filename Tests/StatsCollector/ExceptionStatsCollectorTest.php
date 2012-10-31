@@ -19,12 +19,12 @@ class ExceptionStatsCollectorTest extends WebTestCase
     public function mockStatsDFactory($compare)
     {
         $phpunit = $this;
-        $statsDFactory = $this->getMockBuilder('Liuggio\StatsdClient\Factory\StatsdDataFactory')
+        $statsDFactory = $this->getMockBuilder('\Liuggio\StatsdClient\Factory\StatsdDataFactory')
             ->disableOriginalConstructor()
             ->setMethods(array('increment'))
             ->getMock();
 
-        $dataMock = $this->getMock('Liuggio\StatsDClientBundle\Model\StatsDataInterface');
+        $dataMock = $this->getMock('\Liuggio\StatsdClient\Entity\StatsdDataInterface');
 
         $statsDFactory->expects($this->any())
             ->method('increment')

@@ -27,7 +27,7 @@ class MemoryStatsCollector extends StatsCollector
      */
     public function collect(Request $request, Response $response, \Exception $exception = null)
     {
-        $statData = $this->getStatsDataFactory()->gauge($this->getStatsDataKey(), $this->getMemoryUsage());
+        $statData = $this->getStatsdDataFactory()->gauge($this->getStatsDataKey(), $this->getMemoryUsage());
         $this->addStatsData($statData);
 
         return true;

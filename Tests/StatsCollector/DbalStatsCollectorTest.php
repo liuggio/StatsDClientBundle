@@ -22,7 +22,7 @@ class DbalStatsCollectorTest extends WebTestCase
             ->setMethods(array('increment'))
             ->getMock();
 
-        $dataMock = $this->getMock('\Liuggio\StatsDClientBundle\Model\StatsDataInterface');
+        $dataMock = $this->getMock('\Liuggio\StatsdClient\Entity\StatsdDataInterface');
 
         $statsDFactory->expects($this->any())
             ->method('increment')

@@ -29,11 +29,11 @@ class DbalStatsCollector extends StatsCollector implements SQLLogger, StatsColle
             return;
         }
         $key = sprintf('%s.%s', $this->getStatsDataKey(), $verb);
-        if (null === $this->getStatsDataFactory()) {
+        if (null === $this->getStatsdDataFactory()) {
             return;
         }
 
-        $statData = $this->getStatsDataFactory()->increment($key);
+        $statData = $this->getStatsdDataFactory()->increment($key);
         $this->addStatsData($statData);
     }
 

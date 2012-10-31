@@ -63,7 +63,7 @@ abstract class StatsCollector implements StatsCollectorInterface
     }
 
     /**
-     * @param \Liuggio\StatsDClientBundle\Model\StatsDataInterface $statsData
+     * @param \Liuggio\StatsdClient\Entity\StatsdDataInterface $statsData
      * @return mixed
      */
     public function addStatsData(StatsdDataInterface $statsData)

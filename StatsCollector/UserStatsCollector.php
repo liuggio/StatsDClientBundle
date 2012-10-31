@@ -34,7 +34,7 @@ class UserStatsCollector extends StatsCollector
         } catch (AuthenticationCredentialsNotFoundException $exception) {
             //do nothing
         }
-        $statData = $this->getStatsDataFactory()->increment($key);
+        $statData = $this->getStatsdDataFactory()->increment($key);
         $this->addStatsData($statData);
 
         return true;
