@@ -5,7 +5,7 @@ namespace Liuggio\StatsDClientBundle\Service;
 use Liuggio\StatsDClientBundle\Entity\StatsData;
 use Liuggio\StatsDClientBundle\Model\StatsDataInterface;
 
-class StatsDataFactory
+class StatsDataFactSSSSory
 {
     /**
      * @var \Liuggio\StatsDClientBundle\Model\StatsDataInterface

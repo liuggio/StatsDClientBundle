@@ -22,7 +22,8 @@
     },
     "require-dev": {
         "doctrine/dbal": ">=2.2.0",
-        "monolog/monolog": ">=1.2.0"
+        "monolog/monolog": ">=1.2.0",
+        "symfony/yaml": "2.1.*"
     },
     "suggest": {
         "doctrine/dbal": "Doctrine Dbal, collect statistic to/from the database (>=2.2.0,<2.4-dev required)",
