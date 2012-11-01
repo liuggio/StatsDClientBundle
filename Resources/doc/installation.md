@@ -38,8 +38,6 @@ liuggio_stats_d_client:
   connection:
     host: localhost
     port: 8125
-    fail_silently: true
-  enable_collector: false #default is false
 
 ```
 
@@ -85,6 +83,8 @@ liuggio_stats_d_client:
   connection:
     host: localhost
     port: 8125
+    protocol: udp
+    reduce_packet: true
     fail_silently: true
   enable_collector: false #default is false
   monolog:
@@ -131,24 +131,7 @@ Working with Personal Collector
 
 If the information from Monolog is not enough for you, you can use the Collectors that collect the information and then send the data to the StatsD Server.
 
-# TODO
 
-
-1. Tests cover just 40%, do more tests: on Compiler/Listener
-
-    Planned for: end of July
-
-2. Better stats for existing collector
-
-3. More StatsCollectors+test
-
-4. Spit the StatsDService into a library decoupled with bundles
-
-5. Integrated logging for debugging
-
-5. Better examples and explanations
-Some Collectors are in the StatsCollector folder, but you can build your own personal collectors.
-The collectors are mostly based on the Symfony2 Profilers.
 
 
 ``` yaml
@@ -158,6 +141,8 @@ liuggio_stats_d_client:
   connection:
     host: localhost
     port: 8125
+    protocol: udp
+    reduce_packet: true
     fail_silently: true
   enable_collector: true
   collectors:
@@ -193,6 +178,8 @@ liuggio_stats_d_client:
   connection:
     host: localhost
     port: 8125
+    protocol: udp
+    reduce_packet: true
     fail_silently: true
   enable_collector: true
   collectors:
