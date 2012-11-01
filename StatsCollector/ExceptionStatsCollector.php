@@ -8,15 +8,6 @@ use Symfony\Component\Security\Core\Exception\AuthenticationCredentialsNotFoundE
 
 class ExceptionStatsCollector extends StatsCollector
 {
-    private static $counter = 0;
-
-    public function getName()
-    {
-        return 'ExceptionCollector';
-    }
-
-
-
     /**
      * Collects data for the given Response.
      *
@@ -31,18 +22,10 @@ class ExceptionStatsCollector extends StatsCollector
         if (null === $exception) {
             return true;
         }
-        // check the number times of execution.
-        // eg. with `render` in twig happens that this func is called more times.
-
 
         $key = sprintf('%s.exception', $this->getStatsDataKey());
         $statData = $this->getStatsdDataFactory()->increment($key);
         $this->addStatsData($statData);
-
-        self::$counter++;
         return true;
     }
-
-
-
 }

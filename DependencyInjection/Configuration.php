@@ -27,6 +27,8 @@ class Configuration implements ConfigurationInterface
                 ->children()
                     ->scalarNode("port")->defaultValue(8125)->end()
                     ->scalarNode("host")->defaultValue("localhost")->end()
+                    ->scalarNode("reduce_packet")->defaultValue("true")->end()
+                    ->scalarNode("protocol")->defaultValue("udp")->end()
                     ->scalarNode("fail_silently")->defaultValue(true)->end()
                 ->end()
             ->end()

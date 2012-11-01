@@ -8,12 +8,16 @@ use Symfony\Component\HttpFoundation\Response;
 class MemoryStatsCollector extends StatsCollector
 {
     /*
-    * calculate the peak used by php
+    * calculate the peak used by php in MB
     * @return int
     */
     private function getMemoryUsage()
     {
-        return memory_get_peak_usage(true);
+        $bit = memory_get_peak_usage(true);
+        if ($bit > 1024) {
+            return intval($bit / 1024);
+        }
+        return 0;
     }
 
     /**

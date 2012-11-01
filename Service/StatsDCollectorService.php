@@ -6,7 +6,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
 use Liuggio\StatsDClientBundle\StatsCollector\StatsCollectorInterface;
-use Liuggio\StatsDClientBundle\Service\StatsDClientService;
+use Liuggio\StatsdClient\StatsdClientInterface;
 
 /**
  * StatsDCollectorService.
@@ -21,7 +21,7 @@ class StatsDCollectorService
     /**
      * Constructor.
      */
-    public function __construct(StatsDClientService $stats_d_client)
+    public function __construct(StatsdClientInterface $stats_d_client)
     {
         $this->collectors = array();
         $this->statsDClient = $stats_d_client;

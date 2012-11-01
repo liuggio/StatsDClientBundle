@@ -59,9 +59,9 @@ The CollectorService collects all the collector classes that have a tag `data_co
 
 3. `StatsDCollectorService`  calls all the registered collectors that have `StatsCollectorInterface`
 
-4. `StatsDCollectorService` sends all data to StatsDClientService
+4. `StatsDCollectorService` sends all data to StatsdClientInterface
 
-5. `StatsDClientService` provides to send to the server
+5. `StatsdClientInterface` provides to send to the server
 
 6. On Graphite you'll have all data and all that happens in your Symfony2 application
 

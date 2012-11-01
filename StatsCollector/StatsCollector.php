@@ -33,7 +33,7 @@ abstract class StatsCollector implements StatsCollectorInterface
     public function __construct($stat_key = __CLASS__, StatsdDataFactoryInterface $stats_data_factory = null, $only_on_master_response = false)
     {
         $this->setStatsDataKey($stat_key);
-        $this->StatsdDataFactory = $stats_data_factory;
+        $this->statsdDataFactory = $stats_data_factory;
         $this->setOnlyOnMasterResponse($only_on_master_response);
     }
 
@@ -92,7 +92,7 @@ abstract class StatsCollector implements StatsCollectorInterface
      */
     public function setStatsdDataFactory(StatsdDataFactoryInterface $StatsdDataFactory)
     {
-        $this->StatsdDataFactory = $StatsdDataFactory;
+        $this->statsdDataFactory = $StatsdDataFactory;
     }
 
     /**
@@ -100,7 +100,7 @@ abstract class StatsCollector implements StatsCollectorInterface
      */
     public function getStatsdDataFactory()
     {
-        return $this->StatsdDataFactory;
+        return $this->statsdDataFactory;
     }
     /**
      * @param boolean $onlyOnMasterResponse
