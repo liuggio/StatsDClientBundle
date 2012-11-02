@@ -31,6 +31,15 @@ services:
     liuggio_stats_d_client.collector.exception:
         class: %liuggio_stats_d_client.collector.exception.class%
         calls:
+            - ['setOnlyOnMasterResponse', [false]]
+        tags:
+            - { name: stats_d_collector}
+
+#special connector dbal is also a sqllogger
+    liuggio_stats_d_client.collector.dbal:
+        class: %liuggio_stats_d_client.collector.dbal.class%
+        arguments: ['query']
+        calls:
             - ['setOnlyOnMasterResponse', [true]]
         tags:
             - { name: stats_d_collector}

@@ -24,6 +24,7 @@ class DbalStatsCollector extends StatsCollector implements SQLLogger, StatsColle
      */
     public function startQuery($sql, array $params = null, array $types = null)
     {
+
         $verb = $this->extractVerbsFromSql($sql);
         if (null === $verb) {
             return;
@@ -32,7 +33,6 @@ class DbalStatsCollector extends StatsCollector implements SQLLogger, StatsColle
         if (null === $this->getStatsdDataFactory()) {
             return;
         }
-
         $statData = $this->getStatsdDataFactory()->increment($key);
         $this->addStatsData($statData);
     }

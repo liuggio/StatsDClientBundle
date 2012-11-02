@@ -41,12 +41,13 @@ class StatsDCollectorService
     {
         $statSData = array();
         foreach ($this->collectors as $collector) {
+
             if ($collector->getOnlyOnMasterResponse() && !$isMasterRequest) {
-                break;
+                continue;
             }
+
             $collector->collect($request, $response, $exception);
             $statSData = array_merge($statSData, $collector->getStatsData());
-
         }
         return $statSData;
     }
