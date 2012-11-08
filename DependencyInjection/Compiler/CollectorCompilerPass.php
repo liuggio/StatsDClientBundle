@@ -31,7 +31,7 @@ class CollectorCompilerPass implements CompilerPassInterface
                     // setterInjection
                     $collectorReference = new Reference($id);
                     $collectorDefinition = $container->getDefinition($id);
-                    $collectorDefinition->addMethodCall('setStatsDataFactory', array(new Reference('liuggio_stats_d_client.factory')));
+                    $collectorDefinition->addMethodCall('setStatsdDataFactory', array(new Reference('liuggio_stats_d_client.factory')));
                     $collectorDefinition->addMethodCall('setStatsDataKey', array($collectorsEnabled[$id]));
                     // adding to this collector the the collection
                     $serviceDefinition->addMethodCall('add', array($collectorReference));

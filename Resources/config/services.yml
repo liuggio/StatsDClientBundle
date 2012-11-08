@@ -1,36 +1,34 @@
 parameters:
-    liuggio_stats_d_client.service.class: Liuggio\StatsDClientBundle\Service\StatsDClientService
+    liuggio_stats_d_client.service.class: Liuggio\StatsdClient\StatsdClient
+    liuggio_stats_d_client.entity.class: Liuggio\StatsdClient\Entity\StatsdData
+    liuggio_stats_d_client.factory.class: Liuggio\StatsdClient\Factory\StatsdDataFactory
+
+    liuggio_stats_d_client.socket.service.class: Liuggio\StatsdClient\Sender\SocketSender
+
     liuggio_stats_d_client.collector.service.class: Liuggio\StatsDClientBundle\Service\StatsDCollectorService
     liuggio_stats_d_client.collector.listener.class: Liuggio\StatsDClientBundle\Listener\StatsDCollectorListener
-    liuggio_stats_d_client.entity.class: Liuggio\StatsDClientBundle\Entity\StatsData
-    liuggio_stats_d_client.factory.class: Liuggio\StatsDClientBundle\Service\StatsDataFactory
     liuggio_stats_d_client.collector.dbal.class: Liuggio\StatsDClientBundle\StatsCollector\DbalStatsCollector
 # monolog handler
     liuggio_stats_d_client.monolog_handler.class: Liuggio\StatsDClientBundle\Monolog\Handler\StatsDHandler
 # monolog formatter
     liuggio_stats_d_client.monolog_formatter.short_line.class: Liuggio\StatsDClientBundle\Monolog\Formatter\ShortLineFormatter
 
-#this is an example of a listener waiting for a generic statsd-event
-    liuggio_stats_d_client.collector.listener:
-        class: %liuggio_stats_d_client.collector.listener.class%
-        tags:
-            - { name: stats_d_collector}
 services:
-    liuggio_stats_d_client.service:
-        class: %liuggio_stats_d_client.service.class%
-        arguments: [%liuggio_stats_d_client.connection.host%, %liuggio_stats_d_client.connection.port%, %liuggio_stats_d_client.connection.fail_silently%]
-
-    liuggio_stats_d_client.collector.service:
-        class: %liuggio_stats_d_client.collector.service.class%
-        arguments: [@liuggio_stats_d_client.service]
-
+# statsd-php-client
     liuggio_stats_d_client.factory:
         class: %liuggio_stats_d_client.factory.class%
         arguments: [%liuggio_stats_d_client.entity.class%]
 
-#special connector dbal is also a sqllogger
-    liuggio_stats_d_client.collector.dbal:
-        class: %liuggio_stats_d_client.collector.dbal.class%
-        arguments: ['query']
-        tags:
-            - { name: stats_d_collector}
+    liuggio_stats_d_client.socket.service:
+        class: %liuggio_stats_d_client.socket.service.class%
+
+    liuggio_stats_d_client.service:
+        class: %liuggio_stats_d_client.service.class%
+        arguments: [@liuggio_stats_d_client.socket.service, %liuggio_stats_d_client.connection.host%, %liuggio_stats_d_client.connection.port%,%liuggio_stats_d_client.connection.protocol%, %liuggio_stats_d_client.connection.reduce_packet%, %liuggio_stats_d_client.connection.fail_silently%]
+
+# collector service
+    liuggio_stats_d_client.collector.service:
+        class: %liuggio_stats_d_client.collector.service.class%
+        arguments: [@liuggio_stats_d_client.service]
+
+

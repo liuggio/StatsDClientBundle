@@ -5,7 +5,9 @@ namespace Liuggio\StatsDClientBundle\StatsCollector;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
-use Liuggio\StatsDClientBundle\Service\StatsDataFactory;
+use Liuggio\StatsdClient\Factory\StatsdDataFactory;
+use Liuggio\StatsdClient\Factory\StatsdDataFactoryInterface;
+use Liuggio\StatsdClient\Entity\StatsdDataInterface;
 
 abstract class StatsCollector implements StatsCollectorInterface
 {
@@ -18,9 +20,9 @@ abstract class StatsCollector implements StatsCollectorInterface
      */
     protected $statsData;
     /**
-     * @var \Liuggio\StatsDClientBundle\Service\StatsDataFactory
+     * @var \Liuggio\StatsdClient\Factory\StatsdDataFactoryInterface
      */
-    protected $statsDataFactory;
+    protected $StatsdDataFactory;
     /**
      * @var boolean
      */
@@ -28,10 +30,10 @@ abstract class StatsCollector implements StatsCollectorInterface
 
 
 
-    public function __construct($stat_key = __CLASS__, StatsDataFactory $stats_data_factory = null, $only_on_master_response = false)
+    public function __construct($stat_key = __CLASS__, StatsdDataFactoryInterface $stats_data_factory = null, $only_on_master_response = false)
     {
         $this->setStatsDataKey($stat_key);
-        $this->statsDataFactory = $stats_data_factory;
+        $this->statsdDataFactory = $stats_data_factory;
         $this->setOnlyOnMasterResponse($only_on_master_response);
     }
 
@@ -61,10 +63,10 @@ abstract class StatsCollector implements StatsCollectorInterface
     }
 
     /**
-     * @param \Liuggio\StatsDClientBundle\Model\StatsDataInterface $statsData
+     * @param \Liuggio\StatsdClient\Entity\StatsdDataInterface $statsData
      * @return mixed
      */
-    public function addStatsData(\Liuggio\StatsDClientBundle\Model\StatsDataInterface $statsData)
+    public function addStatsData(StatsdDataInterface $statsData)
     {
         $this->statsData[] = $statsData;
     }
@@ -86,19 +88,19 @@ abstract class StatsCollector implements StatsCollectorInterface
     }
 
     /**
-     * @param \Liuggio\StatsDClientBundle\Service\StatsDataFactory $statsDataFactory
+     * @param \Liuggio\StatsdClient\Factory\StatsdDataFactoryInterface $StatsdDataFactory
      */
-    public function setStatsDataFactory(StatsDataFactory $statsDataFactory)
+    public function setStatsdDataFactory(StatsdDataFactoryInterface $StatsdDataFactory)
     {
-        $this->statsDataFactory = $statsDataFactory;
+        $this->statsdDataFactory = $StatsdDataFactory;
     }
 
     /**
-     * @return \Liuggio\StatsDClientBundle\Service\StatsDataFactory
+     * @return \Liuggio\StatsdClient\Factory\StatsdDataFactory
      */
-    public function getStatsDataFactory()
+    public function getStatsdDataFactory()
     {
-        return $this->statsDataFactory;
+        return $this->statsdDataFactory;
     }
     /**
      * @param boolean $onlyOnMasterResponse
