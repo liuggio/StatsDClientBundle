@@ -11,7 +11,7 @@ a **Monolog Handler** and a series of **Collectors** in order to aggregate your 
 
 **Check out the documentation**
 
-* [Installation and Configuration](https://github.com/liuggio/StatsDClientBundle/blob/master/Resources/doc/installation.md)
+* [Installation and Usage](https://github.com/liuggio/StatsDClientBundle/blob/master/Resources/doc/installation.md)
 * [Advanced usage](https://github.com/liuggio/StatsDClientBundle/blob/master/Resources/doc/advanced.md)
 
 ## Abstract

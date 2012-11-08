@@ -65,9 +65,9 @@ class StatsDHandlerTest extends TestCase
 
 
         $phpunit = $this;
-        $statsDFactory = $this->getMock("\StdClass", array('createStatsDataIncrement'));
+        $statsDFactory = $this->getMock("\StdClass", array('increment'));
         $statsDFactory->expects($this->any())
-            ->method('createStatsDataIncrement')
+            ->method('increment')
             ->will($this->returnCallback(function ($input) use ($phpunit) {
 
             return new StatsDEntity($input);

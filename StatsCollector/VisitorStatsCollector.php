@@ -18,7 +18,7 @@ class VisitorStatsCollector extends StatsCollector
      */
     public function collect(Request $request, Response $response, \Exception $exception = null)
     {
-        $statData = $this->getStatsDataFactory()->createStatsDataIncrement($this->getStatsDataKey());
+        $statData = $this->getStatsdDataFactory()->increment($this->getStatsDataKey());
         $this->addStatsData($statData);
         return true;
     }
