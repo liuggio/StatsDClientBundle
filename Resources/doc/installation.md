@@ -6,7 +6,7 @@ Installation
 ```
 "require": {
     # ..
-    "liuggio/statsd-client-bundle": ">1.0.0",
+    "liuggio/statsd-client-bundle": ">=1.2",
     # ..
 }
 ```
@@ -156,6 +156,17 @@ liuggio_stats_d_client:
 ```
 
 For example the `liuggio_stats_d_client.collector.dbal` will collect a lot of the information provided by the doctrine logging.
+
+In order to enable the query collector you also have to add to your doctrine.dbal the profiling variable from your config.yml
+eg.
+``` yaml
+
+# Doctrine Configuration
+doctrine:
+    dbal:
+        profiling: true
+
+```
 
 
 
