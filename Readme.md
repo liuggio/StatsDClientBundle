@@ -1,15 +1,20 @@
-StatsD Client Bundle
+StatsD Client Bundle v1.2.0
 ===================
 
 [![Build Status](https://secure.travis-ci.org/liuggio/StatsDClientBundle.png)](http://travis-ci.org/liuggio/StatsDClientBundle)
 
 This bundle helps you to monitor your application.
 
-It includes a **Client** for the etsy/Statsd API, a **service**,
-a **Monolog Handler** and a series of **Collectors** in order to aggregate your personal data.
+It uses [statsd-php-client](https://github.com/liuggio/statsd-php-client) as **Client** for the etsy/Statsd API.
+
+It Includes
+
+* a **Service**, a **Factory** and an Entity callable by the DIC
+* a **Monolog Handler**
+* a series of **Collectors** in order to aggregate your personal data.
 
 
-**Check out the documentation**
+## Check out the documentation
 
 * [Installation and Usage](https://github.com/liuggio/StatsDClientBundle/blob/master/Resources/doc/installation.md)
 * [Advanced usage](https://github.com/liuggio/StatsDClientBundle/blob/master/Resources/doc/advanced.md)
@@ -22,13 +27,13 @@ Within this bundle you could use ready-to-go monitor for
 
 - Monolog (this is a new feature)
 
-- Amount of user
+- Amount of user (collector)
 
-- Logged vs Anonymous user
+- Logged vs Anonymous user (collector)
 
 - SQL: Verbs used (amount of select/set/update/upgrade/delete) (this feature is not suggested, please use a server monitor tool eg. nagios, munin)
 
-- Amount of PHP ram used
+- Amount of PHP ram used (collector)
 
 
 
