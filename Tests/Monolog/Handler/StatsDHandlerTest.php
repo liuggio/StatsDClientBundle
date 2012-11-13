@@ -57,7 +57,6 @@ class StatsDHandlerTest extends TestCase
         $statsd->expects($this->once())
             ->method('send');
 
-
         return $statsd;
     }
 
@@ -98,7 +97,6 @@ class StatsDHandlerTest extends TestCase
         $this->assertArrayNotHasKey(2, $outputBuffer);
     }
 
-
     public function testHandleBuffersWithContext()
     {
         $handler = new StatsDHandler(Logger::INFO);
@@ -120,5 +118,25 @@ class StatsDHandlerTest extends TestCase
             $this->buffer[2]
         );
 
+    }
+
+    public function provider()
+    {
+        return array(
+            array('string'),
+            array(new \DateTime()),
+            array(new \StdClass()),
+            array(null),
+        );
+    }
+
+    /**
+     * @dataProvider provider
+     */
+    public function testToAscii($input) {
+
+        $statsDHandler = $this->getMock("\Liuggio\StatsDClientBundle\Monolog\Handler\StatsDHandler", array('close', 'send'));
+        $string = $statsDHandler->toAscii($input);
+        $this->assertTrue(is_string($string));
     }
 }

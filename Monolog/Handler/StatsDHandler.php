@@ -100,12 +100,20 @@ class StatsDHandler extends AbstractProcessingHandler
     }
 
     /**
-     * @param $str
-     * @return mixed
+     * @param mixed $inputToConvert
+     * @return String
      */
-    protected function toAscii($str)
+    public function toAscii($inputToConvert)
     {
-        $clean = preg_replace("/[^a-zA-Z0-9\/_|+ -]/", '', $str);
+        $string = '';
+        try {
+            $string = (string) $inputToConvert;
+        } catch (\Exception $e) {
+            if ($inputToConvert instanceof \DateTime) {
+                $string = $inputToConvert->format("Y-m-d-H-i-s");
+            }
+        }
+        $clean = preg_replace("/[^a-zA-Z0-9\/_|+ -]/", '', $string);
         $clean = strtolower(trim($clean, '-'));
         $clean = preg_replace("/[\/_|+ -]+/", '-', $clean);
 
