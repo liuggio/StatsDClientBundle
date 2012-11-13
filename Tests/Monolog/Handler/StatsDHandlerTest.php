@@ -136,7 +136,13 @@ class StatsDHandlerTest extends TestCase
     public function testToAscii($input) {
 
         $statsDHandler = $this->getMock("\Liuggio\StatsDClientBundle\Monolog\Handler\StatsDHandler", array('close', 'send'));
-        $string = $statsDHandler->toAscii($input);
-        $this->assertTrue(is_string($string));
+
+        $reflectionOfUser = new \ReflectionClass('\Liuggio\StatsDClientBundle\Monolog\Handler\StatsDHandler');
+        $method = $reflectionOfUser->getMethod('toAscii');
+        $method->setAccessible(true);
+
+        $val = $method->invokeArgs($statsDHandler, array($input));
+
+        $this->assertTrue(is_string($val));
     }
 }
