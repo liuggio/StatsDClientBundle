@@ -1,4 +1,4 @@
-StatsD Client Bundle v1.2.0
+StatsD Client Bundle v1.2.x
 ===================
 
 [![Build Status](https://secure.travis-ci.org/liuggio/StatsDClientBundle.png)](http://travis-ci.org/liuggio/StatsDClientBundle)
