@@ -20,7 +20,7 @@ class DbalStatsCollector extends StatsCollector implements SQLLogger, StatsColle
     }
 
     /**
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     public function startQuery($sql, array $params = null, array $types = null)
     {
@@ -38,7 +38,7 @@ class DbalStatsCollector extends StatsCollector implements SQLLogger, StatsColle
     }
 
     /**
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     public function stopQuery()
     {

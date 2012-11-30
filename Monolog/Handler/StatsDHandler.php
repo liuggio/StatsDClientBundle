@@ -123,7 +123,7 @@ class StatsDHandler extends AbstractProcessingHandler
     }
 
     /**
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     public function close()
     {
@@ -131,7 +131,7 @@ class StatsDHandler extends AbstractProcessingHandler
     }
 
     /**
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     protected function write(array $record)
     {

@@ -53,7 +53,7 @@ class ShortLineFormatter extends LineFormatter
     }
 
     /**
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     public function format(array $record)
     {
