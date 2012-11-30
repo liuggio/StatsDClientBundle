@@ -107,11 +107,12 @@ class StatsDHandler extends AbstractProcessingHandler
     {
         $string = '';
         try {
-            $string = (string) $inputToConvert;
-        } catch (\Exception $e) {
             if ($inputToConvert instanceof \DateTime) {
                 $string = $inputToConvert->format("Y-m-d-H-i-s");
             }
+            $string = (string) $inputToConvert;
+        } catch (\Exception $e) {
+            // do nothing
         }
         $clean = preg_replace("/[^a-zA-Z0-9\/_|+ -]/", '', $string);
         $clean = strtolower(trim($clean, '-'));
