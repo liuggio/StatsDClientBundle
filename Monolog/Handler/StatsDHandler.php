@@ -109,8 +109,9 @@ class StatsDHandler extends AbstractProcessingHandler
         try {
             if ($inputToConvert instanceof \DateTime) {
                 $string = $inputToConvert->format("Y-m-d-H-i-s");
+            }else {
+                $string = (string) $inputToConvert;
             }
-            $string = (string) $inputToConvert;
         } catch (\Exception $e) {
             // do nothing
         }
