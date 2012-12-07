@@ -18,6 +18,8 @@ It Includes
 
 * [Installation and Usage](https://github.com/liuggio/StatsDClientBundle/blob/master/Resources/doc/installation.md)
 * [Advanced usage](https://github.com/liuggio/StatsDClientBundle/blob/master/Resources/doc/advanced.md)
+* [Article : Install Stats.d / Graphite on a debian server in order to monitor a Symfony2 application (1/2) ](http://www.elao.com/blog/linux/install-stats-d-graphite-on-a-debian-server-to-monitor-a-symfony2-application-12.html)
+* [Article : Monitor your Symfony2 application via Stats.d and Graphite (2/2) ](http://www.elao.com/blog/symfony-2/monitor-your-symfony2-application-via-stats-d-and-graphite-22.html)
 
 ## Abstract
 
