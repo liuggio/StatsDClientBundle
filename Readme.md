@@ -85,6 +85,10 @@ phpunit --coverage-html reports
 ```
 
 
+## Contributors
+
+https://github.com/liuggio/StatsDClientBundle/graphs/contributors
+
 
 
 
