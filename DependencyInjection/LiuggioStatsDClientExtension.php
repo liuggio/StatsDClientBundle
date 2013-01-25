@@ -36,16 +36,19 @@ class LiuggioStatsDClientExtension extends Extension
 
         $loader = new Loader\YamlFileLoader($container, new FileLocator(__DIR__ . '/../Resources/config'));
         $loader->load('services.yml');
-        $loader->load('collectors.yml');
 
-        if ($config['enable_collector'] && count($config['collectors'])) {
+        if ($config['enable_collector']) {
+            $loader->load('collectors.yml');
 
-            // Define the Listener
-            $definition = new Definition('%liuggio_stats_d_client.collector.listener.class%',
-                array(new Reference('liuggio_stats_d_client.collector.service'))
-            );
-            $definition->addTag('kernel.event_subscriber');
-            $container->setDefinition('liuggio_stats_d_client.collector.listener', $definition);
+            if (count($config['collectors'])) {
+
+                // Define the Listener
+                $definition = new Definition('%liuggio_stats_d_client.collector.listener.class%',
+                    array(new Reference('liuggio_stats_d_client.collector.service'))
+                );
+                $definition->addTag('kernel.event_subscriber');
+                $container->setDefinition('liuggio_stats_d_client.collector.listener', $definition);
+            }
         }
         // monolog
         if ($config['monolog'] && $config['monolog']['enable']) {
