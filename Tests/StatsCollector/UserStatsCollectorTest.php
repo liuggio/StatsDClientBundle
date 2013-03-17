@@ -29,12 +29,13 @@ class UserStatsCollectorTest extends StatsCollectorBase
      */
     public function testCollect($isLogged, $dataKey)
     {
-        $c = new UserStatsCollector('prefix', $this->mockStatsDFactory('prefix.'.$dataKey));
+        $c = new UserStatsCollector('prefix', $this->mockStatsDFactory('prefix.' . $dataKey));
         $c->setSecurityContext($this->mockSecurityContext($isLogged));
         $c->collect(new Request(), new Response(), null);
     }
 
-    public function provider() {
+    public function provider()
+    {
         return array(
             array(true, 'logged'),
             array(false, 'anonymous'));

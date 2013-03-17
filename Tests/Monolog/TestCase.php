@@ -53,7 +53,9 @@ class TestCase extends \PHPUnit_Framework_TestCase
         $formatter = $this->getMock('Monolog\\Formatter\\FormatterInterface');
         $formatter->expects($this->any())
             ->method('format')
-            ->will($this->returnCallback(function($record) { return $record['message']; }));
+            ->will($this->returnCallback(function ($record) {
+            return $record['message'];
+        }));
 
         return $formatter;
     }

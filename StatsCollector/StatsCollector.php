@@ -29,7 +29,6 @@ abstract class StatsCollector implements StatsCollectorInterface
     protected $onlyOnMasterResponse;
 
 
-
     public function __construct($stat_key = __CLASS__, StatsdDataFactoryInterface $stats_data_factory = null, $only_on_master_response = false)
     {
         $this->setStatsDataKey($stat_key);
@@ -102,6 +101,7 @@ abstract class StatsCollector implements StatsCollectorInterface
     {
         return $this->statsdDataFactory;
     }
+
     /**
      * @param boolean $onlyOnMasterResponse
      */
@@ -129,7 +129,7 @@ abstract class StatsCollector implements StatsCollectorInterface
     {
         $string = str_replace(array('"', "'"), "", $string);
         $string = trim($string);
-        $length = (strlen($string) > $maxLength)? $maxLength: strlen($string);
+        $length = (strlen($string) > $maxLength) ? $maxLength : strlen($string);
         $string = strtolower(strstr(substr(trim($string), 0, $length), ' ', true));
 
         return $string;
