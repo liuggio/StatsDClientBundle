@@ -30,7 +30,7 @@ class StatsDCollectorService
     /**
      * Collects data for the given Response.
      *
-     * @param boolean     $isMasterRequest
+     * @param Boolean     $isMasterRequest
      * @param Request     $request   A Request instance
      * @param Response    $response  A Response instance
      * @param \Exception  $exception An exception instance if the request threw one

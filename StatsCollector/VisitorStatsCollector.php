@@ -14,7 +14,7 @@ class VisitorStatsCollector extends StatsCollector
      * @param Response   $response  A Response instance
      * @param \Exception $exception An exception instance if the request threw one
      *
-     * @return boolean
+     * @return Boolean
      */
     public function collect(Request $request, Response $response, \Exception $exception = null)
     {
