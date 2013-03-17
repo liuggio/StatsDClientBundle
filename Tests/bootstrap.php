@@ -1,9 +1,9 @@
 <?php
 
-$file = __DIR__.'/../vendor/autoload.php';
+$file = __DIR__ . '/../vendor/autoload.php';
 if (!file_exists($file)) {
     throw new RuntimeException('Install dependencies to run test suite.');
 }
 
 $autoload = require_once $file;
-require_once __DIR__.'/Monolog/TestCase.php';
+require_once __DIR__ . '/Monolog/TestCase.php';

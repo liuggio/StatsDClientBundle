@@ -23,36 +23,39 @@ class StatsDEntity
     private $message;
 
     public function setMessage($message)
-    { 
+    {
         $this->message = $message;
     }
 
     public function getMessage()
-    {   
+    {
 
-        
+
         return $this->message;
     }
 
-    public function __construct($message) {
+    public function __construct($message)
+    {
         $this->setMessage($message);
     }
 }
 
 class StatsDHandlerTest extends TestCase
 {
-    protected  $buffer;
+    protected $buffer;
 
-    public function setUp() {
+    public function setUp()
+    {
 
-        $this->buffer= array(
+        $this->buffer = array(
             new StatsDEntity('.test.info.2012-09-19-160214-testinfo-personal-ca-'),
             new StatsDEntity('.test.info'),
             new StatsDEntity('.test.info.context.c.a'));
 
     }
 
-    public function mockStatsDService() {
+    public function mockStatsDService()
+    {
 
         $phpunit = $this;
         $statsd = $this->getMock("\StdClass", array('send'));
@@ -62,7 +65,8 @@ class StatsDHandlerTest extends TestCase
         return $statsd;
     }
 
-    public function mockStatsDFactory() {
+    public function mockStatsDFactory()
+    {
 
 
         $phpunit = $this;
@@ -85,12 +89,12 @@ class StatsDHandlerTest extends TestCase
         $handler->setStatsDFactory($this->mockStatsDFactory());
         $handler->setContextLogging(false);
 
-        $handler->handle($this->getRecord(Logger::INFO, 'personal', array('c'=>'a')));
+        $handler->handle($this->getRecord(Logger::INFO, 'personal', array('c' => 'a')));
 
         $outputBuffer = $handler->getBuffer();
 
-        $this->assertStringStartsWith('.test.info.',  $this->buffer[0]->getMessage());
-        $this->assertStringEndsWith('-testinfo-personal-ca-',  $this->buffer[0]->getMessage());
+        $this->assertStringStartsWith('.test.info.', $this->buffer[0]->getMessage());
+        $this->assertStringEndsWith('-testinfo-personal-ca-', $this->buffer[0]->getMessage());
 
         $this->assertEquals($outputBuffer[1],
             $this->buffer[1]
@@ -106,12 +110,12 @@ class StatsDHandlerTest extends TestCase
         $handler->setStatsDFactory($this->mockStatsDFactory());
         $handler->setContextLogging(true);
 
-        $handler->handle($this->getRecord(Logger::INFO, 'personal', array('c'=>'a')));
+        $handler->handle($this->getRecord(Logger::INFO, 'personal', array('c' => 'a')));
 
         $outputBuffer = $handler->getBuffer();
 
-        $this->assertStringStartsWith('.test.info.',  $this->buffer[0]->getMessage());
-        $this->assertStringEndsWith('-testinfo-personal-ca-',  $this->buffer[0]->getMessage());
+        $this->assertStringStartsWith('.test.info.', $this->buffer[0]->getMessage());
+        $this->assertStringEndsWith('-testinfo-personal-ca-', $this->buffer[0]->getMessage());
 
         $this->assertEquals($outputBuffer[1],
             $this->buffer[1]
@@ -135,7 +139,8 @@ class StatsDHandlerTest extends TestCase
     /**
      * @dataProvider provider
      */
-    public function testToAscii($input) {
+    public function testToAscii($input)
+    {
 
         $statsDHandler = $this->getMock("\Liuggio\StatsDClientBundle\Monolog\Handler\StatsDHandler", array('close', 'send'));
 
