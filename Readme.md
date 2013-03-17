@@ -28,7 +28,7 @@ It Includes
 * [Article:  ServerGrove - Interesting Symfony Bundles: StatsDClientBundle](http://blog.servergrove.com/2012/10/09/interesting-symfony-bundles-statsdclientbundle)
 * [Article : Install Stats.d / Graphite on a debian server in order to monitor a Symfony2 application (1/2) ](http://www.elao.com/blog/linux/install-stats-d-graphite-on-a-debian-server-to-monitor-a-symfony2-application-12.html)
 * [Article : Monitor your Symfony2 application via Stats.d and Graphite (2/2) ](http://www.elao.com/blog/symfony-2/monitor-your-symfony2-application-via-stats-d-and-graphite-22.html)
-* [Talks : Building OpenSky with Symfony2 by Jonathan H. Wage](https://speakerdeck.com/jwage/building-opensky-with-symfony2)
+* [Slide : Building OpenSky with Symfony2 by Jonathan H. Wage](https://speakerdeck.com/jwage/building-opensky-with-symfony2)
 
 ## Abstract
 
