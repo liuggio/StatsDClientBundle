@@ -1,5 +1,9 @@
-StatsD Client Bundle v1.2.x
+StatsD Client Bundle
 ===================
+
+This bundle is not stable for sf2.2 help the community or just wait.
+
+If you are using Symfony 2.1 go to the [2.1 branch](https://github.com/liuggio/StatsDClientBundle/tree/2.1)
 
 [![Build Status](https://secure.travis-ci.org/liuggio/StatsDClientBundle.png)](http://travis-ci.org/liuggio/StatsDClientBundle)
 
@@ -18,8 +22,13 @@ It Includes
 
 * [Installation and Usage](https://github.com/liuggio/StatsDClientBundle/blob/master/Resources/doc/installation.md)
 * [Advanced usage](https://github.com/liuggio/StatsDClientBundle/blob/master/Resources/doc/advanced.md)
+
+## Articles
+
+* [Article:  ServerGrove - Interesting Symfony Bundles: StatsDClientBundle](http://blog.servergrove.com/2012/10/09/interesting-symfony-bundles-statsdclientbundle)
 * [Article : Install Stats.d / Graphite on a debian server in order to monitor a Symfony2 application (1/2) ](http://www.elao.com/blog/linux/install-stats-d-graphite-on-a-debian-server-to-monitor-a-symfony2-application-12.html)
 * [Article : Monitor your Symfony2 application via Stats.d and Graphite (2/2) ](http://www.elao.com/blog/symfony-2/monitor-your-symfony2-application-via-stats-d-and-graphite-22.html)
+* [Talks : Building OpenSky with Symfony2 by Jonathan H. Wage](https://speakerdeck.com/jwage/building-opensky-with-symfony2)
 
 ## Abstract
 
@@ -36,7 +45,6 @@ Within this bundle you could use ready-to-go monitor for
 - SQL: Verbs used (amount of select/set/update/upgrade/delete) (this feature is not suggested, please use a server monitor tool eg. nagios, munin)
 
 - Amount of PHP ram used (collector)
-
 
 
 ## Short Theory
