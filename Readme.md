@@ -36,15 +36,37 @@ Monitoring what is happening in your production Symfony2 application, with Stats
 
 Within this bundle you could use ready-to-go monitor for
 
-- Monolog (this is a new feature)
+- Monolog (this is very powerful feature)
 
-- Amount of user (collector)
+- Amount of visitor
 
-- Logged vs Anonymous user (collector)
+- Logged vs Anonymous user
 
 - SQL: Verbs used (amount of select/set/update/upgrade/delete) (this feature is not suggested, please use a server monitor tool eg. nagios, munin)
 
-- Amount of PHP ram used (collector)
+- Amount of PHP ram used
+
+- You could create your own using  the Factory and the Service.
+
+
+One UDP packet to rule them all
+-------------------------------
+
+With a proper config file, your StatsD server will receive in a single upd packet:
+
+```txt
+prefix.visitor:1|c                  # Increment visitor
+prefix.user.anonymous:1|c           # The visitor is not logged
+
+prefix.log.app.error.user_action:1  # Stats by monolog with $this->get('logger')->error('user_action')
+
+prefix.memory:4480|g                # The php memory peak was 4480 MB
+
+prefix.exception.exception.500:1|c  # Exception occurred, the Exception code was 500
+
+prefix.query.insert:1|c             # Query Insert
+prefix.query.select:1|c             # Query Select
+```
 
 
 ## Short Theory
