@@ -24,7 +24,7 @@ abstract class StatsCollector implements StatsCollectorInterface
      */
     protected $StatsdDataFactory;
     /**
-     * @var boolean
+     * @var Boolean
      */
     protected $onlyOnMasterResponse;
 
@@ -43,7 +43,7 @@ abstract class StatsCollector implements StatsCollectorInterface
      * @param Response   $response  A Response instance
      * @param \Exception $exception An exception instance if the request threw one
      *
-     * @return boolean
+     * @return Boolean
      */
     public function collect(Request $request, Response $response, \Exception $exception = null)
     {
@@ -103,7 +103,7 @@ abstract class StatsCollector implements StatsCollectorInterface
     }
 
     /**
-     * @param boolean $onlyOnMasterResponse
+     * @param Boolean $onlyOnMasterResponse
      */
     public function setOnlyOnMasterResponse($onlyOnMasterResponse)
     {
@@ -111,7 +111,7 @@ abstract class StatsCollector implements StatsCollectorInterface
     }
 
     /**
-     * @return boolean
+     * @return Boolean
      */
     public function getOnlyOnMasterResponse()
     {

@@ -16,7 +16,7 @@ class StatsDHandler extends AbstractProcessingHandler
     protected $contextLogging = false;
 
     /**
-     * @param boolean $contextLogging
+     * @param Boolean $contextLogging
      */
     public function setContextLogging($contextLogging)
     {
@@ -24,7 +24,7 @@ class StatsDHandler extends AbstractProcessingHandler
     }
 
     /**
-     * @return boolean
+     * @return Boolean
      */
     public function getContextLogging()
     {
