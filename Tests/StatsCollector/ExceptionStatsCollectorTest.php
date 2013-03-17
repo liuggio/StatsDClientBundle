@@ -3,42 +3,19 @@
 namespace Liuggio\StatsDClientBundle\Tests\StatsCollector;
 
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
-
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\Security\Core\Exception\AuthenticationCredentialsNotFoundException;
-use Liuggio\StatsDClientBundle\StatsCollector\ExceptionStatsCollector;
-use Liuggio\StatsDClientBundle\StatsCollector\StatsCollector;
-
-use Symfony\Component\HttpKernel\DataCollector\ExceptionDataCollector;
 use Symfony\Component\HttpKernel\Exception\FlattenException;
-use Liuggio\StatsDClientBundle\Model\StatsDataInterface;
 
-class ExceptionStatsCollectorTest extends WebTestCase
+use Liuggio\StatsDClientBundle\StatsCollector\ExceptionStatsCollector;
+
+
+class ExceptionStatsCollectorTest extends StatsCollectorBase
 {
-    public function mockStatsDFactory($compare)
-    {
-        $phpunit = $this;
-        $statsDFactory = $this->getMockBuilder('\Liuggio\StatsdClient\Factory\StatsdDataFactory')
-            ->disableOriginalConstructor()
-            ->setMethods(array('increment'))
-            ->getMock();
-
-        $dataMock = $this->getMock('\Liuggio\StatsdClient\Entity\StatsdDataInterface');
-
-        $statsDFactory->expects($this->any())
-            ->method('increment')
-            ->will($this->returnCallback(function ($input) use ($phpunit, $compare, $dataMock) {
-            $phpunit->assertEquals($compare, $input);
-            return $dataMock;
-        }));
-        return $statsDFactory;
-    }
-
     public function testCollect()
     {
         $e = new \Exception('foo', 500);
-        $c = new ExceptionStatsCollector('prefix', $this->mockStatsDFactory('prefix.exception'));
+        $c = new ExceptionStatsCollector('prefix', $this->mockStatsDFactory('prefix.exception.500'));
         $flattened = FlattenException::create($e);
         $trace = $flattened->getTrace();
 

@@ -2,35 +2,13 @@
 
 namespace Liuggio\StatsDClientBundle\Tests\StatsCollector;
 
-use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
-
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use Liuggio\StatsDClientBundle\StatsCollector\StatsCollector;
 
 use Liuggio\StatsDClientBundle\StatsCollector\UserStatsCollector;
-use Liuggio\StatsDClientBundle\Model\StatsDataInterface;
 
-class UserStatsCollectorTest extends WebTestCase
+class UserStatsCollectorTest extends StatsCollectorBase
 {
-    public function mockStatsDFactory($compare)
-    {
-        $phpunit = $this;
-        $statsDFactory = $this->getMockBuilder('\Liuggio\StatsdClient\Factory\StatsdDataFactory')
-            ->disableOriginalConstructor()
-            ->setMethods(array('increment'))
-            ->getMock();
-
-        $dataMock = $this->getMock('\Liuggio\StatsdClient\Entity\StatsdDataInterface');
-        $statsDFactory->expects($this->any())
-            ->method('increment')
-            ->will($this->returnCallback(function ($input) use ($phpunit, $compare, $dataMock) {
-                $phpunit->assertEquals($compare, $input);
-            return $dataMock;
-        }));
-        return $statsDFactory;
-    }
-
 
     public function mockSecurityContext($return)
     {
@@ -45,7 +23,6 @@ class UserStatsCollectorTest extends WebTestCase
 
         return $statsDFactory;
     }
-
 
     /**
      * @dataProvider provider

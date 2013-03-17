@@ -117,4 +117,20 @@ abstract class StatsCollector implements StatsCollectorInterface
     {
         return $this->onlyOnMasterResponse;
     }
+
+    /**
+     * Extract the first word, its maximum lenght is limited to $maxLenght chars.
+     *
+     * @param  string $string
+     *
+     * @return mixed
+     */
+    protected function extractFirstWord($string, $maxLength = 25)
+    {
+        $string = trim($string);
+        $length = (strlen($string) > $maxLength)? $maxLength: strlen($string);
+        $string = strtolower(strstr(substr(trim($string), 0, $length), ' ', true));
+
+        return $string;
+    }
 }

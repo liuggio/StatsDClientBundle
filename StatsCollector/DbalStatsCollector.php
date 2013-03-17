@@ -9,23 +9,11 @@ use Doctrine\DBAL\Logging\SQLLogger;
 class DbalStatsCollector extends StatsCollector implements SQLLogger, StatsCollectorInterface
 {
     /**
-     * try to extract the sql verbs.
-     * @param $sql
-     * @return mixed
-     */
-    public function extractVerbsFromSql($sql)
-    {
-        $string = strtolower(strstr(trim($sql), ' ', true));
-        return $string;
-    }
-
-    /**
      * {@inheritDoc}
      */
     public function startQuery($sql, array $params = null, array $types = null)
     {
-
-        $verb = $this->extractVerbsFromSql($sql);
+        $verb = $this->extractFirstWord($sql);
         if (null === $verb) {
             return;
         }
