@@ -3,7 +3,7 @@
 namespace Liuggio\StatsDClientBundle\Monolog\Handler;
 
 use Monolog\Handler\AbstractProcessingHandler;
-use Monolog\Formatter\FormatterInterface;
+
 
 /**
  * A processing handler for Monolog
@@ -112,8 +112,8 @@ class StatsDHandler extends AbstractProcessingHandler
         try {
             if ($inputToConvert instanceof \DateTime) {
                 $string = $inputToConvert->format("Y-m-d-H-i-s");
-            }else {
-                $string = (string) $inputToConvert;
+            } else {
+                $string = (string)$inputToConvert;
             }
         } catch (\Exception $e) {
             // do nothing
@@ -138,7 +138,9 @@ class StatsDHandler extends AbstractProcessingHandler
      */
     protected function write(array $record)
     {
-
+        if (!$this->isHandling($record)) {
+            return;
+        }
 
         $channelKey = sprintf("%s.%s", $this->getPrefix(), $this->toAscii($record['channel']));
         $levelKey = sprintf("%s.%s", $channelKey, $this->toAscii($record['level_name']));

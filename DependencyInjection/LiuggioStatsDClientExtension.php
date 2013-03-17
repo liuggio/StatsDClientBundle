@@ -56,6 +56,11 @@ class LiuggioStatsDClientExtension extends Extension
         }
     }
 
+    private function convertLevelToConstant($level)
+    {
+        return is_int($level) ? $level : constant('Monolog\Logger::' . strtoupper($level));
+    }
+
     /**
      * Loads the Monolog configuration.
      *
@@ -74,7 +79,7 @@ class LiuggioStatsDClientExtension extends Extension
         $def->addMethodCall('setStatsDFactory', array(new Reference('liuggio_stats_d_client.factory')));
         $def->addMethodCall('setPrefix', array($config['monolog']['prefix']));
         $def->addMethodCall('setFormatter', array(new Reference($config['monolog']['formatter'])));
-        $def->addMethodCall('setLevel', array($config['monolog']['level']));
+        $def->addMethodCall('setLevel', array($this->convertLevelToConstant($config['monolog']['level'])));
         $def->addMethodCall('setContextLogging', array($config['monolog']['context_logging']));
 
         $container->setDefinition('monolog.handler.statsd', $def);
