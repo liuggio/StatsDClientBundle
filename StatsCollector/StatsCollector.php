@@ -127,6 +127,7 @@ abstract class StatsCollector implements StatsCollectorInterface
      */
     protected function extractFirstWord($string, $maxLength = 25)
     {
+        $string = str_replace(array('"', "'"), "", $string);
         $string = trim($string);
         $length = (strlen($string) > $maxLength)? $maxLength: strlen($string);
         $string = strtolower(strstr(substr(trim($string), 0, $length), ' ', true));

@@ -14,7 +14,7 @@ class DbalStatsCollector extends StatsCollector implements SQLLogger, StatsColle
     public function startQuery($sql, array $params = null, array $types = null)
     {
         $verb = $this->extractFirstWord($sql);
-        if (null === $verb) {
+        if (empty($verb)) {
             return;
         }
         $key = sprintf('%s.%s', $this->getStatsDataKey(), $verb);
