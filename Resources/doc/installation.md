@@ -118,7 +118,7 @@ monolog:
 #            channels:
 #                type:     exclusive # Include all, except those listed below
 #                elements: [ ]
-        streamed
+        streamed:
             type:  stream
             path:  %kernel.logs_dir%/%kernel.environment%.log
             level: critical
