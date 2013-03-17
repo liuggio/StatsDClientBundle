@@ -100,7 +100,10 @@ class StatsDHandler extends AbstractProcessingHandler
     }
 
     /**
-     * @param mixed $inputToConvert
+     * Convert the input.
+     *
+     * @param mixed   $inputToConvert
+     *
      * @return String
      */
     protected function toAscii($inputToConvert)
