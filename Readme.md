@@ -46,7 +46,19 @@ Within this bundle you could use ready-to-go monitor for
 
 - Amount of PHP ram used
 
-- You could create your own using  the Factory and the Service.
+- You could create your own using the Factory and the Service.
+
+### Easy Debug
+
+If debug mode is enabled no packet are sent over the udp socket, and you could see what's going on reading the syslog with `tail -f /var/log/syslog`
+
+```log
+Mar 19 00:48:11 liuggio nginx: statsd-open
+Mar 19 00:48:11 liuggio nginx: statsd-write "tvision.visitor:1|tvision.memory:43520|tvision.user.anonymous:1|tvision.query.start:1|tvision.query.insert:1|c" 118 Bytes
+Mar 19 00:48:11 liuggio nginx: statsd-close
+```
+
+Note: by default in `dev` environment debug is true.
 
 
 One UDP packet to rule them all
