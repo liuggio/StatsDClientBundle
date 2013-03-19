@@ -17,6 +17,7 @@ class LiuggioStatsDClientExtensionTest extends \PHPUnit_Framework_TestCase
     public function testLoad()
     {
         $container = new ContainerBuilder();
+        $container->setParameter('kernel.debug', false);
         $loader = new LiuggioStatsDClientExtension();
         $config = $this->getConfig();
         $loader->load(array($config), $container);
