@@ -20,12 +20,12 @@ class SetCommand extends BaseCommand
         $this
             ->setName('statsd:set')
             ->setDescription('Sends a set metric to StatsD')
-            ->addArgument('key', null, InputArgument::REQUIRED, 'The key')
-            ->addArgument('value', null, InputArgument::REQUIRED, 'The value')
+            ->addArgument('key', InputArgument::REQUIRED, 'The key')
+            ->addArgument('value', InputArgument::REQUIRED, 'The value')
             ->setHelp(<<<EOT
-The <info>statsd:set</info> command sends a set metric to StatsD:
+The <info>%command.full_name%</info> command sends a set metric to StatsD:
 
-  <info>./app/console statsd:set</info>
+  <info>./app/console %command.full_name%</info>
 
 EOT
         );

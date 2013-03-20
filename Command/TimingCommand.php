@@ -20,12 +20,12 @@ class TimingCommand extends BaseCommand
         $this
             ->setName('statsd:timing')
             ->setDescription('Sends a timing metric to StatsD')
-            ->addArgument('key', null, InputArgument::REQUIRED, 'The key')
-            ->addArgument('value', null, InputArgument::REQUIRED, 'The value')
+            ->addArgument('key', InputArgument::REQUIRED, 'The key')
+            ->addArgument('value', InputArgument::REQUIRED, 'The value')
             ->setHelp(<<<EOT
-The <info>statsd:timing</info> command sends a timing metric to StatsD:
+The <info>%command.full_name%</info> command sends a timing metric to StatsD:
 
-  <info>./app/console statsd:timing</info>
+  <info>./app/console %command.full_name%</info>
 
 EOT
         );

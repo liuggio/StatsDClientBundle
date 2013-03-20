@@ -20,11 +20,11 @@ class DecrementCommand extends BaseCommand
         $this
             ->setName('statsd:decrement')
             ->setDescription('Decreases a counter by 1 in StatsD')
-            ->addArgument('key', null, InputArgument::REQUIRED, 'The key')
+            ->addArgument('key', InputArgument::REQUIRED, 'The key')
             ->setHelp(<<<EOT
-The <info>statsd:decrement</info> command sends a decrement metric to StatsD:
+The <info>%command.full_name%</info> command sends a decrement metric to StatsD:
 
-  <info>./app/console statsd:decrement</info>
+  <info>./app/console %command.full_name%</info>
 
 EOT
         );

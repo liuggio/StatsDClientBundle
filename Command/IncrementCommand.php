@@ -21,11 +21,11 @@ class IncrementCommand extends BaseCommand
         $this
             ->setName('statsd:increment')
             ->setDescription('Increases a counter by 1 in StatsD')
-            ->addArgument('key', null, InputArgument::REQUIRED, 'The key')
+            ->addArgument('key', InputArgument::REQUIRED, 'The key')
             ->setHelp(<<<EOT
-The <info>statsd:increment</info> command sends an increment metric to StatsD:
+The <info>%command.full_name%</info> command sends an increment metric to StatsD:
 
-  <info>./app/console statsd:increment</info>
+  <info>./app/console %command.full_name%</info>
 
 EOT
         );
