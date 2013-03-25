@@ -46,8 +46,18 @@ Within this bundle you could use ready-to-go monitor for
 
 - Amount of PHP ram used
 
-- You could create your own using  the Factory and the Service.
+- You could create your own using the Factory and the Service.
 
+### Easy Debug
+
+If debug mode is enabled no packet are sent over the udp socket, and you could see what's going on reading the syslog with `tail -f /var/log/syslog`
+
+```log
+Mar 19 00:48:11 liuggio nginx: statsd-open
+Mar 19 00:48:11 liuggio nginx: statsd-write "tvision.visitor:1|tvision.memory:43520|tvision.user.anonymous:1|tvision.query.start:1|tvision.query.insert:1|c" 118 Bytes
+Mar 19 00:48:11 liuggio nginx: statsd-close
+```
+Note: by default in `dev` environment debug is true.
 
 One UDP packet to rule them all
 -------------------------------
@@ -68,15 +78,11 @@ prefix.query.insert:1|c             # Query Insert
 prefix.query.select:1|c             # Query Select
 ```
 
+## Short Theory and links
 
-## Short Theory
+### Vagrant StatSD and Graphite
 
-### Easily Install StatSD and Graphite
-
-In order to try this application monitor you have to install etsy/statsd and Graphite
-
-see this blog post to install it with vagrant [Easy install statsd graphite](http://welcometothebundle.com/easily-install-statsd-and-graphite-with-vagrant/).
-
+see this blog post to install [Easy install statsd graphite with vagrant](http://welcometothebundle.com/easily-install-statsd-and-graphite-with-vagrant/).
 
 #### [StatsD](https://github.com/etsy/statsd)
 

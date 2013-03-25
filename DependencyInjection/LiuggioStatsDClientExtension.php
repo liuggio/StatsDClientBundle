@@ -25,8 +25,11 @@ class LiuggioStatsDClientExtension extends Extension
      */
     public function load(array $configs, ContainerBuilder $container)
     {
-        $configuration = new Configuration();
+        $configuration = new Configuration($container->getParameter('kernel.debug'));
         $config = $this->processConfiguration($configuration, $configs);
+
+        $container->setParameter($this->getAlias() . '.sender.class', $config['connection']['class']);
+        $container->setParameter($this->getAlias() . '.sender.debug_class', $config['connection']['debug_class']);
 
         foreach ($config['connection'] as $k => $v) {
             $container->setParameter($this->getAlias() . '.connection.' . $k, $v);
@@ -53,6 +56,12 @@ class LiuggioStatsDClientExtension extends Extension
         // monolog
         if ($config['monolog'] && $config['monolog']['enable']) {
             $this->loadMonologHandler($config, $container);
+        }
+        // set the debug sender
+        if ($config['connection']['debug']) {
+            $senderService = new Definition('%liuggio_stats_d_client.sender.debug_class%');
+            $container->setDefinition('liuggio_stats_d_client.sender.service', $senderService);
+            $senderService->setArguments(array());
         }
     }
 

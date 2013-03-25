@@ -132,8 +132,6 @@ Working with Personal Collector
 If the information from Monolog is not enough for you, you can use the Collectors that collect the information and then send the data to the StatsD Server.
 
 
-
-
 ``` yaml
 
 # app/config/config.yml
@@ -187,6 +185,9 @@ liuggio_stats_d_client:
     level: 'warning'
     context_logging: true
   connection:
+    class: Liuggio\StatsdClient\Sender\SocketSender
+    debug_class: Liuggio\StatsdClient\Sender\ErrorLogSender
+    debug: %kernel.debug%
     host: localhost
     port: 8125
     protocol: udp
