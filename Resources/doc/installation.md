@@ -6,7 +6,7 @@ Installation
 ```
 "require": {
     # ..
-    "liuggio/statsd-client-bundle": ">=1.2",
+    "liuggio/statsd-client-bundle": ">=1.4.2",
     # ..
 }
 ```
@@ -89,7 +89,7 @@ liuggio_stats_d_client:
   enable_collector: false #default is false
   monolog:
     enable: true
-    prefix: 'log'
+    prefix: 'my-app'
     formatter: 'monolog.formatter.shortline' # optional but this will prettify the statsd key
     level: 'warning'
     context_logging: false # with this option you could also have the monolog context variable in your graphs
@@ -144,11 +144,11 @@ liuggio_stats_d_client:
     fail_silently: true
   enable_collector: true
   collectors:
-    liuggio_stats_d_client.collector.dbal: 'collect.query'
-    liuggio_stats_d_client.collector.visitor: 'collect.visitor'
-    liuggio_stats_d_client.collector.memory: 'collect.memory'
-    liuggio_stats_d_client.collector.user: 'collect.user'
-    liuggio_stats_d_client.collector.exception: 'collect.exception'
+    liuggio_stats_d_client.collector.dbal: 'my-app.query'
+    liuggio_stats_d_client.collector.visitor: 'my-app.visitor'
+    liuggio_stats_d_client.collector.memory: 'my-app.memory'
+    liuggio_stats_d_client.collector.user: 'my-app.user'
+    liuggio_stats_d_client.collector.exception: 'my-app.exception'
 
 
 ```
@@ -180,26 +180,26 @@ then add to config/yaml
 liuggio_stats_d_client:
   monolog:
     enable: true
-    prefix: 'log'
+    prefix: 'my-app.log'
     formatter: 'monolog.formatter.shortline'
     level: 'warning'
     context_logging: true
   connection:
-    class: Liuggio\StatsdClient\Sender\SocketSender
-    debug_class: Liuggio\StatsdClient\Sender\ErrorLogSender
-    debug: %kernel.debug%
+ #   class: Liuggio\StatsdClient\Sender\SocketSender
+ #   debug_class: Liuggio\StatsdClient\Sender\SysLogSender # or EchoSender
+ #   debug: %kernel.debug%   # use false if you want to disable debugging and shot packet over Socket
     host: localhost
     port: 8125
-    protocol: udp
-    reduce_packet: true
-    fail_silently: true
+#    protocol: udp
+#    reduce_packet: true
+#    fail_silently: true
   enable_collector: true
   collectors:
-    liuggio_stats_d_client.collector.dbal: 'tvision.query'
-    liuggio_stats_d_client.collector.visitor: 'tvision.visitor'
-    liuggio_stats_d_client.collector.memory: 'tvision.memory'
-    liuggio_stats_d_client.collector.user: 'tvision.user'
-    liuggio_stats_d_client.collector.exception: 'tvision.exception'
+    liuggio_stats_d_client.collector.dbal: 'my-app.query'
+    liuggio_stats_d_client.collector.visitor: 'my-app.visitor'
+    liuggio_stats_d_client.collector.memory: 'my-app.memory'
+    liuggio_stats_d_client.collector.user: 'my-app.user'
+    liuggio_stats_d_client.collector.exception: 'my-app.exception'
 
 
 ```
