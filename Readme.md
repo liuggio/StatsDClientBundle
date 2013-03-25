@@ -1,10 +1,6 @@
 StatsD Client Bundle
 ===================
 
-This bundle is not stable for sf2.2 help the community or just wait.
-
-If you are using Symfony 2.1 go to the [2.1 branch](https://github.com/liuggio/StatsDClientBundle/tree/2.1)
-
 [![Build Status](https://secure.travis-ci.org/liuggio/StatsDClientBundle.png)](http://travis-ci.org/liuggio/StatsDClientBundle)
 
 This bundle helps you to monitor your application.
