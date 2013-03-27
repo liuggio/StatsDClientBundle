@@ -54,7 +54,7 @@ class LiuggioStatsDClientExtension extends Extension
             }
         }
         // monolog
-        if ($config['monolog'] && $config['monolog']['enable']) {
+        if (!empty($config['monolog']) && $config['monolog']['enable']) {
             $this->loadMonologHandler($config, $container);
         }
         // set the debug sender
