@@ -149,6 +149,7 @@ liuggio_stats_d_client:
     liuggio_stats_d_client.collector.memory: 'my-app.memory'
     liuggio_stats_d_client.collector.user: 'my-app.user'
     liuggio_stats_d_client.collector.exception: 'my-app.exception'
+    liuggio_stats_d_client.collector.time: 'my-app.time' # the time is a "fake" one, it is ~100ms smaller than the Kernel but you can still monitor the evolution of your application
 
 
 ```
@@ -200,6 +201,7 @@ liuggio_stats_d_client:
     liuggio_stats_d_client.collector.memory: 'my-app.memory'
     liuggio_stats_d_client.collector.user: 'my-app.user'
     liuggio_stats_d_client.collector.exception: 'my-app.exception'
+    liuggio_stats_d_client.collector.time: 'my-app.time'
 
 
 ```

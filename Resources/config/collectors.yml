@@ -3,6 +3,7 @@ parameters:
     liuggio_stats_d_client.collector.memory.class: Liuggio\StatsDClientBundle\StatsCollector\MemoryStatsCollector
     liuggio_stats_d_client.collector.user.class: Liuggio\StatsDClientBundle\StatsCollector\UserStatsCollector
     liuggio_stats_d_client.collector.exception.class: Liuggio\StatsDClientBundle\StatsCollector\ExceptionStatsCollector
+    liuggio_stats_d_client.collector.time.class: Liuggio\StatsDClientBundle\StatsCollector\TimeStatsCollector
 
 
 services:
@@ -32,6 +33,13 @@ services:
         class: %liuggio_stats_d_client.collector.exception.class%
         calls:
             - ['setOnlyOnMasterResponse', [false]]
+        tags:
+            - { name: stats_d_collector}
+
+    liuggio_stats_d_client.collector.time:
+        class: %liuggio_stats_d_client.collector.time.class%
+        calls:
+            - ['setOnlyOnMasterResponse', [true]]
         tags:
             - { name: stats_d_collector}
 
