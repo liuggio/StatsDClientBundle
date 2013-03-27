@@ -43,7 +43,6 @@ class Configuration implements ConfigurationInterface
             ->end()
             ->arrayNode('collectors')->canBeUnset()
                 ->prototype('scalar')->end()
-                ->isRequired()
                 ->useAttributeAsKey('name')
             ->end()
             ->arrayNode('monolog')->canBeUnset()
