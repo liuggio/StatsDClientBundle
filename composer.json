@@ -1,0 +1,42 @@
+{
+    "name": "liuggio/statsd-client-bundle",
+    "type": "symfony-bundle",
+    "description": "Provides a statsd client and simple ready-to-use support for #Symfony2 Application",
+    "keywords": ["symfony", "statsd", "graphite", "monitor"],
+    "license": "MIT",
+    "authors": [
+        {
+            "name":     "Liuggio",
+            "email":    "liuggio@gmail.com",
+            "homepage": "https://github.com/Liuggio"
+        },
+        {
+            "name": "Community contributions",
+            "homepage": "https://github.com/liuggio/StatsDClientBundle/contributors"
+        }
+    ],
+    "require": {
+        "php": ">=5.3.2",
+        "liuggio/statsd-php-client": ">=1.0.6",
+        "symfony/framework-bundle": ">2.0"
+    },
+    "require-dev": {
+        "doctrine/dbal": ">=2.2.0",
+        "monolog/monolog": ">=1.2.0",
+        "symfony/yaml": "2.1.*"
+    },
+    "suggest": {
+        "doctrine/dbal": "Doctrine Dbal, collect statistic to/from the database (>=2.2.0,<2.4-dev required)",
+        "monolog/monolog": "Monolog, in order to do generate statistic from log >=1.2.0)"
+    },
+    "autoload": {
+        "psr-0": { "Liuggio\\StatsDClientBundle": "" }
+    },
+    "target-dir": "Liuggio/StatsDClientBundle",
+    "extra": {
+        "branch-alias": {
+            "dev-2.1": "2.1.x-dev",
+            "dev-master": "2.2.x-dev"
+        }
+    }
+}
