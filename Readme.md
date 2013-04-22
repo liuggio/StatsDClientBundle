@@ -32,7 +32,7 @@ Monitoring what is happening in your production Symfony2 application, with Stats
 
 Within this bundle you could use ready-to-go monitor for
 
-- Monolog (this is very powerful feature)
+- Monolog
 
 - Amount of visitor
 
