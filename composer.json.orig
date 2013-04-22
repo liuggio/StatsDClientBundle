@@ -27,7 +27,11 @@
     },
     "suggest": {
         "doctrine/dbal": "Doctrine Dbal, collect statistic to/from the database (>=2.2.0,<2.4-dev required)",
-        "monolog/monolog": "Monolog, in order to generate statistic from log >=1.2.0)"
+<<<<<<< HEAD
+        "monolog/monolog": "Monolog, in order to do generate statistic from log >=1.2.0)"
+=======
+        "monolog/monolog": "Monolog, in order to do  statistic on log >=1.2.0)"
+>>>>>>> origin/master
     },
     "autoload": {
         "psr-0": { "Liuggio\\StatsDClientBundle": "" }
