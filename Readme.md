@@ -1,7 +1,7 @@
 StatsD Client Bundle
 ===================
 
-[![Build Status](https://secure.travis-ci.org/liuggio/StatsDClientBundle.png)](http://travis-ci.org/liuggio/StatsDClientBundle)
+[![Total Downloads](https://poser.pugx.org/liuggio/statsd-client-bundle/downloads.png)](https://packagist.org/packages/liuggio/statsd-client-bundle) [![Latest Stable Version](https://poser.pugx.org/liuggio/statsd-client-bundle/v/stable.png)](https://packagist.org/packages/liuggio/statsd-client-bundle) [![Build Status](https://secure.travis-ci.org/liuggio/StatsDClientBundle.png)](http://travis-ci.org/liuggio/StatsDClientBundle)
 
 This bundle helps you to monitor your application.
 
