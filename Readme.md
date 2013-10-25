@@ -12,7 +12,7 @@ It Includes
 * a **Service**, a **Factory** and an Entity callable by the DIC
 * a **Monolog Handler**
 * a series of **Collectors** in order to aggregate your personal data.
-
+* a series of **Commands** in order to execute data also from cli.
 
 ## Check out the documentation
 
