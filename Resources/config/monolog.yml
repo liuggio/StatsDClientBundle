@@ -1,0 +1,24 @@
+parameters:
+    liuggio_stats_d_client.monolog.formatter.class: Liuggio\StatsdClient\Monolog\Formatter\StatsDFormatter
+    liuggio_stats_d_client.monolog.handler.class: Liuggio\StatsdClient\Monolog\Handler\StatsDHandler
+
+services:
+    liuggio_stats_d_client.monolog.formatter:
+        class: %liuggio_stats_d_client.monolog.formatter.class%
+        public: false
+        arguments:
+            - %liuggio_stats_d_client.monolog.formatter.format%
+            - %liuggio_stats_d_client.monolog.formatter.context_logging%
+            - %liuggio_stats_d_client.monolog.formatter.extra_logging%
+            - %liuggio_stats_d_client.monolog.formatter.words%
+
+    liuggio_stats_d_client.monolog.handler:
+        class: %liuggio_stats_d_client.monolog.handler.class%
+        public: false
+        arguments:
+            - @liuggio_stats_d_client.client
+            - @liuggio_stats_d_client.factory
+            - %liuggio_stats_d_client.factory.prefix%
+            - %liuggio_stats_d_client.factory.level%
+        calls:
+            - [ setFormatter, [@liuggio_stats_d_client.monolog.formatter] ]

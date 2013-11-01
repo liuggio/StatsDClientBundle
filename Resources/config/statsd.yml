@@ -1,0 +1,33 @@
+parameters:
+    liuggio_stats_d_client.entity.class: Liuggio\StatsdClient\Entity\StatsdData
+
+    liuggio_stats_d_client.client.class: Liuggio\StatsdClient\StatsdClient
+    liuggio_stats_d_client.sender.default.class: Liuggio\StatsdClient\Sender\SocketSender
+    liuggio_stats_d_client.sender.debug.class: Liuggio\StatsdClient\Sender\SysLogSender
+    liuggio_stats_d_client.factory.class: Liuggio\StatsdClient\Factory\StatsdDataFactory
+
+services:
+    liuggio_stats_d_client.client:
+        class: %liuggio_stats_d_client.client.class%
+        arguments:
+            - @liuggio_stats_d_client.sender
+            - %liuggio_stats_d_client.connection.reduce_packet%
+            - %liuggio_stats_d_client.connection.fail_silently%
+
+    liuggio_stats_d_client.sender:
+        alias: liuggio_stats_d_client.sender.default
+
+    liuggio_stats_d_client.sender.default:
+        class: %liuggio_stats_d_client.sender.default.class%
+        arguments:
+            - %liuggio_stats_d_client.connection.host%
+            - %liuggio_stats_d_client.connection.port%
+            - %liuggio_stats_d_client.connection.protocol%
+
+    liuggio_stats_d_client.sender.debug:
+        class: %liuggio_stats_d_client.sender.debug.class%
+
+    liuggio_stats_d_client.factory:
+        class: %liuggio_stats_d_client.factory.class%
+        arguments:
+            - %liuggio_stats_d_client.entity.class%
