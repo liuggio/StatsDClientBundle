@@ -120,7 +120,7 @@ monolog:
 #----------------------------------
         stats_d:
             type:  service
-            id: monolog.handler.statsd
+            id: liuggio_stats_d_client.monolog.handler
             level: warning
 #            channels:
 #                type:     exclusive # Include all, except those listed below
