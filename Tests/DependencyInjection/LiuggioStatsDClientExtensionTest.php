@@ -2,18 +2,15 @@
 
 namespace Liuggio\StatsDClientBundle\Tests\DependencyInjection;
 
+use Liuggio\StatsDClientBundle\DependencyInjection\Compiler\DataCollectorCompilerPass;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 
 use Liuggio\StatsDClientBundle\DependencyInjection\LiuggioStatsDClientExtension;
+use Symfony\Component\DependencyInjection\Reference;
 
 class LiuggioStatsDClientExtensionTest extends \PHPUnit_Framework_TestCase
 {
 
-    /**
-     * @covers Liuggio\StatsDClientBundle\LiuggioStatsDClientBundle
-     * @covers Liuggio\StatsDClientBundle\DependencyInjection\LiuggioStatsDClientExtension::load
-     * @covers Liuggio\StatsDClientBundle\DependencyInjection\Configuration::getConfigTreeBuilder
-     */
     public function testLoad()
     {
         $container = new ContainerBuilder();
@@ -21,34 +18,44 @@ class LiuggioStatsDClientExtensionTest extends \PHPUnit_Framework_TestCase
         $loader = new LiuggioStatsDClientExtension();
         $config = $this->getConfig();
         $loader->load(array($config), $container);
+        $compilerPass = new DataCollectorCompilerPass();
+        $compilerPass->process($container);
+
         //testing parameter
         $this->assertEquals('localhost', $container->getParameter('liuggio_stats_d_client.connection.host'));
         $this->assertEquals('100', $container->getParameter('liuggio_stats_d_client.connection.port'));
         $this->assertEquals(true, $container->getParameter('liuggio_stats_d_client.connection.fail_silently'));
-        $this->assertEquals(true, $container->getParameter('liuggio_stats_d_client.enable_collector'));
-        $this->assertEquals(array('liuggio_stats_d_client.collector.dbal' => 'tv.vision.query'), $container->getParameter('liuggio_stats_d_client.collectors'));
-
-        //we test that the kernel_event is attached to the service if collector is enabled
-        $a = $container->getDefinition('liuggio_stats_d_client.collector.listener');
-        $this->assertNotNull($a);
-        $this->assertEquals($a->hasTag('kernel.event_subscriber'), $container->getParameter('liuggio_stats_d_client.enable_collector'));
+        $this->assertEquals(
+            array(
+                'tv.vision.{query_table}.query' => new Reference('liuggio_stats_d_client.collector.doctrine'),
+                'tv.{request_route}.{query_table}.query' => new Reference('liuggio_stats_d_client.collector.doctrine'),
+                'tv.time' => new Reference('liuggio_stats_d_client.collector.time'),
+            ),
+            $container
+                ->getDefinition('liuggio_stats_d_client.data_collector')
+                ->getArgument(0)
+        );
     }
 
     protected function getConfig()
     {
         return array(
-            'enable_collector' => true,
             'connection' => array(
                 'host' => 'localhost',
                 'port' => 100,
                 'fail_silently' => true
             ),
-            'collectors' => array('liuggio_stats_d_client.collector.dbal' => 'tv.vision.query'),
+            'metrics_enabled' => true,
+            'metrics' => array(
+                'tv.vision.{query_table}.query' => 'doctrine',
+                'tv.{request_route}.{query_table}.query' => 'doctrine',
+                'tv.time' => 'time',
+            ),
             'monolog' => array(
-                'enable' => true,
                 'prefix' => 'log',
                 'formatter' => array(),
-                'level' => 'warning')
+                'level' => 'warning'
+            )
         );
     }
 

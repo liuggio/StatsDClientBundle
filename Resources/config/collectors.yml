@@ -1,53 +1,47 @@
 parameters:
-    liuggio_stats_d_client.collector.visitor.class: Liuggio\StatsDClientBundle\StatsCollector\VisitorStatsCollector
-    liuggio_stats_d_client.collector.memory.class: Liuggio\StatsDClientBundle\StatsCollector\MemoryStatsCollector
-    liuggio_stats_d_client.collector.user.class: Liuggio\StatsDClientBundle\StatsCollector\UserStatsCollector
-    liuggio_stats_d_client.collector.exception.class: Liuggio\StatsDClientBundle\StatsCollector\ExceptionStatsCollector
-    liuggio_stats_d_client.collector.time.class: Liuggio\StatsDClientBundle\StatsCollector\TimeStatsCollector
-
+    liuggio_stats_d_client.data_collector.class: AdrienBrault\StatsDCollector\StatsDDataCollector
+    liuggio_stats_d_client.collector.increment.class: AdrienBrault\StatsDCollector\Collector\IncrementCollector
+    liuggio_stats_d_client.collector.memory.class: AdrienBrault\StatsDCollector\Collector\MemoryCollector
+    liuggio_stats_d_client.collector.time.class: AdrienBrault\StatsDCollector\Collector\TimeCollector
+    liuggio_stats_d_client.collector.exception.class: AdrienBrault\StatsDCollector\Collector\ExceptionCollector
+    liuggio_stats_d_client.collector.doctrine.class: AdrienBrault\StatsDCollector\Collector\DoctrineDbalCollector
+    liuggio_stats_d_client.collector.solarium.class: AdrienBrault\StatsDCollector\Collector\SolariumCollector
 
 services:
-    liuggio_stats_d_client.collector.visitor:
-        class: %liuggio_stats_d_client.collector.visitor.class%
-        calls:
-            - ['setOnlyOnMasterResponse', [true]]
+    liuggio_stats_d_client.data_collector:
+        class: %liuggio_stats_d_client.data_collector.class%
+        arguments:
+            - [] # Collectors
+            - [] # Providers
+
+    liuggio_stats_d_client.collector.increment:
+        class: %liuggio_stats_d_client.collector.increment.class%
         tags:
-            - { name: stats_d_collector}
+            - { name: liuggio_stats_d_client.collector, alias: increment }
 
     liuggio_stats_d_client.collector.memory:
         class: %liuggio_stats_d_client.collector.memory.class%
-        calls:
-            - ['setOnlyOnMasterResponse', [true]]
         tags:
-            - { name: stats_d_collector}
-
-    liuggio_stats_d_client.collector.user:
-        class: %liuggio_stats_d_client.collector.user.class%
-        calls:
-            - ['setSecurityContext', [@security.context]]
-            - ['setOnlyOnMasterResponse', [true]]
-        tags:
-            - { name: stats_d_collector}
-
-    liuggio_stats_d_client.collector.exception:
-        class: %liuggio_stats_d_client.collector.exception.class%
-        calls:
-            - ['setOnlyOnMasterResponse', [false]]
-        tags:
-            - { name: stats_d_collector}
+            - { name: liuggio_stats_d_client.collector, alias: memory }
 
     liuggio_stats_d_client.collector.time:
         class: %liuggio_stats_d_client.collector.time.class%
-        calls:
-            - ['setOnlyOnMasterResponse', [true]]
         tags:
-            - { name: stats_d_collector}
+            - { name: liuggio_stats_d_client.collector, alias: time }
+            - { name: kernel.event_listener, event: kernel.request, method: onKernelRequest }
 
-#special connector dbal is also a sqllogger
-    liuggio_stats_d_client.collector.dbal:
-        class: %liuggio_stats_d_client.collector.dbal.class%
-        arguments: ['query']
-        calls:
-            - ['setOnlyOnMasterResponse', [true]]
+    liuggio_stats_d_client.collector.exception:
+        class: %liuggio_stats_d_client.collector.exception.class%
         tags:
-            - { name: stats_d_collector}
+            - { name: liuggio_stats_d_client.collector, alias: exception }
+            - { name: kernel.event_listener, event: kernel.exception, method: onKernelException }
+
+    liuggio_stats_d_client.collector.doctrine:
+        class: %liuggio_stats_d_client.collector.doctrine.class%
+        tags:
+            - { name: liuggio_stats_d_client.collector, alias: doctrine }
+
+    liuggio_stats_d_client.collector.solarium:
+        class: %liuggio_stats_d_client.collector.solarium.class%
+        tags:
+            - { name: liuggio_stats_d_client.collector, alias: solarium }
