@@ -1,9 +1,9 @@
 parameters:
-    liuggio_stats_d_client.event_listener.response.class: Liuggio\StatsDClientBundle\EventListener\ResponseListener
+    liuggio_stats_d_client.event_listener.class: Liuggio\StatsDClientBundle\EventListener\StatsdListener
 
 services:
-    liuggio_stats_d_client.event_listener.response:
-        class: %liuggio_stats_d_client.event_listener.response.class%
+    liuggio_stats_d_client.event_listener:
+        class: %liuggio_stats_d_client.event_listener.class%
         arguments:
             - @liuggio_stats_d_client.data_collector
             - @liuggio_stats_d_client.client
