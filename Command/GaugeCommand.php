@@ -23,9 +23,9 @@ class GaugeCommand extends BaseCommand
             ->addArgument('key', InputArgument::REQUIRED, 'The key')
             ->addArgument('value', InputArgument::REQUIRED, 'The value')
             ->setHelp(<<<EOT
-The <info>%command.full_name%</info> command sends a gauge metric to StatsD:
+The <info>%command.name%</info> command sends a gauge metric to StatsD:
 
-  <info>./app/console %command.full_name%</info>
+  <info>%command.full_name%</info>
 
 EOT
         );
