@@ -71,7 +71,18 @@ the `$data` is the object created by the factory
 
 the send method will optimise the data sent in order to speed up the connection.
 
+### Simplified StatsD service
 
+Reference: `statsd`
+
+This service implements `liuggio_stats_d_client.factory` methods, as well as flush.
+It makes using service less verbose.
+```php
+$this->get('statsd')
+     ->increment('log.error')
+     ->gauge('log.rate', 25)
+     ->flush();
+```
 
 Working with `Monolog`
 -------------
