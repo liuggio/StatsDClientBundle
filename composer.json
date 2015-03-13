@@ -17,7 +17,7 @@
     ],
     "require": {
         "php": ">=5.3.2",
-        "liuggio/statsd-php-client": "1.0.*",
+        "liuggio/statsd-php-client": ">1.0.13",
         "symfony/framework-bundle": ">2.0"
     },
     "require-dev": {
