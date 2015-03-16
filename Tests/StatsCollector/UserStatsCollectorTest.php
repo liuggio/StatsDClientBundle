@@ -14,7 +14,7 @@ class UserStatsCollectorTest extends StatsCollectorBase
     {
         $phpunit = $this;
         $statsDFactory = $this->getMockBuilder('Symfony\Component\Security\Core\SecurityContextInterface')
-            ->setMethods(array('isGranted'))
+            ->setMethods(array('isGranted', 'getToken', 'setToken'))
             ->getMock();
 
         $statsDFactory->expects($this->any())
