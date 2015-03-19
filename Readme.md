@@ -14,6 +14,15 @@ It Includes
 * a series of **Collectors** in order to aggregate your personal data.
 * a series of **Commands** in order to execute data also from cli.
 
+## Simple usage!
+
+``` php
+$this->get('statsd')
+     ->increment('log.error')
+     ->gauge('log.rate', 25)
+     ->flush();
+```
+
 ## Check out the documentation
 
 * [Installation and Usage](https://github.com/liuggio/StatsDClientBundle/blob/master/Resources/doc/installation.md)
