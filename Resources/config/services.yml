@@ -6,7 +6,7 @@ parameters:
     liuggio_stats_d_client.collector.service.class: Liuggio\StatsDClientBundle\Service\StatsDCollectorService
     liuggio_stats_d_client.collector.listener.class: Liuggio\StatsDClientBundle\Listener\StatsDCollectorListener
     liuggio_stats_d_client.collector.dbal.class: Liuggio\StatsDClientBundle\StatsCollector\DbalStatsCollector
-    liuggio_stats_d.sender.class: Liuggio\StatsdClient\Service\StatsDService
+    liuggio_stats_d.sender.class: Liuggio\StatsdClient\Service\StatsdService
 
 # monolog handler
     liuggio_stats_d_client.monolog_handler.class: Liuggio\StatsdClient\Monolog\Handler\StatsDHandler
