@@ -21,8 +21,6 @@ services:
         class: %liuggio_stats_d_client.provider.user.class%
         arguments:
             - @?security.context
-        tags:
-            - { name: liuggio_stats_d_client.provider }
 
     liuggio_stats_d_client.provider.server:
         class: %liuggio_stats_d_client.provider.server.class%

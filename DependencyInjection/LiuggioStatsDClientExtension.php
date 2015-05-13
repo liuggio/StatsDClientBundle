@@ -35,6 +35,13 @@ class LiuggioStatsDClientExtension extends Extension
         if ($config['connection']['debug']) {
             $container->setAlias('liuggio_stats_d_client.sender', 'liuggio_stats_d_client.sender.debug');
         }
+
+        if ($config['providers']['user']) {
+            $container
+                ->getDefinition('liuggio_stats_d_client.provider.user')
+                ->addTag('liuggio_stats_d_client.provider')
+            ;
+        }
     }
 
     /**

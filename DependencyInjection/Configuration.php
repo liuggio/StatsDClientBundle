@@ -57,6 +57,13 @@ class Configuration implements ConfigurationInterface
                                 ->scalarNode('words')->defaultValue(2)->end()
                             ->end()
                         ->end()
+                    ->end()
+                ->end()
+                ->arrayNode('providers')
+                    ->addDefaultsIfNotSet()
+                    ->children()
+                        ->scalarNode('user')->defaultFalse()->end()
+                    ->end()
                 ->end()
             ->end()
         ;
