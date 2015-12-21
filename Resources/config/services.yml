@@ -23,17 +23,17 @@ services:
 
     liuggio_stats_d_client.service:
         class: %liuggio_stats_d_client.service.class%
-        arguments: [@liuggio_stats_d_client.sender.service, %liuggio_stats_d_client.connection.reduce_packet%, %liuggio_stats_d_client.connection.fail_silently%]
+        arguments: ['@liuggio_stats_d_client.sender.service', %liuggio_stats_d_client.connection.reduce_packet%, %liuggio_stats_d_client.connection.fail_silently%]
 
 # collector service
     liuggio_stats_d_client.collector.service:
         class: %liuggio_stats_d_client.collector.service.class%
-        arguments: [@liuggio_stats_d_client.service]
+        arguments: ['@liuggio_stats_d_client.service']
 
 # simplified service
     liuggio_stats_d.service:
         class: %liuggio_stats_d.sender.class%
-        arguments: [@liuggio_stats_d_client.service, @liuggio_stats_d_client.factory]
+        arguments: ['@liuggio_stats_d_client.service', '@liuggio_stats_d_client.factory']
 
     statsd:
          alias: liuggio_stats_d.service
