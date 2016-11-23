@@ -23,6 +23,7 @@
     "require-dev": {
         "doctrine/dbal": ">=2.2.0",
         "monolog/monolog": ">=1.2.0",
+        "phpunit/phpunit": "^4.8",
         "symfony/yaml": "^2.7|^3.0"
     },
     "suggest": {
