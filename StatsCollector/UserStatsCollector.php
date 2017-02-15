@@ -4,11 +4,15 @@ namespace Liuggio\StatsDClientBundle\StatsCollector;
 
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
 use Symfony\Component\Security\Core\Exception\AuthenticationCredentialsNotFoundException;
-use Symfony\Component\Security\Core\SecurityContextInterface;
 
 class UserStatsCollector extends StatsCollector
 {
+    /**
+     * @var AuthorizationCheckerInterface
+     */
+    private $authorizationChecker;
 
     /**
      * Collects data for the given Response.
@@ -22,13 +26,13 @@ class UserStatsCollector extends StatsCollector
     public function collect(Request $request, Response $response, \Exception $exception = null)
     {
 
-        if (null === $this->getSecurityContext()) {
+        if (null === $this->getAuthorizationChecker()) {
             return true;
         }
 
         $key = sprintf('%s.anonymous', $this->getStatsDataKey());
         try {
-            if ($this->getSecurityContext()->isGranted('IS_AUTHENTICATED_FULLY')) {
+            if ($this->getAuthorizationChecker()->isGranted('IS_AUTHENTICATED_FULLY')) {
                 $key = sprintf('%s.logged', $this->getStatsDataKey());
             }
         } catch (AuthenticationCredentialsNotFoundException $exception) {
@@ -40,14 +44,20 @@ class UserStatsCollector extends StatsCollector
         return true;
     }
 
-    public function setSecurityContext(SecurityContextInterface $security_context)
+    /**
+     * @param AuthorizationCheckerInterface $authorizationChecker
+     */
+    public function setAuthorizationChecker(AuthorizationCheckerInterface $authorizationChecker)
     {
-        $this->security_context = $security_context;
+        $this->authorizationChecker = $authorizationChecker;
     }
 
-    public function getSecurityContext()
+    /**
+     * @return AuthorizationCheckerInterface
+     */
+    public function getAuthorizationChecker()
     {
-        return $this->security_context;
+        return $this->authorizationChecker;
     }
 
 
