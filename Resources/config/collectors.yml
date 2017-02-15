@@ -24,7 +24,7 @@ services:
     liuggio_stats_d_client.collector.user:
         class: %liuggio_stats_d_client.collector.user.class%
         calls:
-            - ['setSecurityContext', ['@security.context']]
+            - ['setAuthorizationChecker', ['@security.authorization_checker']]
             - ['setOnlyOnMasterResponse', [true]]
         tags:
             - { name: stats_d_collector}
