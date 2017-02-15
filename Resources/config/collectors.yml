@@ -8,21 +8,21 @@ parameters:
 
 services:
     liuggio_stats_d_client.collector.visitor:
-        class: %liuggio_stats_d_client.collector.visitor.class%
+        class: '%liuggio_stats_d_client.collector.visitor.class%'
         calls:
             - ['setOnlyOnMasterResponse', [true]]
         tags:
             - { name: stats_d_collector}
 
     liuggio_stats_d_client.collector.memory:
-        class: %liuggio_stats_d_client.collector.memory.class%
+        class: '%liuggio_stats_d_client.collector.memory.class%'
         calls:
             - ['setOnlyOnMasterResponse', [true]]
         tags:
             - { name: stats_d_collector}
 
     liuggio_stats_d_client.collector.user:
-        class: %liuggio_stats_d_client.collector.user.class%
+        class: '%liuggio_stats_d_client.collector.user.class%'
         calls:
             - ['setAuthorizationChecker', ['@security.authorization_checker']]
             - ['setOnlyOnMasterResponse', [true]]
@@ -30,14 +30,14 @@ services:
             - { name: stats_d_collector}
 
     liuggio_stats_d_client.collector.exception:
-        class: %liuggio_stats_d_client.collector.exception.class%
+        class: '%liuggio_stats_d_client.collector.exception.class%'
         calls:
             - ['setOnlyOnMasterResponse', [false]]
         tags:
             - { name: stats_d_collector}
 
     liuggio_stats_d_client.collector.time:
-        class: %liuggio_stats_d_client.collector.time.class%
+        class: '%liuggio_stats_d_client.collector.time.class%'
         calls:
             - ['setOnlyOnMasterResponse', [true]]
         tags:
@@ -45,7 +45,7 @@ services:
 
 #special connector dbal is also a sqllogger
     liuggio_stats_d_client.collector.dbal:
-        class: %liuggio_stats_d_client.collector.dbal.class%
+        class: '%liuggio_stats_d_client.collector.dbal.class%'
         arguments: ['query']
         calls:
             - ['setOnlyOnMasterResponse', [true]]
