@@ -23,7 +23,7 @@ class ExceptionStatsCollector extends StatsCollector
             return true;
         }
 
-        $key = sprintf('%s.exception.%s', $this->getStatsDataKey(), $exception->getCode());
+        $key = sprintf('%s.%s', $this->getStatsDataKey(), $exception->getCode());
         $statData = $this->getStatsdDataFactory()->increment($key);
         $this->addStatsData($statData);
 
