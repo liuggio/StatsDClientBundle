@@ -4,33 +4,28 @@ namespace Liuggio\StatsDClientBundle\Tests\StatsCollector;
 
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
 
 use Liuggio\StatsDClientBundle\StatsCollector\UserStatsCollector;
 
 class UserStatsCollectorTest extends StatsCollectorBase
 {
-
-    public function mockSecurityContext($return)
-    {
-        $phpunit = $this;
-        $statsDFactory = $this->getMockBuilder('Symfony\Component\Security\Core\SecurityContextInterface')
-            ->setMethods(array('isGranted', 'getToken', 'setToken'))
-            ->getMock();
-
-        $statsDFactory->expects($this->any())
-            ->method('isGranted')
-            ->will($this->returnValue($return));
-
-        return $statsDFactory;
-    }
-
     /**
      * @dataProvider provider
      */
     public function testCollect($isLogged, $dataKey)
     {
+        $checker = $this->getMockBuilder(AuthorizationCheckerInterface::class)
+            ->setMethods(['isGranted'])
+            ->getMock()
+        ;
+        $checker->expects($this->any())
+            ->method('isGranted')
+            ->will($this->returnValue($isLogged))
+        ;
+
         $c = new UserStatsCollector('prefix', $this->mockStatsDFactory('prefix.' . $dataKey));
-        $c->setSecurityContext($this->mockSecurityContext($isLogged));
+        $c->setSecurityContext($checker);
         $c->collect(new Request(), new Response(), null);
     }
 
