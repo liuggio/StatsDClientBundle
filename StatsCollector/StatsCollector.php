@@ -119,7 +119,7 @@ abstract class StatsCollector implements StatsCollectorInterface
     }
 
     /**
-     * Extract the first word, its maximum lenght is limited to $maxLenght chars.
+     * Extract the first word, its maximum length is limited to $maxLenght chars.
      *
      * @param  string $string
      *
