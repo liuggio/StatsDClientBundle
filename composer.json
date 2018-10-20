@@ -6,8 +6,8 @@
     "license": "MIT",
     "authors": [
         {
-            "name":     "Liuggio",
-            "email":    "liuggio@gmail.com",
+            "name": "Liuggio",
+            "email": "liuggio@gmail.com",
             "homepage": "https://github.com/Liuggio"
         },
         {
@@ -16,18 +16,18 @@
         }
     ],
     "require": {
-        "php": ">=5.3.2",
+        "php": "^5.6 || ^7.0",
         "liuggio/statsd-php-client": "~1.0.14",
-        "symfony/framework-bundle": "^3.0"
+        "symfony/framework-bundle": "^3.0 || ^4.0"
     },
     "require-dev": {
         "doctrine/dbal": ">=2.2.0",
         "monolog/monolog": ">=1.2.0",
-        "phpunit/phpunit": "^4.8",
-        "symfony/yaml": "^3.0"
+        "phpunit/phpunit": "^5.7 || ^6.0 || ^7.0",
+        "symfony/yaml": "^3.0 || ^4.0"
     },
     "suggest": {
-        "doctrine/dbal": "Doctrine Dbal, collect statistic to/from the database (>=2.2.0,<2.4-dev required)",
+        "doctrine/dbal": "Doctrine DBAL, collect statistic to/from the database (>=2.2.0 required)",
         "monolog/monolog": "Monolog, in order to generate statistic from log >=1.2.0)"
     },
     "autoload": {
@@ -36,7 +36,7 @@
     "target-dir": "Liuggio/StatsDClientBundle",
     "extra": {
         "branch-alias": {
-            "dev-master": "1.7.x-dev"
+            "dev-master": "1.8.x-dev"
         }
     }
 }

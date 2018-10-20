@@ -6,7 +6,7 @@ use Symfony\Component\DependencyInjection\ContainerBuilder;
 
 use Liuggio\StatsDClientBundle\DependencyInjection\LiuggioStatsDClientExtension;
 
-class LiuggioStatsDClientExtensionTest extends \PHPUnit_Framework_TestCase
+class LiuggioStatsDClientExtensionTest extends \PHPUnit\Framework\TestCase
 {
 
     /**

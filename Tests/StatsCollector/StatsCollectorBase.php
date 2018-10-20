@@ -7,7 +7,7 @@ use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 
 class StatsCollectorBase extends WebTestCase
 {
-    public function mockStatsDFactory($compare, $method = 'increment')
+    protected function mockStatsDFactory($compare, $method = 'increment')
     {
         $phpunit = $this;
         $statsDFactory = $this->getMockBuilder('\Liuggio\StatsdClient\Factory\StatsdDataFactory')
@@ -15,7 +15,7 @@ class StatsCollectorBase extends WebTestCase
             ->setMethods(array($method))
             ->getMock();
 
-        $dataMock = $this->getMock('\Liuggio\StatsdClient\Entity\StatsdDataInterface');
+        $dataMock = $this->createMock('\Liuggio\StatsdClient\Entity\StatsdDataInterface');
 
         $statsDFactory->expects($this->any())
             ->method($method)
