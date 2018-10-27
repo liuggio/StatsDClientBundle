@@ -14,14 +14,13 @@ class VisitorStatsCollector extends StatsCollector
      * @param Response   $response  A Response instance
      * @param \Exception $exception An exception instance if the request threw one
      *
-     * @return Boolean
+     * @return bool
      */
     public function collect(Request $request, Response $response, \Exception $exception = null)
     {
         $statData = $this->getStatsdDataFactory()->increment($this->getStatsDataKey());
         $this->addStatsData($statData);
+
         return true;
     }
-
-
 }

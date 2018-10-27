@@ -4,7 +4,6 @@ namespace Liuggio\StatsDClientBundle\StatsCollector;
 
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\Security\Core\Exception\AuthenticationCredentialsNotFoundException;
 
 class ExceptionStatsCollector extends StatsCollector
 {
@@ -15,7 +14,7 @@ class ExceptionStatsCollector extends StatsCollector
      * @param Response   $response  A Response instance
      * @param \Exception $exception An exception instance if the request threw one
      *
-     * @return Boolean
+     * @return bool
      */
     public function collect(Request $request, Response $response, \Exception $exception = null)
     {
@@ -23,7 +22,7 @@ class ExceptionStatsCollector extends StatsCollector
             return true;
         }
 
-        $key = sprintf('%s.%s', $this->getStatsDataKey(), $exception->getCode());
+        $key = \sprintf('%s.%s', $this->getStatsDataKey(), $exception->getCode());
         $statData = $this->getStatsdDataFactory()->increment($key);
         $this->addStatsData($statData);
 

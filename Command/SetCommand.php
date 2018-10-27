@@ -7,7 +7,7 @@ use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 
 /**
- * Command to send an set metric to statsd
+ * Command to send an set metric to statsd.
  *
  * @author Pablo Godel <pgodel@gmail.com>
  */

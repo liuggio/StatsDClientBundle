@@ -2,11 +2,10 @@
 
 namespace Liuggio\StatsDClientBundle\Tests\StatsCollector;
 
+use Liuggio\StatsDClientBundle\StatsCollector\UserStatsCollector;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
-
-use Liuggio\StatsDClientBundle\StatsCollector\UserStatsCollector;
 
 class UserStatsCollectorTest extends StatsCollectorBase
 {
@@ -24,15 +23,15 @@ class UserStatsCollectorTest extends StatsCollectorBase
             ->will($this->returnValue($isLogged))
         ;
 
-        $c = new UserStatsCollector('prefix', $this->mockStatsDFactory('prefix.' . $dataKey));
+        $c = new UserStatsCollector('prefix', $this->mockStatsDFactory('prefix.'.$dataKey));
         $c->setSecurityContext($checker);
         $c->collect(new Request(), new Response(), null);
     }
 
     public function provider()
     {
-        return array(
-            array(true, 'logged'),
-            array(false, 'anonymous'));
+        return [
+            [true, 'logged'],
+            [false, 'anonymous'], ];
     }
 }

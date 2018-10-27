@@ -2,17 +2,15 @@
 
 namespace Liuggio\StatsDClientBundle\Tests\DependencyInjection;
 
-use Symfony\Component\DependencyInjection\ContainerBuilder;
-
 use Liuggio\StatsDClientBundle\DependencyInjection\LiuggioStatsDClientExtension;
+use Symfony\Component\DependencyInjection\ContainerBuilder;
 
 class LiuggioStatsDClientExtensionTest extends \PHPUnit\Framework\TestCase
 {
-
     /**
-     * @covers Liuggio\StatsDClientBundle\LiuggioStatsDClientBundle
-     * @covers Liuggio\StatsDClientBundle\DependencyInjection\LiuggioStatsDClientExtension::load
-     * @covers Liuggio\StatsDClientBundle\DependencyInjection\Configuration::getConfigTreeBuilder
+     * @covers \Liuggio\StatsDClientBundle\LiuggioStatsDClientBundle
+     * @covers \Liuggio\StatsDClientBundle\DependencyInjection\LiuggioStatsDClientExtension::load
+     * @covers \Liuggio\StatsDClientBundle\DependencyInjection\Configuration::getConfigTreeBuilder
      */
     public function testLoad()
     {
@@ -20,13 +18,13 @@ class LiuggioStatsDClientExtensionTest extends \PHPUnit\Framework\TestCase
         $container->setParameter('kernel.debug', false);
         $loader = new LiuggioStatsDClientExtension();
         $config = $this->getConfig();
-        $loader->load(array($config), $container);
+        $loader->load([$config], $container);
         //testing parameter
         $this->assertEquals('localhost', $container->getParameter('liuggio_stats_d_client.connection.host'));
         $this->assertEquals('100', $container->getParameter('liuggio_stats_d_client.connection.port'));
-        $this->assertEquals(true, $container->getParameter('liuggio_stats_d_client.connection.fail_silently'));
-        $this->assertEquals(true, $container->getParameter('liuggio_stats_d_client.enable_collector'));
-        $this->assertEquals(array('liuggio_stats_d_client.collector.dbal' => 'tv.vision.query'), $container->getParameter('liuggio_stats_d_client.collectors'));
+        $this->assertTrue($container->getParameter('liuggio_stats_d_client.connection.fail_silently'));
+        $this->assertTrue($container->getParameter('liuggio_stats_d_client.enable_collector'));
+        $this->assertEquals(['liuggio_stats_d_client.collector.dbal' => 'tv.vision.query'], $container->getParameter('liuggio_stats_d_client.collectors'));
 
         //we test that the kernel_event is attached to the service if collector is enabled
         $a = $container->getDefinition('liuggio_stats_d_client.collector.listener');
@@ -36,20 +34,19 @@ class LiuggioStatsDClientExtensionTest extends \PHPUnit\Framework\TestCase
 
     protected function getConfig()
     {
-        return array(
+        return [
             'enable_collector' => true,
-            'connection' => array(
+            'connection' => [
                 'host' => 'localhost',
                 'port' => 100,
-                'fail_silently' => true
-            ),
-            'collectors' => array('liuggio_stats_d_client.collector.dbal' => 'tv.vision.query'),
-            'monolog' => array(
+                'fail_silently' => true,
+            ],
+            'collectors' => ['liuggio_stats_d_client.collector.dbal' => 'tv.vision.query'],
+            'monolog' => [
                 'enable' => true,
                 'prefix' => 'log',
-                'formatter' => array(),
-                'level' => 'warning')
-        );
+                'formatter' => [],
+                'level' => 'warning', ],
+        ];
     }
-
 }

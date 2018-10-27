@@ -2,12 +2,11 @@
 
 namespace Liuggio\StatsDClientBundle\StatsCollector;
 
-use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpFoundation\Response;
-
+use Liuggio\StatsdClient\Entity\StatsdDataInterface;
 use Liuggio\StatsdClient\Factory\StatsdDataFactory;
 use Liuggio\StatsdClient\Factory\StatsdDataFactoryInterface;
-use Liuggio\StatsdClient\Entity\StatsdDataInterface;
+use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 
 abstract class StatsCollector implements StatsCollectorInterface
 {
@@ -24,10 +23,9 @@ abstract class StatsCollector implements StatsCollectorInterface
      */
     protected $StatsdDataFactory;
     /**
-     * @var Boolean
+     * @var bool
      */
     protected $onlyOnMasterResponse;
-
 
     public function __construct($stat_key = __CLASS__, StatsdDataFactoryInterface $stats_data_factory = null, $only_on_master_response = false)
     {
@@ -43,7 +41,7 @@ abstract class StatsCollector implements StatsCollectorInterface
      * @param Response   $response  A Response instance
      * @param \Exception $exception An exception instance if the request threw one
      *
-     * @return Boolean
+     * @return bool
      */
     public function collect(Request $request, Response $response, \Exception $exception = null)
     {
@@ -56,13 +54,15 @@ abstract class StatsCollector implements StatsCollectorInterface
     public function getStatsData()
     {
         if (null === $this->statsData) {
-            return array();
+            return [];
         }
+
         return $this->statsData;
     }
 
     /**
      * @param \Liuggio\StatsdClient\Entity\StatsdDataInterface $statsData
+     *
      * @return mixed
      */
     public function addStatsData(StatsdDataInterface $statsData)
@@ -103,7 +103,7 @@ abstract class StatsCollector implements StatsCollectorInterface
     }
 
     /**
-     * @param Boolean $onlyOnMasterResponse
+     * @param bool $onlyOnMasterResponse
      */
     public function setOnlyOnMasterResponse($onlyOnMasterResponse)
     {
@@ -111,7 +111,7 @@ abstract class StatsCollector implements StatsCollectorInterface
     }
 
     /**
-     * @return Boolean
+     * @return bool
      */
     public function getOnlyOnMasterResponse()
     {
@@ -121,16 +121,16 @@ abstract class StatsCollector implements StatsCollectorInterface
     /**
      * Extract the first word, its maximum length is limited to $maxLenght chars.
      *
-     * @param  string $string
+     * @param string $string
      *
      * @return mixed
      */
     protected function extractFirstWord($string, $maxLength = 25)
     {
-        $string = str_replace(array('"', "'"), "", $string);
-        $string = trim($string);
-        $length = (strlen($string) > $maxLength) ? $maxLength : strlen($string);
-        $string = strtolower(strstr(substr(trim($string), 0, $length), ' ', true));
+        $string = \str_replace(['"', "'"], '', $string);
+        $string = \trim($string);
+        $length = (\strlen($string) > $maxLength) ? $maxLength : \strlen($string);
+        $string = \strtolower(\strstr(\substr(\trim($string), 0, $length), ' ', true));
 
         return $string;
     }

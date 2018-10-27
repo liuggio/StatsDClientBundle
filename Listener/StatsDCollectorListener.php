@@ -2,14 +2,13 @@
 
 namespace Liuggio\StatsDClientBundle\Listener;
 
+use Liuggio\StatsDClientBundle\Service\StatsDCollectorService;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
-use Symfony\Component\HttpKernel\HttpKernelInterface;
+use Symfony\Component\HttpKernel\Event\FilterResponseEvent;
 use Symfony\Component\HttpKernel\Event\GetResponseEvent;
 use Symfony\Component\HttpKernel\Event\GetResponseForExceptionEvent;
-use Symfony\Component\HttpKernel\Event\FilterResponseEvent;
+use Symfony\Component\HttpKernel\HttpKernelInterface;
 use Symfony\Component\HttpKernel\KernelEvents;
-
-use Liuggio\StatsDClientBundle\Service\StatsDCollectorService;
 
 /**
  * StatsDCollectorListener.
@@ -27,16 +26,16 @@ class StatsDCollectorListener implements EventSubscriberInterface
     /**
      * Constructor.
      *
-     * @param StatsDCollectorService  $collector           A collector instance
-     * @param Boolean                 $onlyException      true if the collector only collects data when an exception occurs, false otherwise
-     * @param Boolean                 $onlyMasterRequests true if the collector only collects data when the request is a master request, false otherwise
+     * @param StatsDCollectorService $collector          A collector instance
+     * @param bool                   $onlyException      true if the collector only collects data when an exception occurs, false otherwise
+     * @param bool                   $onlyMasterRequests true if the collector only collects data when the request is a master request, false otherwise
      */
     public function __construct(StatsDCollectorService $collector, $onlyException = false, $onlyMasterRequests = false)
     {
         $this->collector = $collector;
-        $this->onlyException = (Boolean)$onlyException;
-        $this->onlyMasterRequests = (Boolean)$onlyMasterRequests;
-        $this->collectors = array();
+        $this->onlyException = (bool) $onlyException;
+        $this->onlyMasterRequests = (bool) $onlyMasterRequests;
+        $this->collectors = [];
     }
 
     /**
@@ -80,22 +79,20 @@ class StatsDCollectorListener implements EventSubscriberInterface
 
         $dataToSend = $this->collector->collect($master, $request, $event->getResponse(), $exception);
 
-        if (null === $dataToSend || !is_array($dataToSend) || count($dataToSend) < 1) {
+        if (null === $dataToSend || !\is_array($dataToSend) || \count($dataToSend) < 1) {
             return;
         }
         $this->collector->send($dataToSend);
-
     }
 
-    static public function getSubscribedEvents()
+    public static function getSubscribedEvents()
     {
-        return array(
+        return [
             // kernel.request must be registered as early as possible to not break
             // when an exception is thrown in any other kernel.request listener
-            KernelEvents::REQUEST => array('onKernelRequest', 1024),
-            KernelEvents::RESPONSE => array('onKernelResponse', -100),
+            KernelEvents::REQUEST => ['onKernelRequest', 1024],
+            KernelEvents::RESPONSE => ['onKernelResponse', -100],
             KernelEvents::EXCEPTION => 'onKernelException',
-        );
+        ];
     }
-
 }

@@ -14,10 +14,11 @@ class MemoryStatsCollector extends StatsCollector
      */
     private function getMemoryUsage()
     {
-        $bit = memory_get_peak_usage(true);
+        $bit = \memory_get_peak_usage(true);
         if ($bit > 1024) {
-            return intval($bit / 1024);
+            return (int) ($bit / 1024);
         }
+
         return 0;
     }
 
@@ -28,7 +29,7 @@ class MemoryStatsCollector extends StatsCollector
      * @param Response   $response  A Response instance
      * @param \Exception $exception An exception instance if the request threw one
      *
-     * @return Boolean
+     * @return bool
      */
     public function collect(Request $request, Response $response, \Exception $exception = null)
     {
@@ -37,6 +38,4 @@ class MemoryStatsCollector extends StatsCollector
 
         return true;
     }
-
-
 }

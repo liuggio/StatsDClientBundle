@@ -6,9 +6,9 @@ use Symfony\Component\Config\Definition\Builder\TreeBuilder;
 use Symfony\Component\Config\Definition\ConfigurationInterface;
 
 /**
- * This is the class that validates and merges configuration from your app/config files
+ * This is the class that validates and merges configuration from your app/config files.
  *
- * To learn more see {@link http://symfony.com/doc/current/cookbook/bundles/extension.html#cookbook-bundles-extension-config-class}
+ * To learn more see {@link https://symfony.com/doc/current/bundles/extension.html#cookbook-bundles-extension-config-class}
  */
 class Configuration implements ConfigurationInterface
 {
@@ -18,8 +18,9 @@ class Configuration implements ConfigurationInterface
     {
         $this->debug = $debug;
     }
+
     /**
-     * {@inheritDoc}
+     * {@inheritdoc}
      */
     public function getConfigTreeBuilder()
     {
@@ -31,14 +32,14 @@ class Configuration implements ConfigurationInterface
             ->booleanNode('enable_collector')->defaultFalse()->end()
             ->arrayNode('connection')
                 ->children()
-                    ->scalarNode("class")->defaultValue('Liuggio\StatsdClient\Sender\SocketSender')->end()
-                    ->scalarNode("debug_class")->defaultValue('Liuggio\StatsdClient\Sender\SysLogSender')->end()
-                    ->scalarNode("debug")->defaultValue($this->debug)->end()
-                    ->scalarNode("port")->defaultValue(8125)->end()
-                    ->scalarNode("host")->defaultValue("localhost")->end()
-                    ->scalarNode("reduce_packet")->defaultValue(true)->end()
-                    ->scalarNode("protocol")->defaultValue("udp")->end()
-                    ->scalarNode("fail_silently")->defaultValue(true)->end()
+                    ->scalarNode('class')->defaultValue('Liuggio\StatsdClient\Sender\SocketSender')->end()
+                    ->scalarNode('debug_class')->defaultValue('Liuggio\StatsdClient\Sender\SysLogSender')->end()
+                    ->scalarNode('debug')->defaultValue($this->debug)->end()
+                    ->scalarNode('port')->defaultValue(8125)->end()
+                    ->scalarNode('host')->defaultValue('localhost')->end()
+                    ->scalarNode('reduce_packet')->defaultValue(true)->end()
+                    ->scalarNode('protocol')->defaultValue('udp')->end()
+                    ->scalarNode('fail_silently')->defaultValue(true)->end()
                 ->end()
             ->end()
             ->arrayNode('collectors')->canBeUnset()
@@ -48,15 +49,15 @@ class Configuration implements ConfigurationInterface
             ->arrayNode('monolog')->canBeUnset()
                 ->children()
                     ->scalarNode('enable')->defaultValue(false)->end()
-                    ->scalarNode('prefix')->defaultValue("log")->end()
-                    ->scalarNode('level')->defaultValue("warning")->end()
+                    ->scalarNode('prefix')->defaultValue('log')->end()
+                    ->scalarNode('level')->defaultValue('warning')->end()
                     ->arrayNode('formatter')
                         ->children()
-                            ->scalarNode("class")->defaultValue('Liuggio\StatsdClient\Monolog\Formatter\StatsDFormatter')->end()
-                            ->scalarNode("format")->defaultValue(null)->end()
-                            ->booleanNode("context_logging")->defaultValue(false)->end()
-                            ->booleanNode("extra_logging")->defaultValue(false)->end()
-                            ->scalarNode("words")->defaultValue(2)->end()
+                            ->scalarNode('class')->defaultValue('Liuggio\StatsdClient\Monolog\Formatter\StatsDFormatter')->end()
+                            ->scalarNode('format')->defaultValue(null)->end()
+                            ->booleanNode('context_logging')->defaultValue(false)->end()
+                            ->booleanNode('extra_logging')->defaultValue(false)->end()
+                            ->scalarNode('words')->defaultValue(2)->end()
                         ->end()
                     ->end()
                 ->end()

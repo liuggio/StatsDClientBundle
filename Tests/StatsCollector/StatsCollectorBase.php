@@ -4,7 +4,6 @@ namespace Liuggio\StatsDClientBundle\Tests\StatsCollector;
 
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 
-
 class StatsCollectorBase extends WebTestCase
 {
     protected function mockStatsDFactory($compare, $method = 'increment')
@@ -12,7 +11,7 @@ class StatsCollectorBase extends WebTestCase
         $phpunit = $this;
         $statsDFactory = $this->getMockBuilder('\Liuggio\StatsdClient\Factory\StatsdDataFactory')
             ->disableOriginalConstructor()
-            ->setMethods(array($method))
+            ->setMethods([$method])
             ->getMock();
 
         $dataMock = $this->createMock('\Liuggio\StatsdClient\Entity\StatsdDataInterface');

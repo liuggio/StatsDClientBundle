@@ -2,10 +2,9 @@
 
 namespace Liuggio\StatsDClientBundle\Tests\StatsCollector;
 
+use Liuggio\StatsDClientBundle\StatsCollector\VisitorStatsCollector;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-
-use Liuggio\StatsDClientBundle\StatsCollector\VisitorStatsCollector;
 
 class VisitorStatsCollectorTest extends StatsCollectorBase
 {

@@ -4,11 +4,10 @@ namespace Liuggio\StatsDClientBundle\Command;
 
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
-use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
 
 /**
- * Command to send an increment command to statsd
+ * Command to send an increment command to statsd.
  *
  * @author Pablo Godel <pgodel@gmail.com>
  */

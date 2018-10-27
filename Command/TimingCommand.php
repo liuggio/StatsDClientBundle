@@ -7,7 +7,7 @@ use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 
 /**
- * Command to send a timing metric to statsd
+ * Command to send a timing metric to statsd.
  *
  * @author Pablo Godel <pgodel@gmail.com>
  */

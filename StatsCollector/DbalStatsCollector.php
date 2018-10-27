@@ -2,14 +2,12 @@
 
 namespace Liuggio\StatsDClientBundle\StatsCollector;
 
-use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpFoundation\Response;
 use Doctrine\DBAL\Logging\SQLLogger;
 
 class DbalStatsCollector extends StatsCollector implements SQLLogger, StatsCollectorInterface
 {
     /**
-     * {@inheritDoc}
+     * {@inheritdoc}
      */
     public function startQuery($sql, array $params = null, array $types = null)
     {
@@ -17,7 +15,7 @@ class DbalStatsCollector extends StatsCollector implements SQLLogger, StatsColle
         if (empty($verb)) {
             return;
         }
-        $key = sprintf('%s.%s', $this->getStatsDataKey(), $verb);
+        $key = \sprintf('%s.%s', $this->getStatsDataKey(), $verb);
         if (null === $this->getStatsdDataFactory()) {
             return;
         }
@@ -26,12 +24,10 @@ class DbalStatsCollector extends StatsCollector implements SQLLogger, StatsColle
     }
 
     /**
-     * {@inheritDoc}
+     * {@inheritdoc}
      */
     public function stopQuery()
     {
         return true;
     }
-
-
 }

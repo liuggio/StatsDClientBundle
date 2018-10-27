@@ -1,4 +1,3 @@
-reports
+.php_cs.cache
+composer.lock
 vendor
-composer.phar
-.idea

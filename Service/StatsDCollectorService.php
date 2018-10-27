@@ -2,11 +2,10 @@
 
 namespace Liuggio\StatsDClientBundle\Service;
 
+use Liuggio\StatsdClient\StatsdClientInterface;
+use Liuggio\StatsDClientBundle\StatsCollector\StatsCollectorInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-
-use Liuggio\StatsDClientBundle\StatsCollector\StatsCollectorInterface;
-use Liuggio\StatsdClient\StatsdClientInterface;
 
 /**
  * StatsDCollectorService.
@@ -23,32 +22,32 @@ class StatsDCollectorService
      */
     public function __construct(StatsdClientInterface $stats_d_client)
     {
-        $this->collectors = array();
+        $this->collectors = [];
         $this->statsDClient = $stats_d_client;
     }
 
     /**
      * Collects data for the given Response.
      *
-     * @param Boolean     $isMasterRequest
-     * @param Request     $request   A Request instance
-     * @param Response    $response  A Response instance
-     * @param \Exception  $exception An exception instance if the request threw one
+     * @param bool       $isMasterRequest
+     * @param Request    $request         A Request instance
+     * @param Response   $response        A Response instance
+     * @param \Exception $exception       An exception instance if the request threw one
      *
      * @return array
      */
     public function collect($isMasterRequest, Request $request, Response $response, \Exception $exception = null)
     {
-        $statSData = array();
+        $statSData = [];
         foreach ($this->collectors as $collector) {
-
             if ($collector->getOnlyOnMasterResponse() && !$isMasterRequest) {
                 continue;
             }
 
             $collector->collect($request, $response, $exception);
-            $statSData = array_merge($statSData, $collector->getStatsData());
+            $statSData = \array_merge($statSData, $collector->getStatsData());
         }
+
         return $statSData;
     }
 
@@ -67,9 +66,9 @@ class StatsDCollectorService
      *
      * @param array $collectors An array of collectors
      */
-    public function set(array $collectors = array())
+    public function set(array $collectors = [])
     {
-        $this->collectors = array();
+        $this->collectors = [];
         foreach ($collectors as $collector) {
             $this->add($collector);
         }
@@ -90,7 +89,7 @@ class StatsDCollectorService
      *
      * @param string $name A collector name
      *
-     * @return Boolean
+     * @return bool
      */
     public function has($name)
     {
@@ -109,14 +108,14 @@ class StatsDCollectorService
     public function get($name)
     {
         if (!isset($this->collectors[$name])) {
-            throw new \InvalidArgumentException(sprintf('Collector "%s" does not exist.', $name));
+            throw new \InvalidArgumentException(\sprintf('Collector "%s" does not exist.', $name));
         }
 
         return $this->collectors[$name];
     }
 
     /**
-     * Send to StatD all the data collected
+     * Send to StatD all the data collected.
      *
      * @param mixed $data An array of StatData
      */

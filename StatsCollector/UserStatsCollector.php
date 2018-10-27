@@ -4,12 +4,11 @@ namespace Liuggio\StatsDClientBundle\StatsCollector;
 
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\Security\Core\Exception\AuthenticationCredentialsNotFoundException;
 use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
+use Symfony\Component\Security\Core\Exception\AuthenticationCredentialsNotFoundException;
 
 class UserStatsCollector extends StatsCollector
 {
-
     /**
      * Collects data for the given Response.
      *
@@ -17,19 +16,18 @@ class UserStatsCollector extends StatsCollector
      * @param Response   $response  A Response instance
      * @param \Exception $exception An exception instance if the request threw one
      *
-     * @return Boolean
+     * @return bool
      */
     public function collect(Request $request, Response $response, \Exception $exception = null)
     {
-
         if (null === $this->getSecurityContext()) {
             return true;
         }
 
-        $key = sprintf('%s.anonymous', $this->getStatsDataKey());
+        $key = \sprintf('%s.anonymous', $this->getStatsDataKey());
         try {
             if ($this->getSecurityContext()->isGranted('IS_AUTHENTICATED_FULLY')) {
-                $key = sprintf('%s.logged', $this->getStatsDataKey());
+                $key = \sprintf('%s.logged', $this->getStatsDataKey());
             }
         } catch (AuthenticationCredentialsNotFoundException $exception) {
             //do nothing
@@ -49,6 +47,4 @@ class UserStatsCollector extends StatsCollector
     {
         return $this->security_context;
     }
-
-
 }
