@@ -22,7 +22,7 @@ cd StatsDClientBundle
 
 - Create a new branch
 ```
-git -b checkout "your-branch-name"
+git checkout -b "your-branch-name"
 ```
 
 - Install vendors:
@@ -39,9 +39,9 @@ phpunit --coverage-html reports
 
 ## How Can I Contribute?
 
-### Reporting Bugs by creating Issues
-### Suggesting Enhancements
-### Getting Started with first contribution - Check out Issues listed
+#### Reporting Bugs by creating Issues
+#### Suggesting Enhancements
+#### Getting Started with first contribution - Check out Issues listed
 
 ## Pull Requests
 
