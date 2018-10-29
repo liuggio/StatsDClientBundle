@@ -205,8 +205,8 @@ liuggio_stats_d_client:
     level: 'warning'
     context_logging: true
   connection:
-#    class: Liuggio\StatsdClient\Sender\SocketSender
-#    debug_class: Liuggio\StatsdClient\Sender\SysLogSender # or EchoSender
+#    class: Liuggio\StatsdClient\Sender\SocketSender # also SysLogSender or EchoSender could be good debugging option here
+#    arguments: []
 #    debug: %kernel.debug%   # use false if you want to disable debugging and shot packet over Socket
     host: localhost
     port: 8125

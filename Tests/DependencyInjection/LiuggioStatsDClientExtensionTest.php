@@ -20,8 +20,6 @@ class LiuggioStatsDClientExtensionTest extends \PHPUnit\Framework\TestCase
         $config = $this->getConfig();
         $loader->load([$config], $container);
         //testing parameter
-        $this->assertEquals('localhost', $container->getParameter('liuggio_stats_d_client.connection.host'));
-        $this->assertEquals('100', $container->getParameter('liuggio_stats_d_client.connection.port'));
         $this->assertTrue($container->getParameter('liuggio_stats_d_client.connection.fail_silently'));
         $this->assertTrue($container->getParameter('liuggio_stats_d_client.enable_collector'));
         $this->assertEquals(['liuggio_stats_d_client.collector.dbal' => 'tv.vision.query'], $container->getParameter('liuggio_stats_d_client.collectors'));
@@ -37,8 +35,6 @@ class LiuggioStatsDClientExtensionTest extends \PHPUnit\Framework\TestCase
         return [
             'enable_collector' => true,
             'connection' => [
-                'host' => 'localhost',
-                'port' => 100,
                 'fail_silently' => true,
             ],
             'collectors' => ['liuggio_stats_d_client.collector.dbal' => 'tv.vision.query'],

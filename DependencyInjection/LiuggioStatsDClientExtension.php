@@ -24,12 +24,8 @@ class LiuggioStatsDClientExtension extends Extension
         $configuration = new Configuration($container->getParameter('kernel.debug'));
         $config = $this->processConfiguration($configuration, $configs);
 
-        $container->setParameter($this->getAlias().'.sender.class', $config['connection']['class']);
-        $container->setParameter($this->getAlias().'.sender.debug_class', $config['connection']['debug_class']);
-
-        foreach ($config['connection'] as $k => $v) {
-            $container->setParameter($this->getAlias().'.connection.'.$k, $v);
-        }
+        $container->setParameter($this->getAlias().'.connection.reduce_packet', $config['connection']['reduce_packet']);
+        $container->setParameter($this->getAlias().'.connection.fail_silently', $config['connection']['fail_silently']);
         $container->setParameter($this->getAlias().'.enable_collector', $config['enable_collector']);
         $container->setParameter($this->getAlias().'.collectors', $config['collectors']);
 
@@ -41,7 +37,7 @@ class LiuggioStatsDClientExtension extends Extension
 
             if (\count($config['collectors'])) {
                 // Define the Listener
-                $definition = new Definition('%liuggio_stats_d_client.collector.listener.class%',
+                $definition = new Definition('Liuggio\StatsDClientBundle\Listener\StatsDCollectorListener',
                     [new Reference('liuggio_stats_d_client.collector.service')]
                 );
                 $definition->addTag('kernel.event_subscriber');
@@ -52,12 +48,11 @@ class LiuggioStatsDClientExtension extends Extension
         if (!empty($config['monolog']) && $config['monolog']['enable']) {
             $this->loadMonologHandler($config, $container);
         }
-        // set the debug sender
-        if ($config['connection']['debug']) {
-            $senderService = new Definition('%liuggio_stats_d_client.sender.debug_class%');
-            $container->setDefinition('liuggio_stats_d_client.sender.service', $senderService);
-            $senderService->setArguments([]);
-        }
+
+        // Define the sender
+        $senderService = new Definition($config['connection']['class']);
+        $senderService->setArguments($config['connection']['arguments']);
+        $container->setDefinition('liuggio_stats_d_client.sender.service', $senderService);
     }
 
     private function convertLevelToConstant($level)
@@ -82,7 +77,7 @@ class LiuggioStatsDClientExtension extends Extension
         );
         $container->setDefinition('monolog.formatter.statsd', $def2);
 
-        $def = new Definition($container->getParameter('liuggio_stats_d_client.monolog_handler.class'), [
+        $def = new Definition('Liuggio\StatsdClient\Monolog\Handler\StatsDHandler', [
             new Reference('liuggio_stats_d_client.service'),
             new Reference('liuggio_stats_d_client.factory'),
             $config['monolog']['prefix'],
