@@ -1,9 +1,9 @@
 Installation
 ============
 
-* 1 First, add the dependent bundles to the vendor/bundles directory. Add the following lines to the composer.json file
+1. First, add the dependent bundles to the vendor/bundles directory. Add the following lines to the composer.json file
 
-```
+```json
 "require": {
     # ..
     "liuggio/statsd-client-bundle": "1.6.*",
@@ -11,12 +11,12 @@ Installation
 }
 ```
 
-* 2 Then run `composer install`
+2. Then run `composer install`
 
 
-* 3 Then add in your `app/AppKernel`
+3. Then add in your `app/AppKernel`
 
-``` yaml
+```php
 
  class AppKernel extends Kernel
  {
@@ -29,9 +29,9 @@ Installation
 
 ```
 
-* 4 Then add to config/yaml the minimal configuration
+4. Then add to config/yaml the minimal configuration
 
-``` yaml
+```yaml
 
 # app/config/config.yml
 liuggio_stats_d_client:
@@ -41,7 +41,7 @@ liuggio_stats_d_client:
 
 ```
 
-* 5 When you are in develop env (mmm when kernel.debug is true) the packets use the SyslogSender
+5. When you are in develop env (mmm when kernel.debug is true) the packets use the SyslogSender
 see [full-configuration](#full-configuration--max-power) in order to modify it
 
 
@@ -54,7 +54,7 @@ This service creates the (StatsDataInterface) object to send
 
 Reference: `liuggio_stats_d_client.factory`
 
-```
+```php
 $data = $this->get('liuggio_stats_d_client.factory')->increment('log.error');
 
 ```
