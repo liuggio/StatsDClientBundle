@@ -6,14 +6,14 @@ Advanced use
 
 - Create a class that extends StatsCollector then create the `collect` function
 
-```
+```php
 use Liuggio\StatsDClientBundle\StatsCollector\StatsCollector;
 
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
 class ExceptionStatsCollector extends StatsCollector
-
+{
 //...
 
     public function collect(Request $request, Response $response, \Exception $exception = null)
@@ -24,13 +24,13 @@ class ExceptionStatsCollector extends StatsCollector
 
         return true;
     }
-
+}
 ```
 
 
 - add the service
 
-```
+```yaml
      liuggio_stats_d_client.collector.exception:
          class: %THE CLASS%
          tags:
@@ -40,7 +40,7 @@ class ExceptionStatsCollector extends StatsCollector
 
 - enable it in the config.yml
 
-```
+```yaml
   collectors:
 #    serviceReference: prefix
     liuggio_stats_d_client.collector.exception: 'YOURNAME.exception'
